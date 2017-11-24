@@ -60,9 +60,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-/*
         holder.bind(items.get(position));
-*/
 
     }
 
@@ -75,8 +73,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
 
         @BindView(R.id.song_title)
         TextView songTitleView;
+
         @BindView(R.id.song_author)
         TextView songAuthorView;
+
+        @BindView(R.id.song_release_date)
+        TextView songDateView;
 
         public ViewHolder(View view) {
             super(view);
@@ -88,7 +90,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
 
             songTitleView.setText(song.title());
             songAuthorView.setText(song.author());
-
+            songDateView.setText(song.releaseDate());
         }
 
 

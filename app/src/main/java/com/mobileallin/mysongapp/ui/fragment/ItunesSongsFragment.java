@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -88,18 +89,38 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
 
 
     @Override
-    public void showSongs(List<Song> list) {
+    public void displayItuneSongs(List<Song> list) {
+        songsAdapter.setItems(list);
+        if (songsListState != null) {
+            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
+        }
+    }
 
+    @Override
+    public void displayNoItuneSongs() {
+        Toast.makeText(getContext(), "OOOps, there are no Itunes Songs", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayError(Throwable e) {
+        Toast.makeText(getContext(), "Error!, Couldn't get the Itunes songs! Message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showLoading() {
-
+        enableProgressBar(true);
     }
 
     @Override
     public void hideLoading() {
+        enableProgressBar(false);
+    }
 
+    private void enableProgressBar(boolean enable) {
+        int visibility = enable ? View.VISIBLE : View.GONE;
+        progressBar.setVisibility(visibility);
+       /* shield.setVisibility(visibility);*/
+        shield.setVisibility(View.INVISIBLE);
     }
 }
 

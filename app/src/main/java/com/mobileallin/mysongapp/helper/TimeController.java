@@ -8,7 +8,7 @@ public class TimeController {
 
     private static final String TAG = TimeController.class.getName();
     private static final String UPDATE_DATE = "update_date";
-    private static final long UPDATE_INTERVAL_S = 10*60;
+    private static final long UPDATE_INTERVAL_S = 1*60;
     private SharedPreferences pref;
 
     public TimeController(SharedPreferences pref){

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="128dp"
     android:layout_marginBottom="4dp"
     android:layout_marginEnd="8dp"
     android:layout_marginLeft="8dp"
@@ -29,6 +29,7 @@
 
         <TextView
             android:id="@+id/song_title"
+            android:maxLines="2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -36,8 +37,7 @@
             android:layout_toRightOf="@+id/song_image"
             android:paddingStart="16dp"
             android:textStyle="bold"
-            android:textSize="24sp"
-            tools:text="Nutella Pie" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/song_author"
@@ -46,9 +46,17 @@
             android:layout_below="@+id/song_title"
             android:layout_toEndOf="@+id/song_image"
             android:layout_toRightOf="@+id/song_image"
-            android:paddingStart="16dp"
+            android:paddingStart="14dp"
             android:text="@string/author" />
 
+        <TextView
+            android:id="@+id/song_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/song_author"
+            android:layout_toEndOf="@+id/song_image"
+            android:layout_toRightOf="@+id/song_image"
+            android:paddingStart="14dp" />
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.mobileallin.mysongapp.dagger.component;
 
 import com.mobileallin.mysongapp.dagger.module.AppModule;
 import com.mobileallin.mysongapp.presentation.presenter.SongsListPresenter;
+import com.mobileallin.mysongapp.repositories.SongsRepository;
 import com.mobileallin.mysongapp.ui.activity.ItunesSongsListActivity;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongsFragment;
 
@@ -21,9 +22,7 @@ public interface MySongAppComponent {
     void inject(ItunesSongsFragment obj);
 
 
-/*
     SongsRepository SongssRepository();
-*/
 }
 
 

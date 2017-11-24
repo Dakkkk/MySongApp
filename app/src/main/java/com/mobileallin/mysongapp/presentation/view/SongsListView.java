@@ -14,7 +14,11 @@ import java.util.List;
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface SongsListView extends MvpView {
 
-    void showSongs(List<Song> list);
+    void displayItuneSongs(List<Song> list);
+
+    void displayNoItuneSongs();
+
+    void displayError(Throwable error);
 
     void showLoading();
 

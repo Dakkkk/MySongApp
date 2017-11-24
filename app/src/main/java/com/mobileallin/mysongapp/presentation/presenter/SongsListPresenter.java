@@ -1,7 +1,5 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
@@ -12,6 +10,8 @@ import com.mobileallin.mysongapp.presentation.view.SongsListView;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Class responsible for showing the data in the main view
@@ -34,27 +34,15 @@ public class SongsListPresenter extends MvpPresenter<SongsListView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        songsInteractor.updateSongs()
-                .doOnSubscribe(result -> getViewState().showLoading())
-                .doAfterTerminate(() -> getViewState().hideLoading())
-                .subscribe(aLong -> {
-                }, throwable -> Log.d(TAG, throwable.toString()), () -> {
-                });
 
     }
 
-
-/*    @Override
+    @Override
     public void attachView(SongsListView view) {
         super.attachView(view);
 
         //Dispose the observer to avoid memory leaks
-        Disposable disposable = songsInteractor.subscribeToSongs()
-                .subscribe(result -> {
-                    this.songsList = result;
-                    getViewState().showSongs(result);
-                    Log.d("songsList", songsList.toString());
-                });
-    }*/
+        Disposable disposable = songsInteractor.loadSongs(view);
+    }
 
 }

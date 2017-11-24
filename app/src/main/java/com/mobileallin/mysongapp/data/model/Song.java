@@ -3,6 +3,8 @@ package com.mobileallin.mysongapp.data.model;
 import android.os.Parcelable;
 
 import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -14,28 +16,32 @@ public abstract class Song implements Parcelable {
 
     public abstract long id();
 
-    @SerializedName("author")
-    public abstract  String author();
+    @SerializedName("artistName")
+    public abstract String author();
 
-    @SerializedName("title")
-    public abstract  String title();
+    @SerializedName("trackName")
+    public abstract String title();
 
     @SerializedName("releaseDate")
-    public abstract  String releaseDate();
+    public abstract String releaseDate();
 
-    public static Builder builder() {
+    public static TypeAdapter<Song> typeAdapter(Gson gson) {
+        return new AutoValue_Song.GsonTypeAdapter(gson);
+    }
+
+    static Builder builder() {
         return new AutoValue_Song.Builder();
     }
 
     @AutoValue.Builder
-    public abstract static class Builder {
+    abstract static class Builder {
         public abstract Builder setId(long id);
 
         public abstract Builder setTitle(String value);
 
-        public abstract Builder setAuthor(String author);
+        public abstract Builder setAuthor(String value);
 
-        public abstract Builder setReleaseDate(String date);
+        public abstract Builder setReleaseDate(String value);
 
         public abstract Song build();
     }

@@ -1,8 +1,6 @@
 package com.mobileallin.mysongapp.network;
 
-import com.mobileallin.mysongapp.data.model.Song;
-
-import java.util.List;
+import com.mobileallin.mysongapp.data.model.ItunesResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -15,7 +13,7 @@ public interface HttpClient {
     String ENDPOINT = "https://itunes.apple.com/";
 
     //Just for test, this is going to change
-    @GET("search?term=jack+johnson")
-    Observable<List<Song>> getSong();
+    @GET("search?term=offspring&entity=musicTrack")
+    Observable<ItunesResponse> getSongs();
 }
 
