@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="snongs_list_columns_nr">2</integer>
+</resources>

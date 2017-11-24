@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MySongApp</string>
+    <string name="songs_list_ts_empty">Songs list is empty!</string>
+    <string name="author">Author\'</string>
 </resources>

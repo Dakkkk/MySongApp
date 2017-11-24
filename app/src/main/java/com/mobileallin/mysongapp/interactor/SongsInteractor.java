@@ -43,7 +43,7 @@ public class SongsInteractor {
     }
 
   /*  public Observable<List<Song>> subscribeToSongs() {
-        return songsRepository.getRecipeNames()
+        return songsRepository.getSongsNames()
                 .subscribeOn(ioScheduler)
                 .observeOn(uiScheduler);
     }*/

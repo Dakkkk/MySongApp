@@ -12,10 +12,10 @@ import retrofit2.http.GET;
  */
 
 public interface HttpClient {
-    String ENDPOINT = "https://itunes.apple.com/search?";
+    String ENDPOINT = "https://itunes.apple.com/";
 
-    //Just for test
-    @GET("term=jack+johnson")
+    //Just for test, this is going to change
+    @GET("search?term=jack+johnson")
     Observable<List<Song>> getSong();
 }
 

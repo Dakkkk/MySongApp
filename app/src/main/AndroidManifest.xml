@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobileallin.mysongapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MySongApp"
         android:allowBackup="true"
