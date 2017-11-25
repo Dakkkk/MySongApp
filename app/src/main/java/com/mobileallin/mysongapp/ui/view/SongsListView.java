@@ -1,22 +1,15 @@
-package com.mobileallin.mysongapp.presentation.view;
+package com.mobileallin.mysongapp.ui.view;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.mobileallin.mysongapp.data.model.Song;
-
-import java.util.List;
 
 /**
  * Created by Dawid on 2017-10-11.
  */
 
 @StateStrategyType(OneExecutionStateStrategy.class)
-public interface SongsListView extends MvpView {
-
-    void displayItuneSongs(List<Song> list);
-
-    void displayNoItuneSongs();
+public interface SongsListView extends MvpView, BaseView {
 
     void displayError(Throwable error);
 

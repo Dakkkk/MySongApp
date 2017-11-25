@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -21,23 +20,29 @@ import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.Song;
-import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
-import com.mobileallin.mysongapp.ui.view.SongsListView;
+import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
+import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
+import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Dawid on 2017-11-24.
+ * Created by Dawid on 2017-11-25.
  */
 
-public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView {
+public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
 
 
     @InjectPresenter
-    ItuneSongsPresenter ituneSongsPresenter;
+    AssetsSongsPresenter assetsSongsPresenter;
+
+    @Inject
+    AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
 
     private SongsAdapter songsAdapter;
 
@@ -56,9 +61,9 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     private static final String SONGS_LIST_STATE = "songs_list_state";
 
     @ProvidePresenter
-    ItuneSongsPresenter providePresenter() {
+    AssetsSongsPresenter providePresenter() {
         MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
-        return new ItuneSongsPresenter(component, this);
+        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl);
     }
 
 
@@ -73,7 +78,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_songs_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_assets_songs, container, false);
         ButterKnife.bind(this, view);
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
 /*
@@ -88,34 +93,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     }
 
 
-/*    @Override
-    public void displayItuneSongs(List<Song> list) {
-        songsAdapter.setItems(list);
-        if (songsListState != null) {
-            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
-        }
-    }
-
-    @Override
-    public void displayNoItuneSongs() {
-        Toast.makeText(getContext(), "OOOps, there are no Itunes Songs", Toast.LENGTH_SHORT).show();
-    }*/
-
-    @Override
-    public void displayError(Throwable e) {
-        Toast.makeText(getContext(), "Error!, Couldn't get the Itunes songs! Message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showLoading() {
-        enableProgressBar(true);
-    }
-
-    @Override
-    public void hideLoading() {
-        enableProgressBar(false);
-    }
-
     private void enableProgressBar(boolean enable) {
         int visibility = enable ? View.VISIBLE : View.GONE;
         progressBar.setVisibility(visibility);
@@ -123,17 +100,18 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         shield.setVisibility(View.INVISIBLE);
     }
 
+   /* @Override
+    public Context getAssetsFragmentContext() {
+        return this.getContext();
+    }*/
+
     @Override
     public void displaySongs(List<Song> list) {
-        songsAdapter.setItems(list);
-        if (songsListState != null) {
-            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
-        }
+
     }
 
     @Override
     public void displayNoSongs() {
-        Toast.makeText(getContext(), "OOOps, there are no Itunes Songs", Toast.LENGTH_SHORT).show();
+
     }
 }
-

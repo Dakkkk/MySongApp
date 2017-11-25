@@ -11,7 +11,7 @@ import io.reactivex.Scheduler;
  * Created by Dawid on 2017-11-23.
  */
 
-public interface SongsRepository {
+public interface ItunesSongsRepository {
     Observable<ItunesResponse> getSongs(TimeController timeController, HttpClient httpClient,
                                         Scheduler ioScheduler, Scheduler uiScheduler);
 

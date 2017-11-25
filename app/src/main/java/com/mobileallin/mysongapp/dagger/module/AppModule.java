@@ -12,8 +12,8 @@ import com.mobileallin.mysongapp.helper.TimeController;
 import com.mobileallin.mysongapp.interactor.SongsInteractor;
 import com.mobileallin.mysongapp.network.AutoValueGsonFactory;
 import com.mobileallin.mysongapp.network.HttpClient;
-import com.mobileallin.mysongapp.repositories.SongsRepository;
-import com.mobileallin.mysongapp.repositories.impl.ItunesSongsRepository;
+import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
+import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 
 import javax.inject.Singleton;
 
@@ -61,16 +61,21 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public SongsRepository provideItunesSongsRepository() {
-        return new ItunesSongsRepository();
+    public ItunesSongsRepository provideItunesSongsRepository() {
+        return new com.mobileallin.mysongapp.repositories.impl.ItunesSongsRepositoryImpl();
     }
-
 
     @Singleton
     @Provides
-    public SongsInteractor provideSongsInteractor(SongsRepository songsRepository, HttpClient client, TimeController timeController,
+    public AssetsSongsRepositoryImpl provideAssetsSongsRepository() {
+        return new AssetsSongsRepositoryImpl();
+    }
+
+    @Singleton
+    @Provides
+    public SongsInteractor provideSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client, TimeController timeController,
                                                   @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
-        return new SongsInteractor(songsRepository, client, timeController, ioScheduler, uiScheduler);
+        return new SongsInteractor(itunesSongsRepository, client, timeController, ioScheduler, uiScheduler);
     }
 
     @Singleton

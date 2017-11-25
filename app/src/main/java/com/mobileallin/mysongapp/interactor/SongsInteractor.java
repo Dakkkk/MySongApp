@@ -7,8 +7,8 @@ import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.helper.TimeController;
 import com.mobileallin.mysongapp.network.HttpClient;
-import com.mobileallin.mysongapp.presentation.view.SongsListView;
-import com.mobileallin.mysongapp.repositories.SongsRepository;
+import com.mobileallin.mysongapp.ui.view.SongsListView;
+import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 
 import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
@@ -23,14 +23,14 @@ public class SongsInteractor {
     private Scheduler ioScheduler;
     private Scheduler uiScheduler;
     private TimeController timeController;
-    private SongsRepository songsRepository;
+    private ItunesSongsRepository itunesSongsRepository;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public SongsInteractor(SongsRepository songsRepository, HttpClient client, TimeController timeController,
+    public SongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client, TimeController timeController,
                            @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler
     ) {
-        this.songsRepository = songsRepository;
+        this.itunesSongsRepository = itunesSongsRepository;
         this.client = client;
         this.ioScheduler = ioScheduler;
         this.uiScheduler = uiScheduler;
@@ -40,7 +40,7 @@ public class SongsInteractor {
 
     public Disposable loadSongs(SongsListView view) {
 
-        compositeDisposable.add(songsRepository.getSongs(timeController, client,
+        compositeDisposable.add(itunesSongsRepository.getSongs(timeController, client,
                 ioScheduler, uiScheduler)
                 .subscribeOn(Schedulers.io())
                 .observeOn(uiScheduler)
@@ -48,7 +48,7 @@ public class SongsInteractor {
                     @Override
                     public void onNext(@NonNull ItunesResponse songs) {
                         Log.d("loadSongs", songs.toString());
-                        view.displayItuneSongs(songs.allItuneSongs());
+                        view.displaySongs(songs.allItuneSongs());
                     }
 
                     @Override

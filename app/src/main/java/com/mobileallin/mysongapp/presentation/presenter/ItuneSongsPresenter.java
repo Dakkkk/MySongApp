@@ -5,7 +5,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.Song;
 import com.mobileallin.mysongapp.interactor.SongsInteractor;
-import com.mobileallin.mysongapp.presentation.view.SongsListView;
+import com.mobileallin.mysongapp.ui.view.SongsListView;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import io.reactivex.disposables.Disposable;
  * Class responsible for showing the data in the main view
  */
 @InjectViewState
-public class SongsListPresenter extends MvpPresenter<SongsListView> {
+public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 
     private static final String TAG = "SongsListPresenter";
     private List<Song> songsList;
@@ -26,7 +26,7 @@ public class SongsListPresenter extends MvpPresenter<SongsListView> {
     @Inject
     SongsInteractor songsInteractor;
 
-    public SongsListPresenter(MySongAppComponent component, SongsListView view) {
+    public ItuneSongsPresenter(MySongAppComponent component, SongsListView view) {
         component.inject(this);
         this.view = view;
     }
