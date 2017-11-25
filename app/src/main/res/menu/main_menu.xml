@@ -11,13 +11,13 @@
         app:showAsAction="always">
         <menu>
             <item
-                android:id="@+id/itunes_fragment"
+                android:id="@+id/menu_itunes_fragment"
                 android:icon="@drawable/ic_error_black"
                 android:orderInCategory="100"
                 android:title="ITUNES" />
 
             <item
-                android:id="@+id/assets_fragment"
+                android:id="@+id/menu_assets_fragment"
                 android:icon="@drawable/ic_error_black"
                 android:orderInCategory="100"
                 android:title="ASSETS" />

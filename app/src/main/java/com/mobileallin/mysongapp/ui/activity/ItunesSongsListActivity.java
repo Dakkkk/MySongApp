@@ -16,8 +16,21 @@ public class ItunesSongsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_itune_songs_list);
+        setContentView(R.layout.activity_songs_list);
+        addItunesFragment();
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
+    }
+
+    private void addItunesFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.songs_fragment_container,
+                        new ItunesSongsFragment()).addToBackStack(null).commit();
+    }
+
+    private void addAssetsFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.songs_fragment_container,
+                        new AssetsSongsFragment()).addToBackStack(null).commit();
     }
 
     @Override
@@ -28,42 +41,18 @@ public class ItunesSongsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //noinspection SimplifiableIfStatement
-/*
-        selectFragment(item.getItemId());
-*/
+        //ToDo Replacing fragments should be done by presenter
         switch (item.getItemId()) {
-            case R.id.itunes_fragment:
+            case R.id.menu_itunes_fragment:
                 Toast.makeText(getApplicationContext(), "Itunes", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.itunes_songs_fragment,
-                                new ItunesSongsFragment()).commit();
+                addItunesFragment();
                 return true;
-            case R.id.assets_fragment:
+            case R.id.menu_assets_fragment:
                 Toast.makeText(getApplicationContext(), "Assets", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.itunes_songs_fragment,
-                                new AssetsSongsFragment()).commit();
+                addAssetsFragment();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-   /* public void selectFragment(int choosenFragmentId) {
-        Fragment fragment;
-        int currentFragmentId;
-        if (choosenFragmentId == R.id.itunes_songs_fragment) {
-            fragment = new ItunesSongsFragment();
-            currentFragmentId = R.id.assets_fragment;
-        } else {
-            fragment = new AssetsSongsFragment();
-            currentFragmentId = R.id.itunes_fragment;
-        }
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(currentFragmentId, fragment);
-        transaction.commit();
-    }*/
 }

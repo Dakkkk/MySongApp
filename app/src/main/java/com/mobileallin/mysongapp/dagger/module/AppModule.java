@@ -9,6 +9,7 @@ import com.mobileallin.mysongapp.dagger.ApplicationContext;
 import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.helper.TimeController;
+import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.interactor.SongsInteractor;
 import com.mobileallin.mysongapp.network.AutoValueGsonFactory;
 import com.mobileallin.mysongapp.network.HttpClient;
@@ -76,6 +77,12 @@ public class AppModule {
     public SongsInteractor provideSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client, TimeController timeController,
                                                   @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
         return new SongsInteractor(itunesSongsRepository, client, timeController, ioScheduler, uiScheduler);
+    }
+
+    @Singleton
+    @Provides
+    public AssetsSongsInteractor provideAssetsSongsInteractor() {
+        return new AssetsSongsInteractor();
     }
 
     @Singleton

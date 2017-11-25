@@ -19,11 +19,13 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
+import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.data.model.Song;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,7 +43,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
 
-    private SongsAdapter songsAdapter;
+    private AssetsSongsAdapter assetsSongsAdapter;
 
     @BindView(R.id.songs_list)
     RecyclerView songsRecyclerView;
@@ -82,14 +84,14 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         ButterKnife.bind(this, view);
 
         getActivity().setTitle(getString(R.string.assets_songs));
-        songsAdapter = new SongsAdapter(getContext(), emptyListView);
+        assetsSongsAdapter = new AssetsSongsAdapter(getContext(), emptyListView);
 /*
         songsAdapter.setItemClickListener(position -> songsListPresenter.enterDetailActivity(position));
 */
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         songsRecyclerView.setLayoutManager(layoutManager);
-        songsRecyclerView.setAdapter(songsAdapter);
+        songsRecyclerView.setAdapter(assetsSongsAdapter);
 
         return view;
     }
@@ -107,20 +109,22 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         return this.getContext();
     }*/
 
+
     @Override
     public void displaySongs(List<Song> list) {
-/*
-        String a= assetsSongsRepositoryImpl.inputStreamToString(getContext().getResources().getAssets().open("file_name.json"));
-*/
 
-        songsAdapter.setItems(list);
-        if (songsListState != null) {
-            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
-        }
     }
 
     @Override
     public void displayNoSongs() {
 
+    }
+
+    @Override
+    public void displaySongs(ArrayList<AssetsSong> assetsSongs) {
+        assetsSongsAdapter.setItems(assetsSongs);
+        if (songsListState != null) {
+            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
+        }
     }
 }

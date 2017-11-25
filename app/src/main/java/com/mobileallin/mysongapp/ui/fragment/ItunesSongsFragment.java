@@ -83,25 +83,12 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
 */
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
+        emptyListView.setVisibility(View.GONE);
         songsRecyclerView.setLayoutManager(layoutManager);
         songsRecyclerView.setAdapter(songsAdapter);
 
         return view;
     }
-
-
-/*    @Override
-    public void displayItuneSongs(List<Song> list) {
-        songsAdapter.setItems(list);
-        if (songsListState != null) {
-            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
-        }
-    }
-
-    @Override
-    public void displayNoItuneSongs() {
-        Toast.makeText(getContext(), "OOOps, there are no Itunes Songs", Toast.LENGTH_SHORT).show();
-    }*/
 
     @Override
     public void displayError(Throwable e) {

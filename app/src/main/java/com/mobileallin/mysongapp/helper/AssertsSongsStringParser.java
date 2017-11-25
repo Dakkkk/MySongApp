@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class AssertsSongsStringParser {
 
-    public void parseStringToAssetsSongList(String songAssetsString) {
+    public ArrayList<AssetsSong> parseStringToAssetsSongList(String songAssetsString) {
         Log.d("songAssetsString", songAssetsString + "boom");
 
         ArrayList<AssetsSong> assetsSongsList = new ArrayList<AssetsSong>();
@@ -70,5 +70,6 @@ public class AssertsSongsStringParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return assetsSongsList;
     }
 }
