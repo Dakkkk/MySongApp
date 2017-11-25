@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongsFragment;
+import com.mobileallin.mysongapp.ui.fragment.ItunesSongsFragment;
 
 public class ItunesSongsListActivity extends AppCompatActivity {
 
@@ -27,24 +28,42 @@ public class ItunesSongsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
+/*
+        selectFragment(item.getItemId());
+*/
         switch (item.getItemId()) {
-            case 0:
+            case R.id.itunes_fragment:
                 Toast.makeText(getApplicationContext(), "Itunes", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.itunes_songs_fragment,
+                                new ItunesSongsFragment()).commit();
                 return true;
-            case 1:
+            case R.id.assets_fragment:
                 Toast.makeText(getApplicationContext(), "Assets", Toast.LENGTH_SHORT).show();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(android.R.id.content,
+                        .replace(R.id.itunes_songs_fragment,
                                 new AssetsSongsFragment()).commit();
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+   /* public void selectFragment(int choosenFragmentId) {
+        Fragment fragment;
+        int currentFragmentId;
+        if (choosenFragmentId == R.id.itunes_songs_fragment) {
+            fragment = new ItunesSongsFragment();
+            currentFragmentId = R.id.assets_fragment;
+        } else {
+            fragment = new AssetsSongsFragment();
+            currentFragmentId = R.id.itunes_fragment;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(currentFragmentId, fragment);
+        transaction.commit();
+    }*/
 }

@@ -75,6 +75,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_songs_list, container, false);
         ButterKnife.bind(this, view);
+        getActivity().setTitle(getString(R.string.itunes_songs));
+
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
 /*
         songsAdapter.setItemClickListener(position -> songsListPresenter.enterDetailActivity(position));

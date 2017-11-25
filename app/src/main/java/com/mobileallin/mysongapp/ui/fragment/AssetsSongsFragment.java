@@ -26,8 +26,6 @@ import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,7 +39,6 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     @InjectPresenter
     AssetsSongsPresenter assetsSongsPresenter;
 
-    @Inject
     AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
 
     private SongsAdapter songsAdapter;
@@ -62,8 +59,11 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @ProvidePresenter
     AssetsSongsPresenter providePresenter() {
+        //ToDo this shouldn't be initialized here, change this later on: inject or sth
+        assetsSongsRepositoryImpl = new AssetsSongsRepositoryImpl();
+
         MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
-        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl);
+        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl, getContext());
     }
 
 
@@ -80,6 +80,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assets_songs, container, false);
         ButterKnife.bind(this, view);
+
+        getActivity().setTitle(getString(R.string.assets_songs));
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
 /*
         songsAdapter.setItemClickListener(position -> songsListPresenter.enterDetailActivity(position));
@@ -107,7 +109,14 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @Override
     public void displaySongs(List<Song> list) {
+/*
+        String a= assetsSongsRepositoryImpl.inputStreamToString(getContext().getResources().getAssets().open("file_name.json"));
+*/
 
+        songsAdapter.setItems(list);
+        if (songsListState != null) {
+            songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
+        }
     }
 
     @Override
