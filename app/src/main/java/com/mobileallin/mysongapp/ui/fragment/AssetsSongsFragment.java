@@ -43,6 +43,7 @@ import butterknife.ButterKnife;
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
 
 
+    private static final String ASSETS_SONGS_LIST_STATE = "assets_songs_state";
     @InjectPresenter
     AssetsSongsPresenter assetsSongsPresenter;
 
@@ -127,7 +128,14 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         });
         return view;
     }
-    
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(ASSETS_SONGS_LIST_STATE,
+                songsRecyclerView.getLayoutManager().onSaveInstanceState());
+    }
+
     private void enableProgressBar(boolean enable) {
         int visibility = enable ? View.VISIBLE : View.GONE;
         progressBar.setVisibility(visibility);

@@ -30,6 +30,8 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     private static final String TAG = "SongsListPresenter";
     private List<Song> songsList;
     private SongsListView view;
+    private Disposable disposable;
+    private Disposable searchDisposable;
 
     @Inject
     SongsInteractor songsInteractor;
@@ -51,12 +53,25 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     @Override
     public void attachView(SongsListView view) {
         super.attachView(view);
-
-        //Dispose the observer to avoid memory leaks
-        Disposable disposable = songsInteractor.loadSongs(view);
+        // ToDo Dispose the observer to avoid memory leaks
+        disposable = songsInteractor.loadSongs(view);
     }
 
-    public void searchItunesSong(String searchTerm){
+    @Override
+    public void detachView(SongsListView view) {
+        super.detachView(view);
+        if (disposable == null && searchDisposable == null) return;
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+            disposable = null;
+        }
+        if (searchDisposable != null && !searchDisposable.isDisposed()) {
+            searchDisposable.dispose();
+            searchDisposable = null;
+        }
+    }
+
+    public void searchItunesSong(String searchTerm) {
         ItunesSearchCall itunesSearchCall = new ItunesSearchCall(view, client);
         itunesSearchCall.instantSearch(searchTerm);
 /*
@@ -69,17 +84,18 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
         private PublishSubject publishSubject;
         private HttpClient client;
         private final static String MEDIA_TYPE = "music";
-
-        private Disposable searchDisposable;
         private SearchView view;
 
 
-        public ItunesSearchCall(SearchView view, HttpClient client){
+        public ItunesSearchCall(SearchView view, HttpClient client) {
             this.view = view;
             this.client = client;
         }
 
         public void instantSearch(String searchTerm) {
+            if (disposable != null) {
+                disposable.dispose();
+            }
             if (searchDisposable != null) {
                 searchDisposable.dispose();
             }
@@ -93,7 +109,5 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
                     });
 
         }
-
     }
-
 }

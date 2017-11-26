@@ -41,6 +41,7 @@ import butterknife.ButterKnife;
 public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
 
 
+    private static final String ITUNES_SONGS_LIST_STATE = "itunes_songs_state";
     @InjectPresenter
     ItuneSongsPresenter ituneSongsPresenter;
 
@@ -114,6 +115,13 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         });
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(ITUNES_SONGS_LIST_STATE,
+                songsRecyclerView.getLayoutManager().onSaveInstanceState());
     }
 
     @Override
