@@ -6,9 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,6 +31,7 @@ import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +50,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     private AssetsSongsAdapter assetsSongsAdapter;
 
+    private ArrayList<AssetsSong> allAssetsSongs;
+
     @BindView(R.id.songs_list)
     RecyclerView songsRecyclerView;
     @BindView(R.id.empty_view)
@@ -55,6 +62,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     FrameLayout shield;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshView;
+    @BindView(R.id.assets_search_panel)
+    EditText assetsSearchPanel;
 
     private Parcelable songsListState;
     private static final String SONGS_LIST_STATE = "songs_list_state";
@@ -85,6 +94,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
         getActivity().setTitle(getString(R.string.assets_songs));
         assetsSongsAdapter = new AssetsSongsAdapter(getContext(), emptyListView);
+        allAssetsSongs = assetsSongsPresenter.getAssetsSongArrayList();
 /*
         songsAdapter.setItemClickListener(position -> songsListPresenter.enterDetailActivity(position));
 */
@@ -93,22 +103,37 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         songsRecyclerView.setLayoutManager(layoutManager);
         songsRecyclerView.setAdapter(assetsSongsAdapter);
 
+        assetsSearchPanel.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ArrayList<AssetsSong> searchAssetsSongsResults =
+                        assetsSongsPresenter.getAssetsSongArrayList();
+                if (!Objects.equals(charSequence.toString(), "") || Objects.equals(charSequence, null)) {
+                    searchAssetsSongsResults = assetsSongsPresenter.searchAssetsSong(charSequence.toString());
+                }
+                Log.d("MySearchFr", "empty string");
+                assetsSongsPresenter.showAssetsSearchResults(searchAssetsSongsResults);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         return view;
     }
-
-
+    
     private void enableProgressBar(boolean enable) {
         int visibility = enable ? View.VISIBLE : View.GONE;
         progressBar.setVisibility(visibility);
        /* shield.setVisibility(visibility);*/
         shield.setVisibility(View.INVISIBLE);
     }
-
-   /* @Override
-    public Context getAssetsFragmentContext() {
-        return this.getContext();
-    }*/
-
 
     @Override
     public void displaySongs(List<Song> list) {
@@ -126,5 +151,11 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         if (songsListState != null) {
             songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
         }
+    }
+
+    @Override
+    public void showSearchResult(ArrayList<AssetsSong> searchResponse) {
+        Log.d("MySearch", "showSearchResult called!");
+        assetsSongsAdapter.setItems(searchResponse);
     }
 }

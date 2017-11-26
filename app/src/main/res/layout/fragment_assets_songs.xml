@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText android:id="@+id/searchPanel"
+    <EditText android:id="@+id/assets_search_panel"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="top"

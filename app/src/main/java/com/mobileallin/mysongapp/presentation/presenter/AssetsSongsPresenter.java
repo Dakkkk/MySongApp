@@ -1,6 +1,7 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -29,6 +30,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     private AssetsSongsView view;
     private AssetsSongsRepositoryImpl assetsRepository;
     private Context context;
+    private ArrayList<AssetsSong> assetsSongArrayList;
 
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
@@ -51,13 +53,37 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
-
         String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-        ArrayList<AssetsSong> assetsSongArrayList;
 
         //ToDo move from here!
         AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
         assetsSongArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
         assetsSongsInteractor.loadSongs(view, assetsSongArrayList);
+    }
+
+    public ArrayList<AssetsSong> getAssetsSongArrayList(){
+        return assetsSongArrayList;
+    }
+
+    public void showAssetsSearchResults(ArrayList<AssetsSong> searchResponse) {
+        Log.d("MySearch", "showAssetsSearchResults called!");
+        //view.showSearchResult(searchResponse);
+        assetsSongsInteractor.loadSongs(view, searchResponse);
+    }
+
+    public ArrayList<AssetsSong> searchAssetsSong(String s) {
+        ArrayList<AssetsSong> assetsSearchList = new ArrayList<>();
+
+        for (AssetsSong song : assetsSongArrayList) {
+
+            Log.d("MySearch helper", song.author());
+
+            if (song.author().toLowerCase().contains(s) ||
+                    song.title().toLowerCase().startsWith(s)) {
+                assetsSearchList.add(song);
+            }
+        }
+        Log.d("MySearch searchA..Song", assetsSearchList.toString());
+        return assetsSearchList;
     }
 }
