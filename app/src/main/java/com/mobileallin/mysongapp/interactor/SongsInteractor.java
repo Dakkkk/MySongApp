@@ -7,8 +7,8 @@ import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.helper.TimeController;
 import com.mobileallin.mysongapp.network.HttpClient;
-import com.mobileallin.mysongapp.ui.view.SongsListView;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
+import com.mobileallin.mysongapp.ui.view.SongsListView;
 
 import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;

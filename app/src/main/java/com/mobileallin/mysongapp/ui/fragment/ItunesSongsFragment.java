@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,8 +23,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
+import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.Song;
 import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
+import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
 
 import java.util.List;
@@ -33,7 +38,7 @@ import butterknife.ButterKnife;
  * Created by Dawid on 2017-11-24.
  */
 
-public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView {
+public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
 
 
     @InjectPresenter
@@ -51,6 +56,9 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     FrameLayout shield;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshView;
+
+    @BindView(R.id.itunes_search_panel)
+    EditText itunesSearchPanel;
 
     private Parcelable songsListState;
     private static final String SONGS_LIST_STATE = "songs_list_state";
@@ -86,6 +94,24 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         emptyListView.setVisibility(View.GONE);
         songsRecyclerView.setLayoutManager(layoutManager);
         songsRecyclerView.setAdapter(songsAdapter);
+
+        itunesSearchPanel.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ituneSongsPresenter.searchItunesSong(charSequence.toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         return view;
     }
@@ -124,5 +150,11 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     public void displayNoSongs() {
         Toast.makeText(getContext(), "OOOps, there are no Itunes Songs", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showSearchResult(ItunesResponse statusesItems) {
+        songsAdapter.setItems(statusesItems.allItuneSongs());
+    }
+
 }
 
