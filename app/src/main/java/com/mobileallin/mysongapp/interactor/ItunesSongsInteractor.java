@@ -13,7 +13,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableMaybeObserver;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -40,9 +40,9 @@ public class ItunesSongsInteractor {
                 ioScheduler, uiScheduler)
                 .subscribeOn(Schedulers.io())
                 .observeOn(uiScheduler)
-                .subscribeWith(new DisposableObserver<ItunesResponse>() {
+                .subscribeWith(new DisposableMaybeObserver<ItunesResponse>() {
                     @Override
-                    public void onNext(@NonNull ItunesResponse songs) {
+                    public void onSuccess(@NonNull ItunesResponse songs) {
                         Log.d("loadSongs", songs.toString());
                         view.displaySongs(songs.allItuneSongs());
                     }
