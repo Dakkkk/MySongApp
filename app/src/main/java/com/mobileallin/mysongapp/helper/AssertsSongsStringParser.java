@@ -1,6 +1,5 @@
 package com.mobileallin.mysongapp.helper;
 
-import android.os.Parcel;
 import android.util.Log;
 
 import com.mobileallin.mysongapp.data.model.AssetsSong;
@@ -29,39 +28,14 @@ public class AssertsSongsStringParser {
                 String releaseDate = jsonobject.getString("Release Year");
                 Log.d("songAssetsParsed", title + " " + author);
 
-                int finalI = i;
-                AssetsSong assetsSong = new AssetsSong() {
-                    @Override
-                    public long id() {
-                        return finalI;
-                    }
-
-                    @Override
-                    public String title() {
-                        return title;
-                    }
-
-                    @Override
-                    public String author() {
-                        return author;
-                    }
-
-                    @Override
-                    public String releaseDate() {
-                        return releaseDate;
-                    }
-
-                    @Override
-                    public int describeContents() {
-                        return 0;
-                    }
-
-                    @Override
-                    public void writeToParcel(Parcel parcel, int i) {
-
-                    }
-                };
-                assetsSongsList.add(finalI, assetsSong);
+                AssetsSong assetsSong = AssetsSong.builder()
+                        .setId(i)
+                        .setTitle(title)
+                        .setAuthor(author)
+                        .setReleaseDate(releaseDate)
+                        .build();
+                
+                assetsSongsList.add(i, assetsSong);
                 Log.d("assetsSongsList", assetsSongsList.get(0).author());
             }
         } catch (JSONException e) {

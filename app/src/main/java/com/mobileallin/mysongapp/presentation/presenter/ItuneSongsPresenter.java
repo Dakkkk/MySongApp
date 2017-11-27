@@ -1,5 +1,6 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -7,9 +8,12 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
+import com.mobileallin.mysongapp.navigation.Command;
+import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
+import com.mobileallin.mysongapp.utils.Keys;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +41,9 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     @Inject
     HttpClient client;
 
+    @Inject
+    Router router;
+
     public ItuneSongsPresenter(MySongAppComponent component, SongsListView view) {
         component.inject(this);
         this.view = view;
@@ -53,6 +60,8 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
         super.attachView(view);
         // ToDo Dispose the observer to avoid memory leaks
         disposable = itunesSongsInteractor.loadSongs(view);
+
+
     }
 
     @Override
@@ -75,6 +84,20 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 /*
         songsInteractor.searchItunesSongs(searchTerm);
 */
+    }
+
+    public void enterDetailActivity(int position) {
+        Log.d(ItuneSongsPresenter.class.getSimpleName(), "enterDetailActivity called");
+        Bundle args = new Bundle();
+
+        //ToDo rewrite this
+        Log.d("enterDetailActivity", "position: " +  position);
+
+
+        Log.d("enterDetailActivity",  itunesSongsInteractor.getAllItunesSongs().get(2) + "");
+
+        args.putLong(Keys.ID, itunesSongsInteractor.getAllItunesSongs().get(position).id());
+        router.putCommand(Command.SHOW_ITUNE_SONG_DETAILS, ItunesSongDetailsPresenter.class.getName(), args);
     }
 
     public class ItunesSearchCall {

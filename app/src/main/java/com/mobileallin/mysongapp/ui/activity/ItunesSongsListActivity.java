@@ -1,5 +1,6 @@
 package com.mobileallin.mysongapp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,10 +11,12 @@ import android.widget.Toast;
 
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
+import com.mobileallin.mysongapp.navigation.Command;
+import com.mobileallin.mysongapp.navigation.INavigator;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongsFragment;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongsFragment;
 
-public class ItunesSongsListActivity extends AppCompatActivity {
+public class ItunesSongsListActivity extends AppCompatActivity implements INavigator {
 
     //ToDo Move most of the logic to presenter
 
@@ -72,5 +75,24 @@ public class ItunesSongsListActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void handleCommand(Command command) {
+        switch (command) {
+
+            case SHOW_DETAIL_ACTION: {
+                showDetailAction();
+                break;
+            }
+
+            default:
+        }
+    }
+
+    private void showDetailAction() {
+        Intent intent = new Intent(this, SongDetailsActivity.class);
+        startActivity(intent);
+
     }
 }

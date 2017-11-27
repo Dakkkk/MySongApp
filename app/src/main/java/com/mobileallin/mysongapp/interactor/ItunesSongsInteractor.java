@@ -5,9 +5,12 @@ import android.util.Log;
 import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
+
+import java.util.List;
 
 import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
@@ -22,6 +25,8 @@ public class ItunesSongsInteractor {
     private Scheduler ioScheduler;
     private Scheduler uiScheduler;
     private ItunesSongsRepository itunesSongsRepository;
+
+    private List<ItunesSong> allItunesSongs;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -44,7 +49,8 @@ public class ItunesSongsInteractor {
                     @Override
                     public void onSuccess(@NonNull ItunesResponse songs) {
                         Log.d("loadSongs", songs.toString());
-                        view.displaySongs(songs.allItuneSongs());
+                        allItunesSongs = songs.allItuneSongs();
+                        view.displaySongs(allItunesSongs);
                     }
 
                     @Override
@@ -59,5 +65,10 @@ public class ItunesSongsInteractor {
                     }
                 }));
         return null;
+    }
+
+    //ToDo rewrite this
+    public List<ItunesSong> getAllItunesSongs() {
+        return allItunesSongs;
     }
 }

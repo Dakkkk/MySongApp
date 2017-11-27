@@ -82,9 +82,9 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         getActivity().setTitle(getString(R.string.itunes_songs));
 
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
-/*
-        songsAdapter.setItemClickListener(position -> songsListPresenter.enterDetailActivity(position));
-*/
+
+        songsAdapter.setItemClickListener(position -> ituneSongsPresenter.enterDetailActivity(position));
+
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         emptyListView.setVisibility(View.GONE);

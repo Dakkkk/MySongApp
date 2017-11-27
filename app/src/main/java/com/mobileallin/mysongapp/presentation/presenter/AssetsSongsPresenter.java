@@ -72,7 +72,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         ArrayList<AssetsSong> assetsSearchList = new ArrayList<>();
 
         for (AssetsSong song : assetsSongArrayList) {
-
+            //ToDo check id this can be done better (use startsWith or contains or...)
             if (song.author().toLowerCase().contains(s) ||
                     song.title().toLowerCase().startsWith(s) ||
                     song.releaseDate().toLowerCase().startsWith(s)) {

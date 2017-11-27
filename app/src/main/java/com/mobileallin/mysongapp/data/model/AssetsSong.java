@@ -26,12 +26,12 @@ public abstract class AssetsSong implements Parcelable {
         return new AutoValue_AssetsSong.GsonTypeAdapter(gson);
     }
 
-    static Builder builder() {
+    public static Builder builder() {
         return new AutoValue_AssetsSong.Builder();
     }
 
     @AutoValue.Builder
-    abstract static class Builder {
+    public abstract static class Builder {
         public abstract Builder setId(long id);
 
         public abstract Builder setTitle(String value);

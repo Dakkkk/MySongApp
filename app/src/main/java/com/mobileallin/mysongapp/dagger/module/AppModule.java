@@ -10,6 +10,7 @@ import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
+import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.network.AutoValueGsonFactory;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
@@ -29,6 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AppModule {
+
+    //ToDo Split this into a couple of separate modules
 
     private final Context context;
     private static final String SHARED_PREFS_NAME = "app_preferences";
@@ -104,6 +107,12 @@ public class AppModule {
     @Provides
     public SharedPreferences providePreferences(@ApplicationContext Context context) {
         return context.getSharedPreferences(SHARED_PREFS_NAME, Activity.MODE_PRIVATE);
+    }
+
+    @Singleton
+    @Provides
+    Router provideRouter(){
+        return new Router();
     }
 
 }
