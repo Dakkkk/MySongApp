@@ -21,14 +21,14 @@ import butterknife.ButterKnife;
  */
 
 public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.ViewHolder> {
-private Context context;
-private View emptyView;
-private List<AssetsSong> items;
-private IOnItemClickListener itemClickListener;
+    private Context context;
+    private View emptyView;
+    private List<AssetsSong> items;
+    private IOnItemClickListener itemClickListener;
 
-public interface IOnItemClickListener {
-    void onItemClick(int position);
-}
+    public interface IOnItemClickListener {
+        void onItemClick(int position);
+    }
 
     public void setItemClickListener(AssetsSongsAdapter.IOnItemClickListener listener) {
         itemClickListener = listener;
@@ -69,38 +69,38 @@ public interface IOnItemClickListener {
         return items == null ? 0 : items.size();
     }
 
-public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    @BindView(R.id.song_title)
-    TextView songTitleView;
+        @BindView(R.id.song_title)
+        TextView songTitleView;
 
-    @BindView(R.id.song_author)
-    TextView songAuthorView;
+        @BindView(R.id.song_author)
+        TextView songAuthorView;
 
-    @BindView(R.id.song_release_date)
-    TextView songDateView;
+        @BindView(R.id.song_release_date)
+        TextView songDateView;
 
-    public ViewHolder(View view) {
-        super(view);
-        ButterKnife.bind(this, view);
-        view.setOnClickListener(this);
-    }
+        public ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
 
-    public void bind(AssetsSong song) {
+        public void bind(AssetsSong song) {
 
-        songTitleView.setText(song.title());
-        songAuthorView.setText(song.author());
-        songDateView.setText(song.releaseDate());
-    }
+            songTitleView.setText(song.title());
+            songAuthorView.setText(song.author());
+            songDateView.setText(song.releaseDate());
+        }
 
 
-    @Override
-    public void onClick(View view) {
-        if (itemClickListener != null) {
-            itemClickListener.onItemClick(getAdapterPosition());
+        @Override
+        public void onClick(View view) {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(getAdapterPosition());
+            }
         }
     }
-}
 
 
     /**

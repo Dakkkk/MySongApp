@@ -14,7 +14,7 @@ public class AssetsLoader {
     private static final String FILE_PATH = "file_name.json";
     private Context context;
 
-    public AssetsLoader(Context context){
+    public AssetsLoader(Context context) {
         this.context = context;
     }
 

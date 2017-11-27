@@ -21,14 +21,7 @@ public class ItunesSongsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs_list);
-/*
-        addAdeqateFregment();
-*/
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
-    }
-
-    private void addAdeqateFregment() {
-
     }
 
     private void addItunesFragment() {
@@ -55,17 +48,7 @@ public class ItunesSongsListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Fragment fragmentBeforeBackPress = getCurrentFragment();
-        // Perform the usual back action
         super.onBackPressed();
-        Fragment fragmentAfterBackPress = getCurrentFragment();
-
-   /*     int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-        if (backStackEntryCount == 0) {
-            goBack();   // write your code to switch between fragments.
-        } else {
-            super.onBackPressed();
-        }*/
     }
 
     @Override

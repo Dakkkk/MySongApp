@@ -29,6 +29,7 @@ public interface MySongAppComponent {
     void inject(AssetsSongsPresenter obj);
 
     ItunesSongsRepository ItunesSongsRepository();
+
     AssetsSongsRepositoryImpl AssetsSongsRepository();
 }
 

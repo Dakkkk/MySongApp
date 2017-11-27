@@ -5,7 +5,6 @@ import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 
 /**
@@ -14,7 +13,7 @@ import io.reactivex.Scheduler;
 
 public class ItunesSongsRepositoryImpl implements ItunesSongsRepository {
 
-    //ToDo Rewrite this to use Maybe / Single instead of Observable
+    //ToDo Rewrite this to use f.e. callable instead of just()
 
     @Override
     public Maybe<ItunesResponse> getSongs(HttpClient httpClient,

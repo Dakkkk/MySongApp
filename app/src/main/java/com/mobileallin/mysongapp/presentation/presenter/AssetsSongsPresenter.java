@@ -61,7 +61,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         assetsSongsInteractor.loadSongs(view, assetsSongArrayList);
     }
 
-    public ArrayList<AssetsSong> getAssetsSongArrayList(){
+    public ArrayList<AssetsSong> getAssetsSongArrayList() {
         return assetsSongArrayList;
     }
 
