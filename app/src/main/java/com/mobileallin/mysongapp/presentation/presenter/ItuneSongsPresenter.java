@@ -6,7 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.Song;
-import com.mobileallin.mysongapp.interactor.SongsInteractor;
+import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
@@ -34,7 +34,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     private Disposable searchDisposable;
 
     @Inject
-    SongsInteractor songsInteractor;
+    ItunesSongsInteractor itunesSongsInteractor;
 
     @Inject
     HttpClient client;
@@ -54,7 +54,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     public void attachView(SongsListView view) {
         super.attachView(view);
         // ToDo Dispose the observer to avoid memory leaks
-        disposable = songsInteractor.loadSongs(view);
+        disposable = itunesSongsInteractor.loadSongs(view);
     }
 
     @Override

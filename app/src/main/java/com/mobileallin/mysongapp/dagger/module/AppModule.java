@@ -8,13 +8,12 @@ import com.google.gson.GsonBuilder;
 import com.mobileallin.mysongapp.dagger.ApplicationContext;
 import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
-import com.mobileallin.mysongapp.helper.TimeController;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
-import com.mobileallin.mysongapp.interactor.SongsInteractor;
+import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
 import com.mobileallin.mysongapp.network.AutoValueGsonFactory;
 import com.mobileallin.mysongapp.network.HttpClient;
-import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
+import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 
 import javax.inject.Singleton;
 
@@ -74,9 +73,9 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public SongsInteractor provideSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client, TimeController timeController,
-                                                  @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
-        return new SongsInteractor(itunesSongsRepository, client, timeController, ioScheduler, uiScheduler);
+    public ItunesSongsInteractor provideSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client,
+                                                        @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
+        return new ItunesSongsInteractor(itunesSongsRepository, client, ioScheduler, uiScheduler);
     }
 
     @Singleton
@@ -99,12 +98,6 @@ public class AppModule {
                 .build();
 
         return retrofit.create(HttpClient.class);
-    }
-
-    @Singleton
-    @Provides
-    public TimeController provideTimeController(SharedPreferences pref) {
-        return new TimeController(pref);
     }
 
     @Singleton

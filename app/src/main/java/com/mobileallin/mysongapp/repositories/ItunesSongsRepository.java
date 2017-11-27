@@ -1,7 +1,6 @@
 package com.mobileallin.mysongapp.repositories;
 
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
-import com.mobileallin.mysongapp.helper.TimeController;
 import com.mobileallin.mysongapp.network.HttpClient;
 
 import io.reactivex.Observable;
@@ -12,7 +11,7 @@ import io.reactivex.Scheduler;
  */
 
 public interface ItunesSongsRepository {
-    Observable<ItunesResponse> getSongs(TimeController timeController, HttpClient httpClient,
-                                        Scheduler ioScheduler, Scheduler uiScheduler);
+    Observable<ItunesResponse> getSongs(HttpClient httpClient,Scheduler ioScheduler,
+                                        Scheduler uiScheduler);
 
 }
