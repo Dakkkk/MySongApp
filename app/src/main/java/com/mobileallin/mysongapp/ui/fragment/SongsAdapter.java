@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mobileallin.mysongapp.R;
-import com.mobileallin.mysongapp.data.model.Song;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Dawid on 2017-11-24.
- */
 
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> {
     private Context context;
     private View emptyView;
-    private List<Song> items;
+    private List<ItunesSong> items;
     private IOnItemClickListener itemClickListener;
 
     public interface IOnItemClickListener {
@@ -38,14 +35,14 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         this(context, new ArrayList<>(), emptyView);
     }
 
-    public SongsAdapter(Context context, List<Song> items, View emptyView) {
+    public SongsAdapter(Context context, List<ItunesSong> items, View emptyView) {
         this.context = context;
         this.items = items;
         this.emptyView = emptyView;
         showEmptyView(items);
     }
 
-    public void setItems(List<Song> items) {
+    public void setItems(List<ItunesSong> items) {
         this.items = items;
         showEmptyView(items);
         notifyDataSetChanged();
@@ -86,11 +83,11 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             view.setOnClickListener(this);
         }
 
-        public void bind(Song song) {
+        public void bind(ItunesSong itunesSong) {
 
-            songTitleView.setText(song.title());
-            songAuthorView.setText(song.author());
-            songDateView.setText(song.releaseDate());
+            songTitleView.setText(itunesSong.title());
+            songAuthorView.setText(itunesSong.author());
+            songDateView.setText(itunesSong.releaseDate());
         }
 
 
@@ -107,7 +104,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
      * util methods
      */
 
-    private void showEmptyView(List<Song> list) {
+    private void showEmptyView(List<ItunesSong> list) {
         if (emptyView != null) {
             int visibility = (list == null || list.isEmpty()) ? View.VISIBLE : View.INVISIBLE;
             this.emptyView.setVisibility(visibility);

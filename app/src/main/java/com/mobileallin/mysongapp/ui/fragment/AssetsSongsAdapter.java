@@ -16,9 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
 
 public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.ViewHolder> {
     private Context context;

@@ -1,3 +1,4 @@
+/*
 package com.mobileallin.mysongapp.helper;
 
 import android.content.Context;
@@ -5,9 +6,7 @@ import android.content.Context;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by Dawid on 2017-11-24.
- */
+
 
 public class AssetsLoader {
 
@@ -43,3 +42,4 @@ public class AssetsLoader {
 
     }
 }
+*/

@@ -7,12 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Dawid on 2017-11-23.
- */
 
 @AutoValue
-public abstract class Song implements Parcelable {
+public abstract class ItunesSong implements Parcelable {
 
     public abstract long id();
 
@@ -25,12 +22,12 @@ public abstract class Song implements Parcelable {
     @SerializedName("releaseDate")
     public abstract String releaseDate();
 
-    public static TypeAdapter<Song> typeAdapter(Gson gson) {
-        return new AutoValue_Song.GsonTypeAdapter(gson);
+    public static TypeAdapter<ItunesSong> typeAdapter(Gson gson) {
+        return new AutoValue_ItunesSong.GsonTypeAdapter(gson);
     }
 
     static Builder builder() {
-        return new AutoValue_Song.Builder();
+        return new AutoValue_ItunesSong.Builder();
     }
 
     @AutoValue.Builder
@@ -43,7 +40,7 @@ public abstract class Song implements Parcelable {
 
         public abstract Builder setReleaseDate(String value);
 
-        public abstract Song build();
+        public abstract ItunesSong build();
     }
 
 }

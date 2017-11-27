@@ -11,9 +11,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
 
 public class AssertsSongsStringParser {
 

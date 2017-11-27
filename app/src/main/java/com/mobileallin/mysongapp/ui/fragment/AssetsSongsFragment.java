@@ -24,7 +24,7 @@ import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
-import com.mobileallin.mysongapp.data.model.Song;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
@@ -36,12 +36,8 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
 
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
-
 
     private static final String ASSETS_SONGS_LIST_STATE = "assets_songs_state";
     @InjectPresenter
@@ -144,7 +140,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     }
 
     @Override
-    public void displaySongs(List<Song> list) {
+    public void displaySongs(List<ItunesSong> list) {
 
     }
 

@@ -24,7 +24,7 @@ import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
-import com.mobileallin.mysongapp.data.model.Song;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
@@ -34,12 +34,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Dawid on 2017-11-24.
- */
 
 public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
-
 
     private static final String ITUNES_SONGS_LIST_STATE = "itunes_songs_state";
     @InjectPresenter
@@ -69,7 +65,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
         return new ItuneSongsPresenter(component, this);
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,7 +142,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     }
 
     @Override
-    public void displaySongs(List<Song> list) {
+    public void displaySongs(List<ItunesSong> list) {
         songsAdapter.setItems(list);
         if (songsListState != null) {
             songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);

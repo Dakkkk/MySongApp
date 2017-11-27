@@ -7,9 +7,7 @@ import com.mobileallin.mysongapp.data.model.AssetsSong;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
+
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface AssetsSongsView extends MvpView, BaseView {
 

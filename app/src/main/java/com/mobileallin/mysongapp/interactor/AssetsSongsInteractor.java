@@ -5,9 +5,6 @@ import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
 
 public class AssetsSongsInteractor {
 

@@ -6,9 +6,6 @@ import com.mobileallin.mysongapp.dagger.component.DaggerMySongAppComponent;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.dagger.module.AppModule;
 
-/**
- * Created by Dawid on 2017-11-23.
- */
 
 public class MySongApp extends Application {
 

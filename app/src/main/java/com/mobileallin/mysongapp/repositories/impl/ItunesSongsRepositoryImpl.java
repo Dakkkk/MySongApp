@@ -7,9 +7,6 @@ import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 
-/**
- * Created by Dawid on 2017-11-24.
- */
 
 public class ItunesSongsRepositoryImpl implements ItunesSongsRepository {
 

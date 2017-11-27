@@ -7,9 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
+
 @AutoValue
 public abstract class AssetsSong implements Parcelable {
 

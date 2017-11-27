@@ -17,7 +17,7 @@ public abstract class ItunesResponse implements Parcelable {
     public abstract int resultsNumber();
 
     @SerializedName("results")
-    public abstract List<Song> allItuneSongs();
+    public abstract List<ItunesSong> allItuneSongs();
 
     public static TypeAdapter<ItunesResponse> typeAdapter(Gson gson) {
         return new AutoValue_ItunesResponse.GsonTypeAdapter(gson);
@@ -27,7 +27,7 @@ public abstract class ItunesResponse implements Parcelable {
     public abstract static class Builder {
         public abstract Builder setResultsNumber(int resultsNumber);
 
-        public abstract Builder setAllItuneSongs(List<Song> allItuneSongs);
+        public abstract Builder setAllItuneSongs(List<ItunesSong> allItuneSongs);
 
         public abstract ItunesResponse build();
     }

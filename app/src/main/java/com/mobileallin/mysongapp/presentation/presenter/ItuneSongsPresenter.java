@@ -5,7 +5,7 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
-import com.mobileallin.mysongapp.data.model.Song;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.ui.view.SearchView;
@@ -21,14 +21,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
-/**
- * Class responsible for showing the data in the main view
- */
+
 @InjectViewState
 public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 
     private static final String TAG = "SongsListPresenter";
-    private List<Song> songsList;
+    private List<ItunesSong> songsList;
     private SongsListView view;
     private Disposable disposable;
     private Disposable searchDisposable;

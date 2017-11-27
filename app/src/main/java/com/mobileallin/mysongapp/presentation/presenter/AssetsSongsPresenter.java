@@ -7,7 +7,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
-import com.mobileallin.mysongapp.data.model.Song;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.helper.AssertsSongsStringParser;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
@@ -18,15 +18,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-/**
- * Created by Dawid on 2017-11-25.
- */
 
 @InjectViewState
 public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
     private static final String TAG = "AssetsSongsPresenter";
-    private List<Song> songsList;
+    private List<ItunesSong> songsList;
     private AssetsSongsView view;
     private AssetsSongsRepositoryImpl assetsRepository;
     private Context context;
