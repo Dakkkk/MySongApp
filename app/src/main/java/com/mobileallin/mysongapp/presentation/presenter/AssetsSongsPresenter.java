@@ -73,10 +73,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
         for (AssetsSong song : assetsSongArrayList) {
 
-            Log.d("MySearch helper", song.author());
-
             if (song.author().toLowerCase().contains(s) ||
-                    song.title().toLowerCase().startsWith(s)) {
+                    song.title().toLowerCase().startsWith(s) ||
+                    song.releaseDate().toLowerCase().startsWith(s)) {
                 assetsSearchList.add(song);
             }
         }
