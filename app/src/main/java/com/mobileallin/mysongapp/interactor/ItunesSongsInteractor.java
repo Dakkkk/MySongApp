@@ -90,6 +90,12 @@ public class ItunesSongsInteractor {
         return convertedItuneSongsList;
     }
 
+    public ItunesSong getChosenItunesSong(long id){
+        int intId = (int) id;
+        Log.d("chosenSong", allItunesSongs.get(intId).toString());
+        return allItunesSongs.get(intId);
+    }
+
     //ToDo rewrite this
     public List<ItunesSong> getAllItunesSongs() {
         return allItunesSongs;

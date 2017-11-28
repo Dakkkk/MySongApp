@@ -49,7 +49,7 @@ public class Router {
 
     private void addArguments(String key, Bundle args) {
         if (key != null && args != null) {
-            Log.d(Router.class.getSimpleName(), "addArguments: " + key + " " + args.getBundle(key));
+            Log.d(Router.class.getSimpleName(), "addArguments: " + key + " " + args.toString());
             argumentMap.put(key, args);
         } else {
             Log.d(Router.class.getSimpleName(), "addArguments called key null");

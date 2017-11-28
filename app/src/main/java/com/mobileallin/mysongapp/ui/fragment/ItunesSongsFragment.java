@@ -38,8 +38,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mobileallin.mysongapp.utils.Keys.ITUNE_SONG_ID;
-
 
 public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
 
@@ -77,10 +75,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     }
 
     public static ItunesSongsFragment newInstance(long songId) {
-        Bundle args = new Bundle();
-        args.putLong(ITUNE_SONG_ID, songId);
         ItunesSongsFragment f = new ItunesSongsFragment();
-        f.setArguments(args);
         return f;
     }
 

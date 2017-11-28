@@ -5,9 +5,51 @@
     android:layout_height="match_parent"
     tools:context="com.mobileallin.mysongapp.ui.activity.SongDetailsActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/itunes_details_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+  <LinearLayout
+      android:orientation="vertical"
+      android:id="@+id/song_details_data"
+      android:layout_width="wrap_content"
+      android:layout_height="400dp">
+
+      <TextView
+          android:textColor="@color/colorPrimaryDark"
+          android:id="@+id/song_details_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:textColor="@color/colorPrimaryDark"
+          android:id="@+id/song_details_author"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:textColor="@color/colorPrimaryDark"
+          android:id="@+id/song_details_release_date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+   <!--   <TextView
+          android:id="@+id/song_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:id="@+id/song_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:id="@+id/song_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />-->
+
+  </LinearLayout>
 
 </FrameLayout>

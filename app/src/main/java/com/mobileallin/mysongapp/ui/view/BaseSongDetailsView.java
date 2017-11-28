@@ -9,5 +9,5 @@ import com.mobileallin.mysongapp.data.model.ItunesSong;
 public interface BaseSongDetailsView extends MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void showChosenRecipeDetails(ItunesSong itunesSong);
+    void showItunesSongDetails(ItunesSong itunesSong);
 }

@@ -57,6 +57,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
         super.onFirstViewAttach();
         Bundle args = router.getArguments(getClass().getName());
         id = args.getLong(ArgumentKeys.ID);
+        Log.d("ItunesPresenter", id +"");
     }
 
     @Override
@@ -93,6 +94,10 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     public void showDetails(int position) {
         Bundle args = new Bundle();
         args.putLong(ArgumentKeys.ID, itunesSongsInteractor.getAllItunesSongs().get(position).id());
+        args.putString(ArgumentKeys.TITLE, itunesSongsInteractor.getAllItunesSongs().get(position).title());
+        args.putString(ArgumentKeys.AUTHOR, itunesSongsInteractor.getAllItunesSongs().get(position).author());
+        args.putString(ArgumentKeys.RELEASE_DATE, itunesSongsInteractor.getAllItunesSongs().get(position).releaseDate());
+
         router.putCommand(Command.SHOW_ITUNE_SONG_DETAILS, ItunesSongDetailsPresenter.class.getName(), args);
         Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");
         Log.d("showDetails, ID: ", args.getLong(ArgumentKeys.ID) + "");

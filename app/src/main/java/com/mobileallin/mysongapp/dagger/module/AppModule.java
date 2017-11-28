@@ -10,6 +10,7 @@ import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
+import com.mobileallin.mysongapp.interactor.SongDetailsInteractor;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.network.AutoValueGsonFactory;
 import com.mobileallin.mysongapp.network.HttpClient;
@@ -49,7 +50,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    Router provideRouter(){
+    Router provideRouter() {
         return new Router();
     }
 
@@ -91,6 +92,12 @@ public class AppModule {
     @Provides
     public AssetsSongsInteractor provideAssetsSongsInteractor() {
         return new AssetsSongsInteractor();
+    }
+
+    @Singleton
+    @Provides
+    public SongDetailsInteractor provideSongDetailsInteractor() {
+        return new SongDetailsInteractor();
     }
 
     @Singleton

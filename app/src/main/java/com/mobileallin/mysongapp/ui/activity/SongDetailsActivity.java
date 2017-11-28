@@ -20,9 +20,22 @@ public class SongDetailsActivity extends BaseActivity implements INavigator {
         ActivityUtils.setDisplayHomeAsUpEnabled(this);
         showSongDetails();
 
+/*
+        Bundle args = getArguments();
+*/
+
+/*
+        Log.d("detailArgs", args.toString());
+*/
+
+/*
+        showSongDetails();
+*/
+
     }
 
     private void showSongDetails() {
+
         addFragment(R.id.song_details_container, ItunesSongDetailsFragment::new, false);
     }
 
