@@ -6,10 +6,9 @@ import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.navigation.Command;
 import com.mobileallin.mysongapp.navigation.INavigator;
+import com.mobileallin.mysongapp.ui.fragment.ItunesSongDetailsFragment;
+import com.mobileallin.mysongapp.utils.ActivityUtils;
 
-/**
- * Created by Dawid on 2017-11-27.
- */
 
 public class SongDetailsActivity extends BaseActivity implements INavigator {
 
@@ -18,6 +17,13 @@ public class SongDetailsActivity extends BaseActivity implements INavigator {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_details);
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
+        ActivityUtils.setDisplayHomeAsUpEnabled(this);
+        showSongDetails();
+
+    }
+
+    private void showSongDetails() {
+        addFragment(R.id.song_details_container, ItunesSongDetailsFragment::new, false);
     }
 
     @Override

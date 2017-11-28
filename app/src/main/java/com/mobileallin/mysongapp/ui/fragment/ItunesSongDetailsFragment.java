@@ -1,15 +1,31 @@
 package com.mobileallin.mysongapp.ui.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.mobileallin.mysongapp.MySongApp;
+import com.mobileallin.mysongapp.R;
+import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
+import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
+import com.mobileallin.mysongapp.ui.view.BaseSongDetailsView;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by Dawid on 2017-11-27.
  */
 
-public class ItunesSongDetailsFragment extends MvpAppCompatFragment {
+public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements BaseSongDetailsView {
 
 
-    /*@InjectPresenter
+    @InjectPresenter
     ItunesSongDetailsPresenter presenter;
 
     @ProvidePresenter
@@ -27,5 +43,10 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment {
         getActivity().setTitle(getString(R.string.song_details));
 
         return view;
-    }*/
+    }
+
+    @Override
+    public void showChosenRecipeDetails(ItunesSong itunesSong) {
+
+    }
 }
