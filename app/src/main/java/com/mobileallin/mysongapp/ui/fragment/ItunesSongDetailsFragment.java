@@ -1,21 +1,23 @@
 package com.mobileallin.mysongapp.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.mobileallin.mysongapp.R;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by Dawid on 2017-11-27.
  */
 
 public class ItunesSongDetailsFragment extends MvpAppCompatFragment {
+
+
+    /*@InjectPresenter
+    ItunesSongDetailsPresenter presenter;
+
+    @ProvidePresenter
+    ItunesSongDetailsPresenter providePresenter() {
+        MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
+        return new ItunesSongDetailsPresenter(component);
+    }
+
 
     @Nullable
     @Override
@@ -25,5 +27,5 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment {
         getActivity().setTitle(getString(R.string.song_details));
 
         return view;
-    }
+    }*/
 }

@@ -34,10 +34,11 @@ public class AssertsSongsStringParser {
                         .setAuthor(author)
                         .setReleaseDate(releaseDate)
                         .build();
-                
+
                 assetsSongsList.add(i, assetsSong);
-                Log.d("assetsSongsList", assetsSongsList.get(0).author());
+
             }
+            Log.d("assetsSongsList", "0: " + assetsSongsList.get(0).id() + " 5:" + assetsSongsList.get(5).id() + "8: " + assetsSongsList.get(8).id() );
         } catch (JSONException e) {
             e.printStackTrace();
         }

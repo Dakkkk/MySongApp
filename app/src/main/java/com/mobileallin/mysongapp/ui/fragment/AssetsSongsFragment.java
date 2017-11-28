@@ -36,6 +36,8 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mobileallin.mysongapp.utils.Keys.ASSETS_SONG_ID;
+
 
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
 
@@ -74,6 +76,13 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl, getContext());
     }
 
+    public static AssetsSongsFragment newInstance(long songId) {
+        Bundle args = new Bundle();
+        args.putLong(ASSETS_SONG_ID, songId);
+        AssetsSongsFragment f = new AssetsSongsFragment();
+        f.setArguments(args);
+        return f;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

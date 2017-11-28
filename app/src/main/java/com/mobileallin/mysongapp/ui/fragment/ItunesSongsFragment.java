@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,19 +26,28 @@ import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.mobileallin.mysongapp.utils.Keys.ITUNE_SONG_ID;
 
 
 public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
 
     private static final String ITUNES_SONGS_LIST_STATE = "itunes_songs_state";
+
+    @Inject
+    Router router;
+
     @InjectPresenter
     ItuneSongsPresenter ituneSongsPresenter;
 
@@ -66,6 +76,14 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         return new ItuneSongsPresenter(component, this);
     }
 
+    public static ItunesSongsFragment newInstance(long songId) {
+        Bundle args = new Bundle();
+        args.putLong(ITUNE_SONG_ID, songId);
+        ItunesSongsFragment f = new ItunesSongsFragment();
+        f.setArguments(args);
+        return f;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +101,11 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
 
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
 
-        songsAdapter.setItemClickListener(position -> ituneSongsPresenter.enterDetailActivity(position));
+        if(router == null) {
+            Log.d("OnCreateView", "Router is null!!!");
+        }
+
+        songsAdapter.setItemClickListener(position -> ituneSongsPresenter.showDetails(position));
 
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
@@ -158,6 +180,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     public void showSearchResult(ItunesResponse statusesItems) {
         songsAdapter.setItems(statusesItems.allItuneSongs());
     }
-
 }
+
 

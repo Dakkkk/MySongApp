@@ -47,6 +47,12 @@ public class AppModule {
         return context;
     }
 
+    @Singleton
+    @Provides
+    Router provideRouter(){
+        return new Router();
+    }
+
     @IoScheduler
     @Singleton
     @Provides
@@ -107,12 +113,6 @@ public class AppModule {
     @Provides
     public SharedPreferences providePreferences(@ApplicationContext Context context) {
         return context.getSharedPreferences(SHARED_PREFS_NAME, Activity.MODE_PRIVATE);
-    }
-
-    @Singleton
-    @Provides
-    Router provideRouter(){
-        return new Router();
     }
 
 }

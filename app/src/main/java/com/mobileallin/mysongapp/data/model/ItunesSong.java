@@ -26,12 +26,12 @@ public abstract class ItunesSong implements Parcelable {
         return new AutoValue_ItunesSong.GsonTypeAdapter(gson);
     }
 
-    static Builder builder() {
+    public static Builder builder() {
         return new AutoValue_ItunesSong.Builder();
     }
 
     @AutoValue.Builder
-    abstract static class Builder {
+    public abstract static class Builder {
         public abstract Builder setId(long id);
 
         public abstract Builder setTitle(String value);

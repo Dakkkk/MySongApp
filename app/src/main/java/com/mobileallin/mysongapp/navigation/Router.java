@@ -19,7 +19,9 @@ public class Router {
     }
 
     public void attachToNavigator(INavigator navigator) {
+        Log.d("attachNav", "called");
         this.navigator = new WeakReference<>(navigator);
+        Log.d("attachNav", navigator.toString());
     }
 
     public void putCommand(Command command, String key, Bundle args) {
@@ -27,9 +29,11 @@ public class Router {
 
         if (navigator.get() != null) {
             addArguments(key, args);
+            Log.d(Router.class.getSimpleName(), navigator.get().toString());
             navigator.get().handleCommand(command);
+        } else {
+            Log.d(Router.class.getSimpleName(), "putCommand called navigator null");
         }
-        Log.d(Router.class.getSimpleName(), "putCommand called navigator null");
 
     }
 
@@ -45,9 +49,11 @@ public class Router {
 
     private void addArguments(String key, Bundle args) {
         if (key != null && args != null) {
+            Log.d(Router.class.getSimpleName(), "addArguments: " + key + " " + args.getBundle(key));
             argumentMap.put(key, args);
+        } else {
+            Log.d(Router.class.getSimpleName(), "addArguments called key null");
         }
-        Log.d(Router.class.getSimpleName(), "addArguments called key null");
 
     }
 }

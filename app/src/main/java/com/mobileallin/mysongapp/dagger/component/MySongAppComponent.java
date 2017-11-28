@@ -1,12 +1,14 @@
 package com.mobileallin.mysongapp.dagger.component;
 
 import com.mobileallin.mysongapp.dagger.module.AppModule;
+import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
 import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
-import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
+import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
-import com.mobileallin.mysongapp.ui.activity.ItunesSongsListActivity;
+import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.activity.SongDetailsActivity;
+import com.mobileallin.mysongapp.ui.activity.SongsListActivity;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongsFragment;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongsFragment;
 
@@ -19,7 +21,7 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 public interface MySongAppComponent {
 
-    void inject(ItunesSongsListActivity obj);
+    void inject(SongsListActivity obj);
 
     void inject(SongDetailsActivity obj);
 
@@ -31,9 +33,17 @@ public interface MySongAppComponent {
 
     void inject(AssetsSongsPresenter obj);
 
+    void inject(ItunesSongDetailsPresenter obj);
+
+/*
+    void inject(ItunesAndAssetsSongsActivity obj);
+*/
+
     ItunesSongsRepository ItunesSongsRepository();
 
     AssetsSongsRepositoryImpl AssetsSongsRepository();
+
+    Router Router();
 }
 
 

@@ -10,6 +10,7 @@ import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Scheduler;
@@ -49,7 +50,13 @@ public class ItunesSongsInteractor {
                     @Override
                     public void onSuccess(@NonNull ItunesResponse songs) {
                         Log.d("loadSongs", songs.toString());
+/*
                         allItunesSongs = songs.allItuneSongs();
+*/
+                        allItunesSongs = convertToItuneSongsList(songs.allItuneSongs());
+
+                        Log.d("allItunesSongs", "2: " + allItunesSongs.get(2).id() + ", 5:" + allItunesSongs.get(5).id());
+
                         view.displaySongs(allItunesSongs);
                     }
 
@@ -65,6 +72,22 @@ public class ItunesSongsInteractor {
                     }
                 }));
         return null;
+    }
+
+    public List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
+        List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
+        for (int i=0; i<itunesSongs.size(); i++) {
+            ItunesSong currentSongI = itunesSongs.get(i);
+            ItunesSong convertedItuneSong = ItunesSong.builder()
+                    .setId(i)
+                    .setTitle(currentSongI.title())
+                    .setAuthor(currentSongI.author())
+                    .setReleaseDate(currentSongI.releaseDate())
+                    .build();
+
+            convertedItuneSongsList.add(i, convertedItuneSong);
+        }
+        return convertedItuneSongsList;
     }
 
     //ToDo rewrite this

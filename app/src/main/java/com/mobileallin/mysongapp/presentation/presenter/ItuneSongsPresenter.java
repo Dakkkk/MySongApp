@@ -13,7 +13,7 @@ import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
-import com.mobileallin.mysongapp.utils.Keys;
+import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +35,9 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     private Disposable disposable;
     private Disposable searchDisposable;
 
+    private long id;
+
+
     @Inject
     ItunesSongsInteractor itunesSongsInteractor;
 
@@ -52,7 +55,8 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-
+        Bundle args = router.getArguments(getClass().getName());
+        id = args.getLong(ArgumentKeys.ID);
     }
 
     @Override
@@ -86,19 +90,14 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 */
     }
 
-    public void enterDetailActivity(int position) {
-        Log.d(ItuneSongsPresenter.class.getSimpleName(), "enterDetailActivity called");
+    public void showDetails(int position) {
         Bundle args = new Bundle();
-
-        //ToDo rewrite this
-        Log.d("enterDetailActivity", "position: " +  position);
-
-
-        Log.d("enterDetailActivity",  itunesSongsInteractor.getAllItunesSongs().get(2) + "");
-
-        args.putLong(Keys.ID, itunesSongsInteractor.getAllItunesSongs().get(position).id());
+        args.putLong(ArgumentKeys.ID, itunesSongsInteractor.getAllItunesSongs().get(position).id());
         router.putCommand(Command.SHOW_ITUNE_SONG_DETAILS, ItunesSongDetailsPresenter.class.getName(), args);
+        Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");
+        Log.d("showDetails, ID: ", args.getLong(ArgumentKeys.ID) + "");
     }
+
 
     public class ItunesSearchCall {
 
