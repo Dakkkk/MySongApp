@@ -3,20 +3,22 @@ package com.mobileallin.mysongapp.presentation.presenter;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
-import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.interactor.SongDetailsInteractor;
 import com.mobileallin.mysongapp.navigation.Router;
-import com.mobileallin.mysongapp.ui.fragment.ItunesSongDetailsFragment;
-import com.mobileallin.mysongapp.ui.view.BaseItunesDetailsView;
+import com.mobileallin.mysongapp.ui.fragment.AssetsSongDetailsFragment;
+import com.mobileallin.mysongapp.ui.view.BaseAssetsDetailsView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
 import javax.inject.Inject;
 
-@InjectViewState
-public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsView> {
+/**
+ * Created by Dawid on 2017-11-29.
+ */
+
+public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsView> {
 
     @Inject
     Router router;
@@ -27,10 +29,10 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
 
     private long songId;
     private int position;
-    private ItunesSong chosenSong;
-    private ItunesSongDetailsFragment view;
+    private AssetsSong chosenSong;
+    private AssetsSongDetailsFragment view;
 
-    public ItunesSongDetailsPresenter(MySongAppComponent component, ItunesSongDetailsFragment view){
+    public AssetsSongDetailsPresenter(MySongAppComponent component, AssetsSongDetailsFragment view){
         component.inject(this);
         this.view = view;
     }
@@ -51,44 +53,39 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
             songId = args.getLong(ArgumentKeys.ID);
             position = args.getInt(ArgumentKeys.POSITION);
         }
-/*
         System.out.print("DetailsPresenter: " + songId + ", " + position);
-*/
-/*
-        Log.d("DetailsPresenter, song:", getSongTitle().toString());
-*/
+        Log.d("DetailsPresenter, song:", getSongTitle());
 
     }
 
     @Override
-    public void attachView(BaseItunesDetailsView view) {
+    public void attachView(BaseAssetsDetailsView view) {
         super.attachView(view);
 
         Log.d("DetailPresenter, song:", getSongTitle());
-        view.showSongDetails(getItunesSongDetails());
-
+        view.showSongDetails(getAssetsSongDetails());
     }
 
     //ToDO Rewrite (maybe create separate class and function for building Itunes/Assets songs)
-    public ItunesSong getItunesSongDetails() {
-        Bundle routerSongBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
+    public AssetsSong getAssetsSongDetails() {
+        Bundle routerSongBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);
         String releaseDate = (String) routerSongBundle.get(ArgumentKeys.RELEASE_DATE);
 
-        ItunesSong itunesSong = ItunesSong.builder()
+        AssetsSong assetsSong = AssetsSong.builder()
                 .setId(id)
                 .setAuthor(author)
                 .setTitle(title)
                 .setReleaseDate(releaseDate)
                 .build();
 
-        return itunesSong;
+        return assetsSong;
     }
 
     public String getSongTitle() {
-        Bundle routerSongBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
+        Bundle routerSongBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
         return (String) routerSongBundle.get(ArgumentKeys.TITLE);
     }
 

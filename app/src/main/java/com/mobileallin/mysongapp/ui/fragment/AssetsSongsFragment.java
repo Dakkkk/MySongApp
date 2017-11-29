@@ -101,9 +101,9 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         getActivity().setTitle(getString(R.string.assets_songs));
         assetsSongsAdapter = new AssetsSongsAdapter(getContext(), emptyListView);
         allAssetsSongs = assetsSongsPresenter.getAssetsSongArrayList();
-/*
-        songsAdapter.setItemClickListener(position -> songsListPresenter.enterDetailActivity(position));
-*/
+
+        assetsSongsAdapter.setItemClickListener(position -> assetsSongsPresenter.showDetails(position));
+
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         songsRecyclerView.setLayoutManager(layoutManager);

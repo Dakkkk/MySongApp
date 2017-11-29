@@ -14,28 +14,28 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
-import com.mobileallin.mysongapp.data.model.ItunesSong;
-import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
-import com.mobileallin.mysongapp.ui.view.BaseItunesDetailsView;
+import com.mobileallin.mysongapp.data.model.AssetsSong;
+import com.mobileallin.mysongapp.presentation.presenter.AssetsSongDetailsPresenter;
+import com.mobileallin.mysongapp.ui.view.BaseAssetsDetailsView;
 import com.mobileallin.mysongapp.utils.Keys;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Dawid on 2017-11-27.
+ * Created by Dawid on 2017-11-29.
  */
 
-public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements BaseItunesDetailsView {
+public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements BaseAssetsDetailsView {
 
 
     @InjectPresenter
-    ItunesSongDetailsPresenter presenter;
+    AssetsSongDetailsPresenter presenter;
 
     @ProvidePresenter
-    ItunesSongDetailsPresenter providePresenter() {
+    AssetsSongDetailsPresenter providePresenter() {
         MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
-        return new ItunesSongDetailsPresenter(component, this);
+        return new AssetsSongDetailsPresenter(component, this);
     }
 
     @BindView(R.id.song_details_title)
@@ -76,11 +76,11 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
 
 
     @Override
-    public void showSongDetails(ItunesSong itunesSong) {
-        getActivity().setTitle(itunesSong.title());
-        Log.d("showItunesSongDetails: ", itunesSong.toString());
-        songTitleTextView.setText(itunesSong.title());
-        songAuthorTextView.setText(itunesSong.author());
-        songDateTextView.setText(itunesSong.releaseDate());
+    public void showSongDetails(AssetsSong assetsSong) {
+        getActivity().setTitle(assetsSong.title());
+        Log.d("showAssetsSongDetails: ", assetsSong.toString());
+        songTitleTextView.setText(assetsSong.title());
+        songAuthorTextView.setText(assetsSong.author());
+        songDateTextView.setText(assetsSong.releaseDate());
     }
 }

@@ -1,20 +1,22 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
-import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.helper.AssertsSongsStringParser;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
+import com.mobileallin.mysongapp.navigation.Command;
+import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
+import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,7 +25,6 @@ import javax.inject.Inject;
 public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
     private static final String TAG = "AssetsSongsPresenter";
-    private List<ItunesSong> songsList;
     private AssetsSongsView view;
     private AssetsSongsRepositoryImpl assetsRepository;
     private Context context;
@@ -31,6 +32,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
+
+    @Inject
+    Router router;
 
     //ToDo to many arguments, get rid of the context...
     public AssetsSongsPresenter(MySongAppComponent component, AssetsSongsView view,
@@ -81,5 +85,18 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         }
         Log.d("MySearch searchA..Song", assetsSearchList.toString());
         return assetsSearchList;
+    }
+
+    //ToDo clear asssets before put?
+    public void showDetails(int position) {
+        Bundle args = new Bundle();
+        args.putLong(ArgumentKeys.ID, getAssetsSongArrayList().get(position).id());
+        args.putString(ArgumentKeys.TITLE, getAssetsSongArrayList().get(position).title());
+        args.putString(ArgumentKeys.AUTHOR, getAssetsSongArrayList().get(position).author());
+        args.putString(ArgumentKeys.RELEASE_DATE, getAssetsSongArrayList().get(position).releaseDate());
+
+        router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS, AssetsSongDetailsPresenter.class.getName(), args);
+        Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");
+        Log.d("showDetails, ID: ", args.getLong(ArgumentKeys.ID) + "");
     }
 }

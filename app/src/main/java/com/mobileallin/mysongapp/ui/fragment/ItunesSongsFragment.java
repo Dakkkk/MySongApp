@@ -172,8 +172,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     }
 
     @Override
-    public void showSearchResult(ItunesResponse statusesItems) {
-        songsAdapter.setItems(statusesItems.allItuneSongs());
+    public void showSearchResult(ItunesResponse searchResponse) {
+        songsAdapter.setItems(searchResponse.allItuneSongs());
     }
 }
 

@@ -111,6 +111,11 @@ public class SongsListActivity extends BaseActivity implements INavigator {
                 break;
             }
 
+            case SHOW_ASSETS_SONG_DETAILS: {
+                showAssetsSongDetails();
+                break;
+            }
+
             default:
         }
     }
@@ -118,6 +123,13 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     private void showSongDetails() {
         Log.d("showSongDetails", "called");
         Intent intent = new Intent(this, SongDetailsActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void showAssetsSongDetails() {
+        Log.d("showAssetsSongDetails", "called");
+        Intent intent = new Intent(this, AssetsSongDetailsActivity.class);
         startActivity(intent);
 
     }
