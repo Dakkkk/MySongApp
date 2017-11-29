@@ -12,6 +12,4 @@ import java.util.ArrayList;
 public interface AssetsSongsView extends MvpView, BaseView {
 
     void displaySongs(ArrayList<AssetsSong> assetsSongs);
-
-    void showSearchResult(ArrayList<AssetsSong> searchResponse);
 }

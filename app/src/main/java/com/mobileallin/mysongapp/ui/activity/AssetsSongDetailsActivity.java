@@ -33,4 +33,5 @@ public class AssetsSongDetailsActivity extends BaseActivity implements INavigato
     public void handleCommand(Command command) {
 
     }
+
 }

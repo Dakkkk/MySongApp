@@ -28,7 +28,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     private AssetsSongsView view;
     private AssetsSongsRepositoryImpl assetsRepository;
     private Context context;
-    private ArrayList<AssetsSong> assetsSongArrayList;
+    private ArrayList<AssetsSong> allAssetsSongsArrayList;
+    private ArrayList<AssetsSong> assetsSearchList;
+
 
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
@@ -55,15 +57,13 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
         String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-
-        //ToDo move from here!
         AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
-        assetsSongArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
-        assetsSongsInteractor.loadSongs(view, assetsSongArrayList);
+        allAssetsSongsArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
+        assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
     public ArrayList<AssetsSong> getAssetsSongArrayList() {
-        return assetsSongArrayList;
+        return allAssetsSongsArrayList;
     }
 
     public void showAssetsSearchResults(ArrayList<AssetsSong> searchResponse) {
@@ -73,9 +73,11 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
-        ArrayList<AssetsSong> assetsSearchList = new ArrayList<>();
+        assetsSearchList = new ArrayList<>();
 
-        for (AssetsSong song : assetsSongArrayList) {
+        Log.d("searchA..AllSongs", allAssetsSongsArrayList.toString());
+
+        for (AssetsSong song : allAssetsSongsArrayList) {
             //ToDo check id this can be done better (use startsWith or contains or...)
             if (song.author().toLowerCase().contains(s) ||
                     song.title().toLowerCase().startsWith(s) ||
@@ -83,17 +85,26 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                 assetsSearchList.add(song);
             }
         }
-        Log.d("MySearch searchA..Song", assetsSearchList.toString());
+        Log.d("MySearch searchAS...", assetsSearchList.toString());
         return assetsSearchList;
     }
 
     //ToDo clear asssets before put?
     public void showDetails(int position) {
+        ArrayList<AssetsSong> currentSongsList;
+
+        if (assetsSearchList != null && !assetsSearchList.isEmpty()) {
+            Log.d("ASetarchList", "null or empty");
+            currentSongsList = assetsSearchList;
+        } else {
+            currentSongsList = getAssetsSongArrayList();
+        }
+
         Bundle args = new Bundle();
-        args.putLong(ArgumentKeys.ID, getAssetsSongArrayList().get(position).id());
-        args.putString(ArgumentKeys.TITLE, getAssetsSongArrayList().get(position).title());
-        args.putString(ArgumentKeys.AUTHOR, getAssetsSongArrayList().get(position).author());
-        args.putString(ArgumentKeys.RELEASE_DATE, getAssetsSongArrayList().get(position).releaseDate());
+        args.putLong(ArgumentKeys.ID, currentSongsList.get(position).id());
+        args.putString(ArgumentKeys.TITLE, currentSongsList.get(position).title());
+        args.putString(ArgumentKeys.AUTHOR, currentSongsList.get(position).author());
+        args.putString(ArgumentKeys.RELEASE_DATE, currentSongsList.get(position).releaseDate());
 
         router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS, AssetsSongDetailsPresenter.class.getName(), args);
         Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");

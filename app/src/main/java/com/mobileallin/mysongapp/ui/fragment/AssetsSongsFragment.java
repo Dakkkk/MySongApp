@@ -31,7 +31,6 @@ import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -119,10 +118,13 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 ArrayList<AssetsSong> searchAssetsSongsResults =
                         assetsSongsPresenter.getAssetsSongArrayList();
-                if (!Objects.equals(charSequence.toString(), "") || Objects.equals(charSequence, null)) {
+             /*   if (!Objects.equals(charSequence.toString(), "") || Objects.equals(charSequence, null)) {
                     searchAssetsSongsResults = assetsSongsPresenter.searchAssetsSong(charSequence.toString());
-                }
-                Log.d("MySearchFr", "empty string");
+                } else {
+                    Log.d("MySearchFr", "empty string");
+                }*/
+                searchAssetsSongsResults = assetsSongsPresenter.searchAssetsSong(charSequence.toString());
+
                 assetsSongsPresenter.showAssetsSearchResults(searchAssetsSongsResults);
             }
 
@@ -160,15 +162,10 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @Override
     public void displaySongs(ArrayList<AssetsSong> assetsSongs) {
+        Log.d("displaySongs", "called");
         assetsSongsAdapter.setItems(assetsSongs);
         if (songsListState != null) {
             songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
         }
-    }
-
-    @Override
-    public void showSearchResult(ArrayList<AssetsSong> searchResponse) {
-        Log.d("MySearch", "showSearchResult called!");
-        assetsSongsAdapter.setItems(searchResponse);
     }
 }

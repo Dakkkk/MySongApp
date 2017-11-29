@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +15,8 @@ import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.navigation.Command;
 import com.mobileallin.mysongapp.navigation.INavigator;
 import com.mobileallin.mysongapp.navigation.Router;
+import com.mobileallin.mysongapp.presentation.presenter.AssetsSongDetailsPresenter;
+import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongsFragment;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongsFragment;
 
@@ -33,35 +34,22 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs_list);
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
+
+        Bundle assetsDetailBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
+        Bundle itunesDetailBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
+        if (assetsDetailBundle != null && !assetsDetailBundle.isEmpty()) {
+            replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), true, "assetsFragment");
+        } else if (itunesDetailBundle != null && !itunesDetailBundle.isEmpty()) {
+            replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), true, "itunessFragment");
+        }
     }
+
 
     @Override
     public void onResume() {
         super.onResume();
         router.attachToNavigator(this);
         Log.d(getClass().getSimpleName(), router.toString());
-    }
-
-    private void addItunesFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.songs_fragment_container,
-                        new ItunesSongsFragment()).addToBackStack(null).commit();
-    }
-
-    private void addAssetsFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.songs_fragment_container,
-                        new AssetsSongsFragment()).addToBackStack(null).commit();
-    }
-
-    private Fragment getCurrentFragment() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() == 0) {
-            return null;
-        }
-        String fragmentTag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-        Fragment currentFragment = fragmentManager.findFragmentByTag(fragmentTag);
-        return currentFragment;
     }
 
     @Override
@@ -84,7 +72,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 /*
                 addItunesFragment();
 */
-                replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), false);
+                replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), true, "itunessFragment");
 
                 return true;
             case R.id.menu_assets_fragment:
@@ -92,7 +80,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 /*
                 addAssetsFragment();
 */
-                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), false);
+                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), true, "assetsFragment");
 
                 return true;
             default:
@@ -134,11 +122,11 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     }
 
-    private void replaceFragment(@IdRes int containerId, Fragment f, boolean addToBackStack) {
+    private void replaceFragment(@IdRes int containerId, Fragment f, boolean addToBackStack, String fragmentTag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(containerId, f);
         if (addToBackStack) {
-            ft.addToBackStack(null);
+            ft.addToBackStack(fragmentTag);
         }
         ft.commit();
     }

@@ -43,7 +43,6 @@ public class SongFactory {
         return itunesSong;
     }
 
-
     private AssetsSong buildAssetsSong(int id, String title, String author, String releaseDate) {
         AssetsSong assetsSong = AssetsSong.builder()
                 .setId(id)
@@ -53,5 +52,4 @@ public class SongFactory {
                 .build();
         return assetsSong;
     }
-
 }
