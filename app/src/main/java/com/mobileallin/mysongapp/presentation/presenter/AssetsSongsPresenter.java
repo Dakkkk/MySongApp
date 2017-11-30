@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.helper.AssertsSongsStringParser;
+import com.mobileallin.mysongapp.helper.AssetsSongTitleComparator;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.navigation.Command;
 import com.mobileallin.mysongapp.navigation.Router;
@@ -17,6 +18,7 @@ import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -59,6 +61,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         String songAssetsString = assetsRepository.loadJSONFromAsset(context);
         AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
         allAssetsSongsArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
+
+        Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
+
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
@@ -85,6 +90,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                 assetsSearchList.add(song);
             }
         }
+
         Log.d("MySearch searchAS...", assetsSearchList.toString());
         return assetsSearchList;
     }

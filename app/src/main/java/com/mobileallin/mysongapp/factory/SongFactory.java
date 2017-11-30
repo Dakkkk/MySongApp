@@ -25,9 +25,9 @@ public class SongFactory {
     public void buildSong(String SongTypeKey) {
         switch (SongTypeKey) {
             case Keys.ITUNE_SONG_TYPE:
-
+                buildItunesSong(id, title, author, releaseDate);
             case Keys.ASSETS_SONG_TYPE:
-
+                buildAssetsSong(id, title, author, releaseDate);
             default:
         }
 

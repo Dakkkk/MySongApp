@@ -6,11 +6,13 @@ import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.helper.ItunesSongTitleComparator;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 import com.mobileallin.mysongapp.ui.view.SongsListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Scheduler;
@@ -75,9 +77,15 @@ public class ItunesSongsInteractor {
     }
 
     public List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
+
         List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
-        for (int i=0; i<itunesSongs.size(); i++) {
+        for (int i = 0; i < itunesSongs.size(); i++) {
             ItunesSong currentSongI = itunesSongs.get(i);
+
+          /*  SongFactory songFactory = new SongFactory(i, currentSongI.title(),
+                    currentSongI.author(), currentSongI.releaseDate());
+            ItunesSong itunesSong = songFactory.buildSong(Keys.ITUNE_SONG_TYPE);*/
+
             ItunesSong convertedItuneSong = ItunesSong.builder()
                     .setId(i)
                     .setTitle(currentSongI.title())
@@ -86,11 +94,12 @@ public class ItunesSongsInteractor {
                     .build();
 
             convertedItuneSongsList.add(i, convertedItuneSong);
+            Collections.sort(convertedItuneSongsList, new ItunesSongTitleComparator());
         }
         return convertedItuneSongsList;
     }
 
-    public ItunesSong getChosenItunesSong(long id){
+    public ItunesSong getChosenItunesSong(long id) {
         int intId = (int) id;
         Log.d("chosenSong", allItunesSongs.get(intId).toString());
         return allItunesSongs.get(intId);
