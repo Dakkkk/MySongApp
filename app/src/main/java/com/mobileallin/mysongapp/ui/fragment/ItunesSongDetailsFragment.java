@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -14,6 +15,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
+import com.mobileallin.mysongapp.dagger.module.GlideApp;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
 import com.mobileallin.mysongapp.ui.view.BaseItunesDetailsView;
@@ -38,6 +40,8 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
         return new ItunesSongDetailsPresenter(component, this);
     }
 
+    @BindView(R.id.song_details_image)
+    ImageView songImage;
     @BindView(R.id.song_details_title)
     TextView songTitleTextView;
     @BindView(R.id.song_details_author)
@@ -76,6 +80,13 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     public void showSongDetails(ItunesSong itunesSong) {
         getActivity().setTitle(itunesSong.title());
         Log.d("showItunesSongDetails: ", itunesSong.toString());
+
+        GlideApp.with(this)
+                .load(itunesSong.thumbnailUrl())
+                .placeholder(R.drawable.ic_music_video_black_48px)
+                .error(R.drawable.ic_music_video_black_48px)
+                .into(songImage);
+
         songTitleTextView.setText(itunesSong.title());
         songAuthorTextView.setText(itunesSong.author());
         songDateTextView.setText(itunesSong.releaseDate());

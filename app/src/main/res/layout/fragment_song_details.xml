@@ -1,77 +1,135 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mobileallin.mysongapp.ui.activity.SongDetailsActivity">
 
-  <LinearLayout
-      android:orientation="vertical"
-      android:id="@+id/song_details_data"
-      android:layout_width="wrap_content"
-      android:layout_height="400dp">
+    <LinearLayout
+        android:id="@+id/song_details_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-      <TextView
-          android:textColor="@color/colorPrimaryDark"
-          android:id="@+id/song_details_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+        <ImageView
+            android:id="@+id/song_details_image"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_music_video_black_48px" />
 
-      <TextView
-          android:textColor="@color/colorPrimaryDark"
-          android:id="@+id/song_details_author"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
-      <TextView
-          android:textColor="@color/colorPrimaryDark"
-          android:id="@+id/song_details_collection_name"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+            <TextView
+                android:id="@+id/song_details_title_label"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/detail_text_view_margin"
+                android:layout_marginEnd="@dimen/detail_text_view_margin"
+                android:text="@string/title"
+                android:textColor="@color/colorPrimaryDark" />
 
-      <TextView
-          android:textColor="@color/colorPrimaryDark"
-          android:id="@+id/song_details_genre_name"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+            <TextView
+                android:id="@+id/song_details_title"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/song_details_title_label"
+                android:textColor="@color/colorPrimaryDark" />
 
-      <TextView
-          android:textColor="@color/colorPrimaryDark"
-          android:id="@+id/song_details_country"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+            <TextView
+                android:id="@+id/song_details_author_label"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_title_label"
+                android:layout_marginBottom="@dimen/detail_text_view_margin"
+                android:layout_marginEnd="@dimen/detail_text_view_margin"
+                android:text="@string/author"
+                android:textColor="@color/colorPrimaryDark" />
 
+            <TextView
+                android:id="@+id/song_details_author"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_title_label"
+                android:layout_toEndOf="@+id/song_details_author_label"
+                android:textColor="@color/colorPrimaryDark" />
 
-      <TextView
-          android:textColor="@color/colorPrimaryDark"
-          android:id="@+id/song_details_release_date"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+            <TextView
+                android:id="@+id/song_details_collection_name_label"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_author_label"
+                android:layout_marginBottom="@dimen/detail_text_view_margin"
+                android:layout_marginEnd="@dimen/detail_text_view_margin"
+                android:text="@string/collection_name"
+                android:textColor="@color/colorPrimaryDark" />
 
-   <!--   <TextView
-          android:id="@+id/song_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+            <TextView
+                android:id="@+id/song_details_collection_name"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_author_label"
+                android:layout_toEndOf="@+id/song_details_collection_name_label"
+                android:textColor="@color/colorPrimaryDark" />
 
-      <TextView
-          android:id="@+id/song_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
+            <TextView
+                android:id="@+id/song_details_genre_name_label"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_collection_name_label"
+                android:layout_marginBottom="@dimen/detail_text_view_margin"
+                android:layout_marginEnd="@dimen/detail_text_view_margin"
+                android:text="@string/genre_name"
+                android:textColor="@color/colorPrimaryDark" />
 
-      <TextView
-          android:id="@+id/song_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />-->
+            <TextView
+                android:id="@+id/song_details_genre_name"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_collection_name_label"
+                android:layout_toEndOf="@+id/song_details_genre_name_label"
+                android:textColor="@color/colorPrimaryDark" />
 
-  </LinearLayout>
+            <TextView
+                android:id="@+id/song_details_country_label"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_genre_name_label"
+                android:layout_marginBottom="@dimen/detail_text_view_margin"
+                android:layout_marginEnd="@dimen/detail_text_view_margin"
+                android:text="@string/country"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/song_details_country"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_genre_name_label"
+                android:layout_toEndOf="@+id/song_details_country_label"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/song_details_release_date_label"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_country_label"
+                android:layout_marginBottom="@dimen/detail_text_view_margin"
+                android:layout_marginEnd="24dp"
+                android:text="@string/release_date"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/song_details_release_date"
+                android:layout_width="@dimen/detail_text_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/song_details_country_label"
+                android:layout_toEndOf="@+id/song_details_genre_name_label"
+                android:textColor="@color/colorPrimaryDark" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

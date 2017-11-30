@@ -38,7 +38,7 @@
             android:layout_toRightOf="@+id/song_image"
             android:paddingStart="16dp"
             android:textStyle="bold"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/song_author"
@@ -46,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/song_title"
             android:layout_toEndOf="@+id/song_image"
-            android:layout_toRightOf="@+id/song_image"
             android:paddingStart="14dp"
             android:text="@string/author" />
 

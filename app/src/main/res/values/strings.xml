@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">MySongApp</string>
     <string name="songs_list_ts_empty">Songs list is empty!</string>
-    <string name="author">Author\'</string>
+    <string name="author">Author:</string>
     <string name="itunes_songs">Itunes Songs</string>
     <string name="assets_songs">Assets Songs</string>
     <string name="search_song">Search song</string>
     <string name="songs_details">Songs details</string>
     <string name="song_details">Song details</string>
+    <string name="title">Title:</string>
+    <string name="collection_name">Collection:</string>
+    <string name="genre_name">Genre:</string>
+    <string name="country">Country:</string>
+    <string name="release_date">Release:</string>
 </resources>
