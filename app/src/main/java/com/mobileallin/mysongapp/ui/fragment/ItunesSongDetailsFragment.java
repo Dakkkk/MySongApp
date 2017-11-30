@@ -56,15 +56,6 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-
-/*
-        Log.d("detailArgs", args.toString());
-*/
-
-/*
-        Log.d("detailArgs", args.get(ArgumentKeys.TITLE).toString());
-*/
-
         if (args != null) {
             presenter.init(args.getLong(Keys.ITUNE_SONG_ID));
         }

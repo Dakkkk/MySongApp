@@ -96,8 +96,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
 
             GlideApp.with(context)
                     .load(itunesSong.thumbnailUrl())
-                    .placeholder(R.drawable.ic_error_black)
-                    .error(R.drawable.ic_error_black)
+                    .placeholder(R.drawable.ic_music_video_black_48px)
+                    .error(R.drawable.ic_music_video_black_48px)
                     .into(songThumbnail);
         }
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="top"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryLight"
         android:fontFamily="sans-serif-light"
         android:hint="@string/search_song"
         android:imeOptions="actionDone"
@@ -17,6 +17,8 @@
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        android:textStyle="italic"
         xmlns:android="http://schemas.android.com/apk/res/android" />
 
     <android.support.v4.widget.SwipeRefreshLayout
