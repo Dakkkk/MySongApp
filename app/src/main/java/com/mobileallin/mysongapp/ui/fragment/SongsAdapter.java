@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mobileallin.mysongapp.R;
+import com.mobileallin.mysongapp.dagger.module.GlideApp;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 import java.util.ArrayList;
@@ -77,6 +79,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         @BindView(R.id.song_release_date)
         TextView songDateView;
 
+        @BindView(R.id.song_image)
+        ImageView songThumbnail;
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -88,6 +93,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             songTitleView.setText(itunesSong.title());
             songAuthorView.setText(itunesSong.author());
             songDateView.setText(itunesSong.releaseDate());
+
+            GlideApp.with(context)
+                    .load(itunesSong.thumbnailUrl())
+                    .placeholder(R.drawable.ic_error_black)
+                    .error(R.drawable.ic_error_black)
+                    .into(songThumbnail);
         }
 
 

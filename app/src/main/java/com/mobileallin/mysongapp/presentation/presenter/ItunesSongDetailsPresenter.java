@@ -76,12 +76,20 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);
         String releaseDate = (String) routerSongBundle.get(ArgumentKeys.RELEASE_DATE);
+        String genreName = (String) routerSongBundle.get(ArgumentKeys.GENRE_NAME);
+        String collectionName = (String) routerSongBundle.get(ArgumentKeys.COLLECTION_NAME);
+        String thumbnailUrl = (String) routerSongBundle.get(ArgumentKeys.THUMBNAIL_URL);
+        String country = (String) routerSongBundle.get(ArgumentKeys.COUNTRY);
 
         ItunesSong itunesSong = ItunesSong.builder()
                 .setId(id)
                 .setAuthor(author)
                 .setTitle(title)
                 .setReleaseDate(releaseDate)
+                .setCollectionName(collectionName)
+                .setCountry(country)
+                .setGenreName(genreName)
+                .setThumbnailUrl(thumbnailUrl)
                 .build();
 
         return itunesSong;

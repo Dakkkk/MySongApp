@@ -97,6 +97,10 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
         args.putString(ArgumentKeys.TITLE, itunesSongsInteractor.getAllItunesSongs().get(position).title());
         args.putString(ArgumentKeys.AUTHOR, itunesSongsInteractor.getAllItunesSongs().get(position).author());
         args.putString(ArgumentKeys.RELEASE_DATE, itunesSongsInteractor.getAllItunesSongs().get(position).releaseDate());
+        args.putString(ArgumentKeys.COUNTRY, itunesSongsInteractor.getAllItunesSongs().get(position).country());
+        args.putString(ArgumentKeys.GENRE_NAME, itunesSongsInteractor.getAllItunesSongs().get(position).genreName());
+        args.putString(ArgumentKeys.COLLECTION_NAME, itunesSongsInteractor.getAllItunesSongs().get(position).collectionName());
+        args.putString(ArgumentKeys.THUMBNAIL_URL, itunesSongsInteractor.getAllItunesSongs().get(position).thumbnailUrl());
 
         router.putCommand(Command.SHOW_ITUNE_SONG_DETAILS, ItunesSongDetailsPresenter.class.getName(), args);
         Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");

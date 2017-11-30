@@ -44,6 +44,12 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     TextView songAuthorTextView;
     @BindView(R.id.song_details_release_date)
     TextView songDateTextView;
+    @BindView(R.id.song_details_collection_name)
+    TextView songCollectionTextView;
+    @BindView(R.id.song_details_genre_name)
+    TextView songGenreTextView;
+    @BindView(R.id.song_details_country)
+    TextView songCountryTextView;
 
 
     @Override
@@ -82,5 +88,8 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
         songTitleTextView.setText(itunesSong.title());
         songAuthorTextView.setText(itunesSong.author());
         songDateTextView.setText(itunesSong.releaseDate());
+        songCollectionTextView.setText(itunesSong.collectionName());
+        songGenreTextView.setText(itunesSong.genreName());
+        songCountryTextView.setText(itunesSong.country());
     }
 }

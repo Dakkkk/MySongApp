@@ -22,6 +22,18 @@ public abstract class ItunesSong implements Parcelable {
     @SerializedName("releaseDate")
     public abstract String releaseDate();
 
+    @SerializedName("collectionName")
+    public abstract String collectionName();
+
+    @SerializedName("country")
+    public abstract String country();
+
+    @SerializedName("primaryGenreName")
+    public abstract String genreName();
+
+    @SerializedName("artworkUrl100")
+    public abstract String thumbnailUrl();
+
     public static TypeAdapter<ItunesSong> typeAdapter(Gson gson) {
         return new AutoValue_ItunesSong.GsonTypeAdapter(gson);
     }
@@ -40,7 +52,15 @@ public abstract class ItunesSong implements Parcelable {
 
         public abstract Builder setReleaseDate(String value);
 
+        public abstract Builder setCollectionName(String value);
+
+        public abstract Builder setCountry(String value);
+
+        public abstract Builder setGenreName(String value);
+
+        public abstract Builder setThumbnailUrl(String value);
+
         public abstract ItunesSong build();
     }
-    
+
 }

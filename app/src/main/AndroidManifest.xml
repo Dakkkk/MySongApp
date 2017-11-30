@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.SongsListActivity">
+        <activity android:name=".ui.activity.SongsListActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,11 +22,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.SongDetailsActivity">
+        <activity android:name=".ui.activity.SongDetailsActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".ui.activity.AssetsSongDetailsActivity">
+        <activity android:name=".ui.activity.AssetsSongDetailsActivity"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

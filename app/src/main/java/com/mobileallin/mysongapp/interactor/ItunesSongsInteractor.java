@@ -91,6 +91,10 @@ public class ItunesSongsInteractor {
                     .setTitle(currentSongI.title())
                     .setAuthor(currentSongI.author())
                     .setReleaseDate(currentSongI.releaseDate())
+                    .setCollectionName(currentSongI.collectionName())
+                    .setCountry(currentSongI.country())
+                    .setGenreName(currentSongI.country())
+                    .setThumbnailUrl(currentSongI.thumbnailUrl())
                     .build();
 
             convertedItuneSongsList.add(i, convertedItuneSong);

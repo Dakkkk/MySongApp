@@ -18,12 +18,11 @@
 
         <ImageView
             android:id="@+id/song_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:src="@drawable/ic_error_black"
-            android:scaleType="center" />
+            android:src="@drawable/ic_error_black" />
 
         <TextView
             android:id="@+id/song_title"

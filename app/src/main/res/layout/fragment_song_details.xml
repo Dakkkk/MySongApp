@@ -27,6 +27,28 @@
 
       <TextView
           android:textColor="@color/colorPrimaryDark"
+          android:id="@+id/song_details_collection_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:textColor="@color/colorPrimaryDark"
+          android:id="@+id/song_details_genre_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:textColor="@color/colorPrimaryDark"
+          android:id="@+id/song_details_country"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+
+      <TextView
+          android:textColor="@color/colorPrimaryDark"
           android:id="@+id/song_details_release_date"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
