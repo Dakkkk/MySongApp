@@ -15,4 +15,7 @@
     <string name="first_label">First:</string>
     <string name="year_label">Year:</string>
     <string name="play_count">Play Count:</string>
+    <string name="itunes_menu">Itunes songs</string>
+    <string name="assets_menu">Assets songs</string>
+    <string name="menu">MENU</string>
 </resources>

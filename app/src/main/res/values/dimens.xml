@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="detail_text_view_margin">24dp</dimen>
-    <dimen name="detail_text_width">120dp</dimen>
+    <dimen name="detail_text_view_margin_16dp">16dp</dimen>
+    <dimen name="detail_text_view_margin_8dp">8dp</dimen>
+    <dimen name="detail_text_label_width">72dp</dimen>
+    <dimen name="detail_text_container_width">296dp</dimen>
 </resources>

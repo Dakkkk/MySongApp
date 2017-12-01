@@ -7,20 +7,20 @@
     <item
         android:id="@+id/action_notification1"
         android:icon="@drawable/ic_menu_white_36px"
-        android:title="action_notification"
+        android:title="@string/menu"
         app:showAsAction="always">
         <menu>
             <item
                 android:id="@+id/menu_itunes_fragment"
                 android:icon="@drawable/ic_music_note_white_24px"
                 android:orderInCategory="100"
-                android:title="ITUNES" />
+                android:title="@string/itunes_menu" />
 
             <item
                 android:id="@+id/menu_assets_fragment"
                 android:icon="@drawable/ic_music_note_white_24px"
                 android:orderInCategory="100"
-                android:title="ASSETS" />
+                android:title="@string/assets_menu" />
 
         </menu>
     </item>
