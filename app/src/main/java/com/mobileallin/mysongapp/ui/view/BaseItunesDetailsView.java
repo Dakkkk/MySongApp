@@ -7,8 +7,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 public interface BaseItunesDetailsView extends MvpView {
-
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showSongDetails(ItunesSong itunesSong);
-
 }

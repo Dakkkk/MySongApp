@@ -41,14 +41,11 @@ import static com.mobileallin.mysongapp.utils.Keys.ASSETS_SONG_ID;
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
 
     private static final String ASSETS_SONGS_LIST_STATE = "assets_songs_state";
-    @InjectPresenter
-    AssetsSongsPresenter assetsSongsPresenter;
-
     AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
-
     private AssetsSongsAdapter assetsSongsAdapter;
-
     private ArrayList<AssetsSong> allAssetsSongs;
+    private Parcelable songsListState;
+    private static final String SONGS_LIST_STATE = "songs_list_state";
 
     @BindView(R.id.songs_list)
     RecyclerView songsRecyclerView;
@@ -63,8 +60,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     @BindView(R.id.assets_search_panel)
     EditText assetsSearchPanel;
 
-    private Parcelable songsListState;
-    private static final String SONGS_LIST_STATE = "songs_list_state";
+    @InjectPresenter
+    AssetsSongsPresenter assetsSongsPresenter;
 
     @ProvidePresenter
     AssetsSongsPresenter providePresenter() {
@@ -96,13 +93,10 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assets_songs, container, false);
         ButterKnife.bind(this, view);
-
         getActivity().setTitle(getString(R.string.assets_songs));
         assetsSongsAdapter = new AssetsSongsAdapter(getContext(), emptyListView);
         allAssetsSongs = assetsSongsPresenter.getAssetsSongArrayList();
-
         assetsSongsAdapter.setItemClickListener(position -> assetsSongsPresenter.showDetails(position));
-
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         songsRecyclerView.setLayoutManager(layoutManager);
@@ -117,14 +111,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 ArrayList<AssetsSong> searchAssetsSongsResults =
-                        assetsSongsPresenter.getAssetsSongArrayList();
-             /*   if (!Objects.equals(charSequence.toString(), "") || Objects.equals(charSequence, null)) {
-                    searchAssetsSongsResults = assetsSongsPresenter.searchAssetsSong(charSequence.toString());
-                } else {
-                    Log.d("MySearchFr", "empty string");
-                }*/
-                searchAssetsSongsResults = assetsSongsPresenter.searchAssetsSong(charSequence.toString());
-
+                        assetsSongsPresenter.searchAssetsSong(charSequence.toString());
                 assetsSongsPresenter.showAssetsSearchResults(searchAssetsSongsResults);
             }
 

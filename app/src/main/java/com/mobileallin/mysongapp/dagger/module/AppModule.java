@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class AppModule {
 
-    //ToDo Split this into a couple of separate modules
+    //ToDo Split this into a couple of separate modules?
 
     private final Context context;
     private static final String SHARED_PREFS_NAME = "app_preferences";

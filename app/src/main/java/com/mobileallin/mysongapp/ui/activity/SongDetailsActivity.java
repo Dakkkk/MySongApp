@@ -22,10 +22,10 @@ public class SongDetailsActivity extends BaseActivity implements INavigator {
     }
 
     private void showSongDetails() {
-
         addFragment(R.id.song_details_container, ItunesSongDetailsFragment::new, false);
     }
 
+    //ToDo this should not be here split the interface into separate or remove the metod from interface
     @Override
     public void handleCommand(Command command) {
 

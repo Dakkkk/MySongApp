@@ -29,7 +29,6 @@ public class ItunesSongsFactory {
         this.collectionName = collectionName;
         this.country = country;
         this.thumbnailUrl = thumbnailUrl;
-        checkForNullValues(title, author, releaseDate, genreName, collectionName, country, thumbnailUrl);
     }
 
     public ItunesSong buildItunesSong() {
@@ -45,18 +44,6 @@ public class ItunesSongsFactory {
                 .setThumbnailUrl(thumbnailUrl)
                 .build();
         return itunesSong;
-    }
-
-    public void checkForNullValues(String title, String author, String releaseDate,
-                                   String genreName, String collectionName, String country,
-                                   String thumbnailUrl) {
-        if (title == null) this.title = "no data";
-        if (author == null) this.author = "no data";
-        if (releaseDate == null) this.releaseDate = "no data";
-        if (genreName == null) this.genreName = "no data";
-        if (collectionName == null) this.collectionName = "no data";
-        if (country == null) this.country = "no data";
-        if (thumbnailUrl == null) this.thumbnailUrl = "no data";
     }
 }
 

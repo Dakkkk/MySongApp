@@ -7,11 +7,9 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface SongsListView extends MvpView, BaseView, SearchView {
-
     void displayError(Throwable error);
 
     void showLoading();
 
     void hideLoading();
-
 }

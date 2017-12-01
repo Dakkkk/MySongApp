@@ -33,7 +33,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     private ArrayList<AssetsSong> allAssetsSongsArrayList;
     private ArrayList<AssetsSong> assetsSearchList;
 
-
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
 
@@ -52,7 +51,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-
     }
 
     @Override
@@ -61,9 +59,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         String songAssetsString = assetsRepository.loadJSONFromAsset(context);
         AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
         allAssetsSongsArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
-
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
-
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
@@ -90,7 +86,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                 assetsSearchList.add(song);
             }
         }
-
         Log.d("MySearch searchAS...", assetsSearchList.toString());
         return assetsSearchList;
     }
@@ -98,7 +93,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     //ToDo clear asssets before put?
     public void showDetails(int position) {
         ArrayList<AssetsSong> currentSongsList;
-
         if (assetsSearchList != null && !assetsSearchList.isEmpty()) {
             Log.d("ASetarchList", "null or empty");
             currentSongsList = assetsSearchList;

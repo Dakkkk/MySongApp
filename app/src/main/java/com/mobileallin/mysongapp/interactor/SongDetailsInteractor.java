@@ -12,8 +12,8 @@ public class SongDetailsInteractor {
 
     }
 
+    //ToDo Use interactor for getting the song for details?
   /*  public ItunesSong getSong(long id) {
       return mainInteractor.getChosenItunesSong(id);
     }*/
-
 }

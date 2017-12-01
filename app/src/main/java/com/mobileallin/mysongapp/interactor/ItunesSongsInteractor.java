@@ -29,11 +29,7 @@ public class ItunesSongsInteractor {
     private Scheduler ioScheduler;
     private Scheduler uiScheduler;
     private ItunesSongsRepository itunesSongsRepository;
-
     private List<ItunesSong> allItunesSongs;
-
-    private List<ItunesSong> currentItuneSongsList;
-
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public ItunesSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client,
@@ -46,7 +42,6 @@ public class ItunesSongsInteractor {
     }
 
     public Disposable loadSongs(SongsListView view) {
-
         compositeDisposable.add(itunesSongsRepository.getSongs(client,
                 ioScheduler, uiScheduler)
                 .subscribeOn(Schedulers.io())
@@ -55,13 +50,8 @@ public class ItunesSongsInteractor {
                     @Override
                     public void onSuccess(@NonNull ItunesResponse songs) {
                         Log.d("loadSongs", songs.toString());
-
-                       /* allItunesSongs = songs.allItuneSongs();*/
-
                         allItunesSongs = convertToItuneSongsList(songs.allItuneSongs());
-
                         Log.d("allItunesSongs", "2: " + allItunesSongs.get(2).id() + ", 5:" + allItunesSongs.get(5).id());
-
                         view.displaySongs(allItunesSongs);
                     }
 
@@ -80,44 +70,24 @@ public class ItunesSongsInteractor {
     }
 
     public List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
-
         List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
         for (int i = 0; i < itunesSongs.size(); i++) {
             ItunesSong currentSongI = itunesSongs.get(i);
-
+            //ToDo do as below for the rest of the values for better readability
             String releaseDate = currentSongI.releaseDate();
             String collectionName = currentSongI.collectionName();
-
-            if (releaseDate == null) releaseDate = "no data";
-            if (collectionName == null) collectionName = "no data";
 
             ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(i, currentSongI.title(),
                     currentSongI.author(), releaseDate, currentSongI.genreName(),
                     collectionName, currentSongI.country(),
                     currentSongI.thumbnailUrl());
             ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
-       /*     ItunesSong convertedItuneSong = ItunesSong.builder()
-                    .setId(i)
-                    .setTitle(currentSongI.title())
-                    .setAuthor(currentSongI.author())
-                    .setReleaseDate(currentSongI.releaseDate())
-                    .setCollectionName(currentSongI.collectionName())
-                    .setCountry(currentSongI.country())
-                    .setGenreName(currentSongI.country())
-                    .setThumbnailUrl(currentSongI.thumbnailUrl())
-                    .build();*/
 
             convertedItuneSongsList.add(i, convertedItuneSong);
             Collections.sort(convertedItuneSongsList, new ItunesSongTitleComparator());
         }
         return convertedItuneSongsList;
     }
-
- /*   public ItunesSong getChosenItunesSong(long id) {
-        int intId = (int) id;
-        Log.d("chosenSong", allItunesSongs.get(intId).toString());
-        return allItunesSongs.get(intId);
-    }*/
 
     //ToDo rewrite this
     public List<ItunesSong> getAllItunesSongs() {

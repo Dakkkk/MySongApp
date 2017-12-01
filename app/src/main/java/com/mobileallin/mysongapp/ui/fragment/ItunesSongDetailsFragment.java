@@ -24,12 +24,8 @@ import com.mobileallin.mysongapp.utils.Keys;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Dawid on 2017-11-27.
- */
 
 public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements BaseItunesDetailsView {
-
 
     @InjectPresenter
     ItunesSongDetailsPresenter presenter;
@@ -54,7 +50,6 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     TextView songGenreTextView;
     @BindView(R.id.song_details_country)
     TextView songCountryTextView;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

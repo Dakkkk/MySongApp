@@ -10,5 +10,4 @@ import io.reactivex.Scheduler;
 public interface ItunesSongsRepository {
     Maybe<ItunesResponse> getSongs(HttpClient httpClient, Scheduler ioScheduler,
                                    Scheduler uiScheduler);
-
 }

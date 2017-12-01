@@ -22,12 +22,8 @@ import com.mobileallin.mysongapp.utils.Keys;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Dawid on 2017-11-29.
- */
 
 public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements BaseAssetsDetailsView {
-
 
     @InjectPresenter
     AssetsSongDetailsPresenter presenter;
@@ -45,7 +41,6 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     @BindView(R.id.song_details_release_date)
     TextView songDateTextView;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +57,8 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
         View view = inflater.inflate(R.layout.fragment_song_details, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(presenter.getSongTitle());
-
         return view;
     }
-
 
     @Override
     public void showSongDetails(AssetsSong assetsSong) {

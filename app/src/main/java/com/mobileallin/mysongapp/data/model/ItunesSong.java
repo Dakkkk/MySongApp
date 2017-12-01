@@ -8,6 +8,12 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+/*
+Check for AutoValue updates as @NotNull here seem to be not the best solution. Now it's the only
+available "AutoValue way". Without it the app will crush each time any of the value returned from
+the Itunes API is not existent. Better solution would be to use something like default("no data")
+in typeAdapter.
+*/
 
 @AutoValue
 public abstract class ItunesSong implements Parcelable {

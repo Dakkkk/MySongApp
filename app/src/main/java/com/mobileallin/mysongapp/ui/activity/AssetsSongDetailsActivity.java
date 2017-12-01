@@ -25,13 +25,12 @@ public class AssetsSongDetailsActivity extends BaseActivity implements INavigato
     }
 
     private void showSongDetails() {
-
         addFragment(R.id.song_details_container, AssetsSongDetailsFragment::new, false);
     }
 
+    //ToDo this should not be here split the interface into separate
     @Override
     public void handleCommand(Command command) {
 
     }
-
 }

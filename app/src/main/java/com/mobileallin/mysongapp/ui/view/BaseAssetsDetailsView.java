@@ -10,7 +10,6 @@ import com.mobileallin.mysongapp.data.model.AssetsSong;
  */
 
 public interface BaseAssetsDetailsView extends MvpView {
-
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showSongDetails(AssetsSong assetsSong);
 }

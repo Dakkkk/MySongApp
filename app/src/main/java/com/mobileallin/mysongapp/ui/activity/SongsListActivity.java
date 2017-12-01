@@ -28,7 +28,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     @Inject
     Router router;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +42,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
             replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), true, "itunessFragment");
         }
     }
-
 
     @Override
     public void onResume() {
@@ -69,19 +67,12 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         switch (item.getItemId()) {
             case R.id.menu_itunes_fragment:
                 Toast.makeText(getApplicationContext(), "Itunes", Toast.LENGTH_SHORT).show();
-/*
-                addItunesFragment();
-*/
+                //ToDo Create method out of this?, we don' need id in the newInstance method - rewrite
                 replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), true, "itunessFragment");
-
                 return true;
             case R.id.menu_assets_fragment:
                 Toast.makeText(getApplicationContext(), "Assets", Toast.LENGTH_SHORT).show();
-/*
-                addAssetsFragment();
-*/
                 replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), true, "assetsFragment");
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -91,19 +82,15 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     @Override
     public void handleCommand(Command command) {
         Log.d("handleCommand", command.toString());
-
         switch (command) {
-
             case SHOW_ITUNE_SONG_DETAILS: {
                 showSongDetails();
                 break;
             }
-
             case SHOW_ASSETS_SONG_DETAILS: {
                 showAssetsSongDetails();
                 break;
             }
-
             default:
         }
     }
@@ -112,14 +99,12 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         Log.d("showSongDetails", "called");
         Intent intent = new Intent(this, SongDetailsActivity.class);
         startActivity(intent);
-
     }
 
     private void showAssetsSongDetails() {
         Log.d("showAssetsSongDetails", "called");
         Intent intent = new Intent(this, AssetsSongDetailsActivity.class);
         startActivity(intent);
-
     }
 
     private void replaceFragment(@IdRes int containerId, Fragment f, boolean addToBackStack, String fragmentTag) {

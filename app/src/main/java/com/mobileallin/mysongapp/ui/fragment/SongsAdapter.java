@@ -60,7 +60,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bind(items.get(position));
-
     }
 
     @Override
@@ -69,16 +68,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         @BindView(R.id.song_title)
         TextView songTitleView;
-
         @BindView(R.id.song_author)
         TextView songAuthorView;
-
         @BindView(R.id.song_release_date)
         TextView songDateView;
-
         @BindView(R.id.song_image)
         ImageView songThumbnail;
 
@@ -89,7 +84,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         }
 
         public void bind(ItunesSong itunesSong) {
-
             songTitleView.setText(itunesSong.title());
             songAuthorView.setText(itunesSong.author());
             songDateView.setText(itunesSong.releaseDate());
@@ -101,7 +95,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
                     .into(songThumbnail);
         }
 
-
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) {
@@ -109,11 +102,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             }
         }
     }
-
-
-    /**
-     * util methods
-     */
 
     private void showEmptyView(List<ItunesSong> list) {
         if (emptyView != null) {

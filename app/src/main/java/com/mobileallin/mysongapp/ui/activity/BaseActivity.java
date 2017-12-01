@@ -14,10 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected interface IFragmentCreator{
+    protected interface IFragmentCreator {
         Fragment createFragment();
     }
 
+    //ToDo decide if we have time to play around with this, or delete
     protected boolean isTablet;
     protected final String TAG = getClass().getName();
 
@@ -31,20 +32,21 @@ public class BaseActivity extends AppCompatActivity {
         return getResources().getBoolean(R.bool.is_tablet);
     }*/
 
-    protected void setOrientation(boolean isTablet){
-        int orientation = isTablet? ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
+    //ToDo decide if we have time to play around with this, or delete
+    protected void setOrientation(boolean isTablet) {
+        int orientation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE :
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         setRequestedOrientation(orientation);
     }
 
     protected void addFragment(@IdRes int containerId, IFragmentCreator fragmentCreator,
-                               boolean addToBackStack){
+                               boolean addToBackStack) {
 
         FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentById(containerId) == null){
+        if (fm.findFragmentById(containerId) == null) {
             FragmentTransaction ft = fm.beginTransaction();
             ft.add(containerId, fragmentCreator.createFragment());
-            if (addToBackStack){
+            if (addToBackStack) {
                 ft.addToBackStack(null);
             }
             ft.commit();

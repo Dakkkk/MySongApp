@@ -42,13 +42,8 @@ import butterknife.ButterKnife;
 public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
 
     private static final String ITUNES_SONGS_LIST_STATE = "itunes_songs_state";
-
-    @Inject
-    Router router;
-
-    @InjectPresenter
-    ItuneSongsPresenter ituneSongsPresenter;
-
+    private Parcelable songsListState;
+    private static final String SONGS_LIST_STATE = "songs_list_state";
     private SongsAdapter songsAdapter;
 
     @BindView(R.id.songs_list)
@@ -61,12 +56,14 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
     FrameLayout shield;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshView;
-
     @BindView(R.id.itunes_search_panel)
     EditText itunesSearchPanel;
 
-    private Parcelable songsListState;
-    private static final String SONGS_LIST_STATE = "songs_list_state";
+    @Inject
+    Router router;
+
+    @InjectPresenter
+    ItuneSongsPresenter ituneSongsPresenter;
 
     @ProvidePresenter
     ItuneSongsPresenter providePresenter() {
@@ -93,13 +90,10 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         View view = inflater.inflate(R.layout.fragment_songs_list, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(getString(R.string.itunes_songs));
-
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
-
         if(router == null) {
             Log.d("OnCreateView", "Router is null!!!");
         }
-
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         emptyListView.setVisibility(View.GONE);
@@ -125,8 +119,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         });
 
         songsAdapter.setItemClickListener(position -> ituneSongsPresenter.showDetails(position));
-
-
         return view;
     }
 
@@ -174,9 +166,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
 
     @Override
     public void showSearchResult(ItunesResponse searchResponse) {
-/*
-        ituneSongsPresenter.setCurrentSearchSongsList(searchResponse);
-*/
         songsAdapter.setItems(searchResponse.allItuneSongs());
     }
 }

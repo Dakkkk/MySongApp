@@ -72,10 +72,8 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
 
         @BindView(R.id.song_title)
         TextView songTitleView;
-
         @BindView(R.id.song_author)
         TextView songAuthorView;
-
         @BindView(R.id.song_release_date)
         TextView songDateView;
 
@@ -92,7 +90,6 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
             songDateView.setText(song.releaseDate());
         }
 
-
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) {
@@ -100,11 +97,6 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
             }
         }
     }
-
-
-    /**
-     * util methods
-     */
 
     private void showEmptyView(List<AssetsSong> list) {
         if (emptyView != null) {

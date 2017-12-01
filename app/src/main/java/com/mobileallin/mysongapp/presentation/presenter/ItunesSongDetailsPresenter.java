@@ -25,18 +25,17 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
     @Inject
     SongDetailsInteractor detailsInteractor;
 
-
     private long songId;
     private int position;
     private ItunesSong chosenSong;
     private ItunesSongDetailsFragment view;
 
-    public ItunesSongDetailsPresenter(MySongAppComponent component, ItunesSongDetailsFragment view){
+    public ItunesSongDetailsPresenter(MySongAppComponent component, ItunesSongDetailsFragment view) {
         component.inject(this);
         this.view = view;
     }
 
-    public void init(long songId){
+    public void init(long songId) {
         this.songId = songId;
     }
 
@@ -45,29 +44,19 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         super.onFirstViewAttach();
 
         Log.d("Dp onFirstViewAttach", "called!");
-
         Bundle args = router.getArguments(ItunesSongDetailsPresenter.class.getName());
-        if (args != null){
+        if (args != null) {
             Log.d("DPargs", args.toString());
             songId = args.getLong(ArgumentKeys.ID);
             position = args.getInt(ArgumentKeys.POSITION);
         }
-/*
-        System.out.print("DetailsPresenter: " + songId + ", " + position);
-*/
-/*
-        Log.d("DetailsPresenter, song:", getSongTitle().toString());
-*/
-
     }
 
     @Override
     public void attachView(BaseItunesDetailsView view) {
         super.attachView(view);
-
         Log.d("DetailPresenter, song:", getSongTitle());
         view.showSongDetails(getItunesSongDetails());
-
     }
 
     //ToDO Rewrite (maybe create separate class and function for building Itunes/Assets songs)
@@ -83,26 +72,12 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         String country = (String) routerSongBundle.get(ArgumentKeys.COUNTRY);
 
         Log.d("songName", title);
-
         if (releaseDate == null) releaseDate = "no data";
         if (collectionName == null) collectionName = "no data";
-
 
         ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(id, title, author,
                 releaseDate, genreName, collectionName, country, thumbnailUrl);
         ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
-
-        /*ItunesSong itunesSong = ItunesSong.builder()
-                .setId(id)
-                .setAuthor(author)
-                .setTitle(title)
-                .setReleaseDate(releaseDate)
-                .setCollectionName(collectionName)
-                .setCountry(country)
-                .setGenreName(genreName)
-                .setThumbnailUrl(thumbnailUrl)
-                .build();*/
-
         return itunesSong;
     }
 
@@ -110,5 +85,4 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         Bundle routerSongBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
         return (String) routerSongBundle.get(ArgumentKeys.TITLE);
     }
-
 }
