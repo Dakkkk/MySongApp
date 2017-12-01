@@ -12,4 +12,7 @@
     <string name="genre_name">Genre:</string>
     <string name="country">Country:</string>
     <string name="release_date">Release:</string>
+    <string name="first_label">First:</string>
+    <string name="year_label">Year:</string>
+    <string name="play_count">Play Count:</string>
 </resources>

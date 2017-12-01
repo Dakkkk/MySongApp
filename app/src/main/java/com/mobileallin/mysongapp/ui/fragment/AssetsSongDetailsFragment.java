@@ -40,6 +40,19 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     TextView songAuthorTextView;
     @BindView(R.id.song_details_release_date)
     TextView songDateTextView;
+    @BindView(R.id.song_details_collection_name)
+    TextView songFirstTextView;
+    @BindView(R.id.song_details_genre_name)
+    TextView songYearView;
+    @BindView(R.id.song_details_country)
+    TextView songPlayCountTextView;
+
+    @BindView(R.id.song_details_collection_name_label)
+    TextView songFirstLabel;
+    @BindView(R.id.song_details_genre_name_label)
+    TextView songYearLabel;
+    @BindView(R.id.song_details_country_label)
+    TextView songPlayCountLabel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,8 +77,16 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     public void showSongDetails(AssetsSong assetsSong) {
         getActivity().setTitle(assetsSong.title());
         Log.d("showAssetsSongDetails: ", assetsSong.toString());
+        //labels
+        songFirstLabel.setText(getResources().getString(R.string.first_label));
+        songYearLabel.setText(getResources().getString(R.string.year_label));
+        songPlayCountLabel.setText(getResources().getString(R.string.play_count));
+
         songTitleTextView.setText(assetsSong.title());
         songAuthorTextView.setText(assetsSong.author());
         songDateTextView.setText(String.valueOf(assetsSong.releaseDate()));
+        songFirstTextView.setText(assetsSong.first());
+        songYearView.setText(assetsSong.year());
+        songPlayCountTextView.setText(assetsSong.playCount());
     }
 }
