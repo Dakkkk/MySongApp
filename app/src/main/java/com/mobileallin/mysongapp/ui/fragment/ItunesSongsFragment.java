@@ -100,8 +100,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
             Log.d("OnCreateView", "Router is null!!!");
         }
 
-        songsAdapter.setItemClickListener(position -> ituneSongsPresenter.showDetails(position));
-
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         emptyListView.setVisibility(View.GONE);
@@ -125,6 +123,9 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
 
             }
         });
+
+        songsAdapter.setItemClickListener(position -> ituneSongsPresenter.showDetails(position));
+
 
         return view;
     }
@@ -173,6 +174,9 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
 
     @Override
     public void showSearchResult(ItunesResponse searchResponse) {
+/*
+        ituneSongsPresenter.setCurrentSearchSongsList(searchResponse);
+*/
         songsAdapter.setItems(searchResponse.allItuneSongs());
     }
 }

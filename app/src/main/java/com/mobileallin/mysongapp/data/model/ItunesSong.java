@@ -1,6 +1,7 @@
 package com.mobileallin.mysongapp.data.model;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -19,18 +20,23 @@ public abstract class ItunesSong implements Parcelable {
     @SerializedName("trackName")
     public abstract String title();
 
+    @Nullable
     @SerializedName("releaseDate")
     public abstract String releaseDate();
 
+    @Nullable
     @SerializedName("collectionName")
     public abstract String collectionName();
 
+    @Nullable
     @SerializedName("country")
     public abstract String country();
 
+    @Nullable
     @SerializedName("primaryGenreName")
     public abstract String genreName();
 
+    @Nullable
     @SerializedName("artworkUrl100")
     public abstract String thumbnailUrl();
 

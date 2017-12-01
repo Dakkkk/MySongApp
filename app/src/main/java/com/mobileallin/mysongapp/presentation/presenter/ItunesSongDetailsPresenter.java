@@ -7,6 +7,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
 import com.mobileallin.mysongapp.interactor.SongDetailsInteractor;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongDetailsFragment;
@@ -81,7 +82,17 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         String thumbnailUrl = (String) routerSongBundle.get(ArgumentKeys.THUMBNAIL_URL);
         String country = (String) routerSongBundle.get(ArgumentKeys.COUNTRY);
 
-        ItunesSong itunesSong = ItunesSong.builder()
+        Log.d("songName", title);
+
+        if (releaseDate == null) releaseDate = "no data";
+        if (collectionName == null) collectionName = "no data";
+
+
+        ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(id, title, author,
+                releaseDate, genreName, collectionName, country, thumbnailUrl);
+        ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
+
+        /*ItunesSong itunesSong = ItunesSong.builder()
                 .setId(id)
                 .setAuthor(author)
                 .setTitle(title)
@@ -90,7 +101,7 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
                 .setCountry(country)
                 .setGenreName(genreName)
                 .setThumbnailUrl(thumbnailUrl)
-                .build();
+                .build();*/
 
         return itunesSong;
     }

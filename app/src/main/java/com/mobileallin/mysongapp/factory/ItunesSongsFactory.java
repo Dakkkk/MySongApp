@@ -1,0 +1,63 @@
+package com.mobileallin.mysongapp.factory;
+
+import android.util.Log;
+
+import com.mobileallin.mysongapp.data.model.ItunesSong;
+
+/**
+ * Created by Dawid on 2017-11-30.
+ */
+
+public class ItunesSongsFactory {
+    private long id;
+    private String title;
+    private String author;
+    private String releaseDate;
+    private String genreName;
+    private String collectionName;
+    private String country;
+    private String thumbnailUrl;
+
+    public ItunesSongsFactory(long id, String title, String author, String releaseDate,
+                              String genreName, String collectionName, String country,
+                              String thumbnailUrl) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.releaseDate = releaseDate;
+        this.genreName = genreName;
+        this.collectionName = collectionName;
+        this.country = country;
+        this.thumbnailUrl = thumbnailUrl;
+        checkForNullValues(title, author, releaseDate, genreName, collectionName, country, thumbnailUrl);
+    }
+
+    public ItunesSong buildItunesSong() {
+        Log.d("buildItunesSong", genreName + ", " + collectionName + ", " + country + ", " + thumbnailUrl);
+        ItunesSong itunesSong = ItunesSong.builder()
+                .setId(id)
+                .setTitle(title)
+                .setAuthor(author)
+                .setReleaseDate(releaseDate)
+                .setGenreName(genreName)
+                .setCollectionName(collectionName)
+                .setCountry(country)
+                .setThumbnailUrl(thumbnailUrl)
+                .build();
+        return itunesSong;
+    }
+
+    public void checkForNullValues(String title, String author, String releaseDate,
+                                   String genreName, String collectionName, String country,
+                                   String thumbnailUrl) {
+        if (title == null) this.title = "no data";
+        if (author == null) this.author = "no data";
+        if (releaseDate == null) this.releaseDate = "no data";
+        if (genreName == null) this.genreName = "no data";
+        if (collectionName == null) this.collectionName = "no data";
+        if (country == null) this.country = "no data";
+        if (thumbnailUrl == null) this.thumbnailUrl = "no data";
+    }
+}
+
+

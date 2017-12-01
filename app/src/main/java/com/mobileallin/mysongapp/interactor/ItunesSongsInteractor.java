@@ -6,6 +6,7 @@ import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
 import com.mobileallin.mysongapp.helper.ItunesSongTitleComparator;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
@@ -31,6 +32,8 @@ public class ItunesSongsInteractor {
 
     private List<ItunesSong> allItunesSongs;
 
+    private List<ItunesSong> currentItuneSongsList;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public ItunesSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client,
@@ -52,9 +55,9 @@ public class ItunesSongsInteractor {
                     @Override
                     public void onSuccess(@NonNull ItunesResponse songs) {
                         Log.d("loadSongs", songs.toString());
-/*
-                        allItunesSongs = songs.allItuneSongs();
-*/
+
+                       /* allItunesSongs = songs.allItuneSongs();*/
+
                         allItunesSongs = convertToItuneSongsList(songs.allItuneSongs());
 
                         Log.d("allItunesSongs", "2: " + allItunesSongs.get(2).id() + ", 5:" + allItunesSongs.get(5).id());
@@ -82,11 +85,18 @@ public class ItunesSongsInteractor {
         for (int i = 0; i < itunesSongs.size(); i++) {
             ItunesSong currentSongI = itunesSongs.get(i);
 
-          /*  SongFactory songFactory = new SongFactory(i, currentSongI.title(),
-                    currentSongI.author(), currentSongI.releaseDate());
-            ItunesSong itunesSong = songFactory.buildSong(Keys.ITUNE_SONG_TYPE);*/
+            String releaseDate = currentSongI.releaseDate();
+            String collectionName = currentSongI.collectionName();
 
-            ItunesSong convertedItuneSong = ItunesSong.builder()
+            if (releaseDate == null) releaseDate = "no data";
+            if (collectionName == null) collectionName = "no data";
+
+            ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(i, currentSongI.title(),
+                    currentSongI.author(), releaseDate, currentSongI.genreName(),
+                    collectionName, currentSongI.country(),
+                    currentSongI.thumbnailUrl());
+            ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
+       /*     ItunesSong convertedItuneSong = ItunesSong.builder()
                     .setId(i)
                     .setTitle(currentSongI.title())
                     .setAuthor(currentSongI.author())
@@ -95,7 +105,7 @@ public class ItunesSongsInteractor {
                     .setCountry(currentSongI.country())
                     .setGenreName(currentSongI.country())
                     .setThumbnailUrl(currentSongI.thumbnailUrl())
-                    .build();
+                    .build();*/
 
             convertedItuneSongsList.add(i, convertedItuneSong);
             Collections.sort(convertedItuneSongsList, new ItunesSongTitleComparator());
@@ -103,14 +113,15 @@ public class ItunesSongsInteractor {
         return convertedItuneSongsList;
     }
 
-    public ItunesSong getChosenItunesSong(long id) {
+ /*   public ItunesSong getChosenItunesSong(long id) {
         int intId = (int) id;
         Log.d("chosenSong", allItunesSongs.get(intId).toString());
         return allItunesSongs.get(intId);
-    }
+    }*/
 
     //ToDo rewrite this
     public List<ItunesSong> getAllItunesSongs() {
+
         return allItunesSongs;
     }
 }

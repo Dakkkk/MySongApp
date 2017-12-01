@@ -1,8 +1,6 @@
 package com.mobileallin.mysongapp.interactor;
 
 
-import com.mobileallin.mysongapp.data.model.ItunesSong;
-
 import javax.inject.Inject;
 
 public class SongDetailsInteractor {
@@ -14,8 +12,8 @@ public class SongDetailsInteractor {
 
     }
 
-    public ItunesSong getSong(long id) {
+  /*  public ItunesSong getSong(long id) {
       return mainInteractor.getChosenItunesSong(id);
-    }
+    }*/
 
 }
