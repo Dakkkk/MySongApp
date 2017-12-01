@@ -82,7 +82,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
             //ToDo check id this can be done better (use startsWith or contains or...)
             if (song.author().toLowerCase().contains(s) ||
                     song.title().toLowerCase().startsWith(s) ||
-                    song.releaseDate().toLowerCase().startsWith(s)) {
+                    String.valueOf(song.releaseDate()).toLowerCase().startsWith(s)) {
                 assetsSearchList.add(song);
             }
         }
@@ -105,6 +105,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         args.putString(ArgumentKeys.TITLE, currentSongsList.get(position).title());
         args.putString(ArgumentKeys.AUTHOR, currentSongsList.get(position).author());
         args.putString(ArgumentKeys.RELEASE_DATE, currentSongsList.get(position).releaseDate());
+        args.putString(ArgumentKeys.YEAR, currentSongsList.get(position).year());
+        args.putString(ArgumentKeys.FIRST, currentSongsList.get(position).first());
+        args.putString(ArgumentKeys.PLAY_COUNT, currentSongsList.get(position).playCount());
 
         router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS, AssetsSongDetailsPresenter.class.getName(), args);
         Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");

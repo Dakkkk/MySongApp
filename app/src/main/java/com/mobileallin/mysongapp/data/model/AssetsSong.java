@@ -22,6 +22,15 @@ public abstract class AssetsSong implements Parcelable {
     @SerializedName("Release Year")
     public abstract String releaseDate();
 
+    @SerializedName("First?")
+    public abstract String first();
+
+    @SerializedName("Year?")
+    public abstract String year();
+
+    @SerializedName("PlayCount")
+    public abstract String playCount();
+
     public static TypeAdapter<AssetsSong> typeAdapter(Gson gson) {
         return new AutoValue_AssetsSong.GsonTypeAdapter(gson);
     }
@@ -33,13 +42,12 @@ public abstract class AssetsSong implements Parcelable {
     @AutoValue.Builder
     public abstract static class Builder {
         public abstract Builder setId(long id);
-
         public abstract Builder setTitle(String value);
-
         public abstract Builder setAuthor(String value);
-
         public abstract Builder setReleaseDate(String value);
-
+        public abstract Builder setFirst(String value);
+        public abstract Builder setYear(String value);
+        public abstract Builder setPlayCount(String value);
         public abstract AssetsSong build();
     }
 

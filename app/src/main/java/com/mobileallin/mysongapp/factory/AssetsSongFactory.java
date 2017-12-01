@@ -8,27 +8,34 @@ import com.mobileallin.mysongapp.data.model.AssetsSong;
 
 public class AssetsSongFactory {
 
-    private int id;
+    private long id;
     private String title;
     private String author;
     private String releaseDate;
-    private String genreName;
-    private String collectionName;
-    private String country;
-    private String thumbnailUrl;
+    private String first;
+    private String year;
+    private String playCount;
 
-    private AssetsSong buildAssetsSong(int id, String title, String author, String releaseDate,
-                                       String genreName, String collectionName, String country,
-                                       String thumbnailUrl) {
+    public AssetsSongFactory(long id, String title, String author, String releaseDate, String first,
+                             String year, String playCount) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.releaseDate = releaseDate;
+        this.first = first;
+        this.year = year;
+        this.playCount = playCount;
+    }
+
+    public AssetsSong buildAssetsSong() {
         AssetsSong assetsSong = AssetsSong.builder()
                 .setId(id)
                 .setTitle(title)
                 .setAuthor(author)
                 .setReleaseDate(releaseDate)
-                .setReleaseDate(genreName)
-                .setReleaseDate(collectionName)
-                .setReleaseDate(country)
-                .setReleaseDate(thumbnailUrl)
+                .setFirst(first)
+                .setYear(year)
+                .setPlayCount(playCount)
                 .build();
         return assetsSong;
     }

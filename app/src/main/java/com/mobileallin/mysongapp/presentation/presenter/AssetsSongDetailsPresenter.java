@@ -6,6 +6,7 @@ import android.util.Log;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
+import com.mobileallin.mysongapp.factory.AssetsSongFactory;
 import com.mobileallin.mysongapp.interactor.SongDetailsInteractor;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongDetailsFragment;
@@ -64,14 +65,22 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);
-        String releaseDate = (String) routerSongBundle.get(ArgumentKeys.RELEASE_DATE);
+        String releaseDate = (String)  routerSongBundle.get(ArgumentKeys.RELEASE_DATE);
+        String first = (String)  routerSongBundle.get(ArgumentKeys.FIRST);
+        String year = (String)  routerSongBundle.get(ArgumentKeys.YEAR);
+        String playCount = (String)  routerSongBundle.get(ArgumentKeys.PLAY_COUNT);
 
-        AssetsSong assetsSong = AssetsSong.builder()
+
+        AssetsSongFactory assetsSongFactory = new AssetsSongFactory(id, title, author,
+                releaseDate, first, year, playCount);
+        AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
+
+        /*AssetsSong assetsSong = AssetsSong.builder()
                 .setId(id)
                 .setAuthor(author)
                 .setTitle(title)
                 .setReleaseDate(releaseDate)
-                .build();
+                .build();*/
         return assetsSong;
     }
 

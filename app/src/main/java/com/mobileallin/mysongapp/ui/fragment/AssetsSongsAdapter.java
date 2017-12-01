@@ -87,7 +87,7 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
 
             songTitleView.setText(song.title());
             songAuthorView.setText(song.author());
-            songDateView.setText(song.releaseDate());
+            songDateView.setText(String.valueOf(song.releaseDate()));
         }
 
         @Override

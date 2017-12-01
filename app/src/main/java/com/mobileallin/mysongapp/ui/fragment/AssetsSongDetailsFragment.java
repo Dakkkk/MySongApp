@@ -66,6 +66,6 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
         Log.d("showAssetsSongDetails: ", assetsSong.toString());
         songTitleTextView.setText(assetsSong.title());
         songAuthorTextView.setText(assetsSong.author());
-        songDateTextView.setText(assetsSong.releaseDate());
+        songDateTextView.setText(String.valueOf(assetsSong.releaseDate()));
     }
 }

@@ -3,6 +3,7 @@ package com.mobileallin.mysongapp.helper;
 import android.util.Log;
 
 import com.mobileallin.mysongapp.data.model.AssetsSong;
+import com.mobileallin.mysongapp.factory.AssetsSongFactory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,17 +24,25 @@ public class AssertsSongsStringParser {
             jsonarray = new JSONArray(songAssetsString);
             for (int i = 0; i < jsonarray.length(); i++) {
                 JSONObject jsonobject = jsonarray.getJSONObject(i);
+                long id = Long.valueOf(i);
                 String title = jsonobject.getString("Song Clean");
                 String author = jsonobject.getString("ARTIST CLEAN");
                 String releaseDate = jsonobject.getString("Release Year");
+                String first = jsonobject.getString("First?");
+                String year = jsonobject.getString("Year?");
+                String playCount = jsonobject.getString("PlayCount");
                 Log.d("songAssetsParsed", title + " " + author);
 
-                AssetsSong assetsSong = AssetsSong.builder()
+                AssetsSongFactory assetsSongFactory = new AssetsSongFactory(id, title, author,
+                        releaseDate, first, year, playCount);
+                AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
+
+                        /*AssetsSong.builder()
                         .setId(i)
                         .setTitle(title)
                         .setAuthor(author)
                         .setReleaseDate(releaseDate)
-                        .build();
+                        .build();*/
 
                 assetsSongsList.add(i, assetsSong);
 
