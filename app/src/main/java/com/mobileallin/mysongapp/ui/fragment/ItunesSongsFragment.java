@@ -8,7 +8,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,10 +89,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
         View view = inflater.inflate(R.layout.fragment_songs_list, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(getString(R.string.itunes_songs));
+
         songsAdapter = new SongsAdapter(getContext(), emptyListView);
-        if(router == null) {
-            Log.d("OnCreateView", "Router is null!!!");
-        }
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);
         emptyListView.setVisibility(View.GONE);
@@ -105,7 +102,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
             ituneSongsPresenter.forceLoadSongs();
             hideSwipeRefresh();
         });
-
 
         itunesSearchPanel.addTextChangedListener(new TextWatcher() {
             @Override
@@ -147,13 +143,11 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
     @Override
     public void showLoading() {
-        Log.d("showLoading", "called");
         enableProgressBar(true);
     }
 
     @Override
     public void hideLoading() {
-        Log.d("hideLoading", "called");
         enableProgressBar(false);
     }
 

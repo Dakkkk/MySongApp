@@ -76,7 +76,6 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     @Override
     public void showSongDetails(AssetsSong assetsSong) {
         getActivity().setTitle(assetsSong.title());
-        Log.d("showAssetsSongDetails: ", assetsSong.toString());
         //labels
         songFirstLabel.setText(getResources().getString(R.string.first_label));
         songYearLabel.setText(getResources().getString(R.string.year_label));

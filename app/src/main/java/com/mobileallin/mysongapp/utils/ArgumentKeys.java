@@ -16,5 +16,5 @@ public abstract class ArgumentKeys {
     //Only Assets
     public static final String FIRST = "first";
     public static final String YEAR = "year";
-    public static final String PLAY_COUNT ="play_count" ;
+    public static final String PLAY_COUNT = "play_count";
 }
