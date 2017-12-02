@@ -2,7 +2,6 @@ package com.mobileallin.mysongapp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.mobileallin.mysongapp.dagger.module.GlideApp;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
 import com.mobileallin.mysongapp.ui.view.BaseItunesDetailsView;
-import com.mobileallin.mysongapp.utils.Keys;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +31,7 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     @ProvidePresenter
     ItunesSongDetailsPresenter providePresenter() {
         MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
-        return new ItunesSongDetailsPresenter(component, this);
+        return new ItunesSongDetailsPresenter(component);
     }
 
     @BindView(R.id.song_details_image)
@@ -54,10 +52,6 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        if (args != null) {
-            presenter.init(args.getLong(Keys.ITUNE_SONG_ID));
-        }
     }
 
     @Nullable
@@ -72,7 +66,6 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
     @Override
     public void showSongDetails(ItunesSong itunesSong) {
         getActivity().setTitle(itunesSong.title());
-        Log.d("showItunesSongDetails: ", itunesSong.toString());
 
         GlideApp.with(this)
                 .load(itunesSong.thumbnailUrl())

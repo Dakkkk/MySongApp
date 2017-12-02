@@ -1,7 +1,6 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -9,7 +8,6 @@ import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
 import com.mobileallin.mysongapp.navigation.Router;
-import com.mobileallin.mysongapp.ui.fragment.ItunesSongDetailsFragment;
 import com.mobileallin.mysongapp.ui.view.BaseItunesDetailsView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
@@ -21,42 +19,27 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
     @Inject
     Router router;
 
-    private long songId;
-    private int position;
-    private ItunesSong chosenSong;
-    private ItunesSongDetailsFragment view;
-
-    public ItunesSongDetailsPresenter(MySongAppComponent component, ItunesSongDetailsFragment view) {
+    public ItunesSongDetailsPresenter(MySongAppComponent component) {
         component.inject(this);
-        this.view = view;
-    }
-
-    public void init(long songId) {
-        this.songId = songId;
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-
-        Log.d("Dp onFirstViewAttach", "called!");
-        Bundle args = router.getArguments(ItunesSongDetailsPresenter.class.getName());
-        if (args != null) {
-            Log.d("DPargs", args.toString());
-            songId = args.getLong(ArgumentKeys.ID);
-            position = args.getInt(ArgumentKeys.POSITION);
-        }
     }
 
     @Override
     public void attachView(BaseItunesDetailsView view) {
         super.attachView(view);
-        Log.d("DetailPresenter, song:", getSongTitle());
         view.showSongDetails(getItunesSongDetails());
     }
 
     public ItunesSong getItunesSongDetails() {
         Bundle routerSongBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
+        return createItunesSongFromBundle(routerSongBundle);
+    }
+
+    public ItunesSong createItunesSongFromBundle(Bundle routerSongBundle){
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);
@@ -65,10 +48,6 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         String collectionName = (String) routerSongBundle.get(ArgumentKeys.COLLECTION_NAME);
         String thumbnailUrl = (String) routerSongBundle.get(ArgumentKeys.THUMBNAIL_URL);
         String country = (String) routerSongBundle.get(ArgumentKeys.COUNTRY);
-
-        Log.d("songName", title);
-        if (releaseDate == null) releaseDate = "no data";
-        if (collectionName == null) collectionName = "no data";
 
         ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(id, title, author,
                 releaseDate, genreName, collectionName, country, thumbnailUrl);

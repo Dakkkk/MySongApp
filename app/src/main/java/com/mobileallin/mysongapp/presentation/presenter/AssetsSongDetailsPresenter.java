@@ -1,7 +1,6 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
@@ -37,39 +36,36 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        Log.d("Dp onFirstViewAttach", "called!");
         Bundle args = router.getArguments(ItunesSongDetailsPresenter.class.getName());
         if (args != null) {
-            Log.d("DPargs", args.toString());
             songId = args.getLong(ArgumentKeys.ID);
             position = args.getInt(ArgumentKeys.POSITION);
         }
-        System.out.print("DetailsPresenter: " + songId + ", " + position);
-        Log.d("DetailsPresenter, song:", getSongTitle());
     }
 
     @Override
     public void attachView(BaseAssetsDetailsView view) {
         super.attachView(view);
-        Log.d("DetailPresenter, song:", getSongTitle());
         view.showSongDetails(getAssetsSongDetails());
     }
 
     public AssetsSong getAssetsSongDetails() {
         Bundle routerSongBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
+        return createAssetsSong(routerSongBundle);
+    }
+
+    public AssetsSong createAssetsSong(Bundle routerSongBundle) {
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);
-        String releaseDate = (String)  routerSongBundle.get(ArgumentKeys.RELEASE_DATE);
-        String first = (String)  routerSongBundle.get(ArgumentKeys.FIRST);
-        String year = (String)  routerSongBundle.get(ArgumentKeys.YEAR);
-        String playCount = (String)  routerSongBundle.get(ArgumentKeys.PLAY_COUNT);
-
+        String releaseDate = (String) routerSongBundle.get(ArgumentKeys.RELEASE_DATE);
+        String first = (String) routerSongBundle.get(ArgumentKeys.FIRST);
+        String year = (String) routerSongBundle.get(ArgumentKeys.YEAR);
+        String playCount = (String) routerSongBundle.get(ArgumentKeys.PLAY_COUNT);
 
         AssetsSongFactory assetsSongFactory = new AssetsSongFactory(id, title, author,
                 releaseDate, first, year, playCount);
         AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
-
         return assetsSong;
     }
 
