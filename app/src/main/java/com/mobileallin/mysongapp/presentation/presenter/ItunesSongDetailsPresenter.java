@@ -8,7 +8,6 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
-import com.mobileallin.mysongapp.interactor.SongDetailsInteractor;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongDetailsFragment;
 import com.mobileallin.mysongapp.ui.view.BaseItunesDetailsView;
@@ -21,9 +20,6 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
 
     @Inject
     Router router;
-
-    @Inject
-    SongDetailsInteractor detailsInteractor;
 
     private long songId;
     private int position;

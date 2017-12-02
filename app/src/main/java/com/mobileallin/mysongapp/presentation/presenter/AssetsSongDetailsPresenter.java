@@ -7,7 +7,6 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.factory.AssetsSongFactory;
-import com.mobileallin.mysongapp.interactor.SongDetailsInteractor;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongDetailsFragment;
 import com.mobileallin.mysongapp.ui.view.BaseAssetsDetailsView;
@@ -20,9 +19,6 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
 
     @Inject
     Router router;
-
-    @Inject
-    SongDetailsInteractor detailsInteractor;
 
     private long songId;
     private int position;
@@ -75,12 +71,6 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
                 releaseDate, first, year, playCount);
         AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
 
-        /*AssetsSong assetsSong = AssetsSong.builder()
-                .setId(id)
-                .setAuthor(author)
-                .setTitle(title)
-                .setReleaseDate(releaseDate)
-                .build();*/
         return assetsSong;
     }
 

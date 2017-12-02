@@ -74,14 +74,16 @@ public class ItunesSongsInteractor {
         List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
         for (int i = 0; i < itunesSongs.size(); i++) {
             ItunesSong currentSongI = itunesSongs.get(i);
-            //ToDo do as below for the rest of the values for better readability
+            String title = currentSongI.title();
+            String author = currentSongI.author();
             String releaseDate = currentSongI.releaseDate();
+            String genre = currentSongI.genreName();
             String collectionName = currentSongI.collectionName();
+            String country = currentSongI.country();
+            String thumbnailUrl = currentSongI.thumbnailUrl();
 
-            ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(i, currentSongI.title(),
-                    currentSongI.author(), releaseDate, currentSongI.genreName(),
-                    collectionName, currentSongI.country(),
-                    currentSongI.thumbnailUrl());
+            ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(i, title, author,
+                    releaseDate, genre, collectionName, country, thumbnailUrl);
             ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
 
             convertedItuneSongsList.add(i, convertedItuneSong);
@@ -90,7 +92,7 @@ public class ItunesSongsInteractor {
         return convertedItuneSongsList;
     }
 
-    //ToDo rewrite this
+    //ToDo rewrite this?
     public List<ItunesSong> getAllItunesSongs() {
         return allItunesSongs;
     }
