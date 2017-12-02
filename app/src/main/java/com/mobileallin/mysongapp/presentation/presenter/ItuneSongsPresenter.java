@@ -76,13 +76,18 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     @Override
     public void detachView(ItunesSongsView view) {
         super.detachView(view);
-        //ToDo Rewrite, put into ddisposeAll() function
+        disposeAll();
+    }
+
+    public void disposeAll(){
         if (disposable == null && searchDisposable == null) return;
         if (disposable != null && !disposable.isDisposed()) {
+            Log.i("disposing", "disposable");
             disposable.dispose();
             disposable = null;
         }
         if (searchDisposable != null && !searchDisposable.isDisposed()) {
+            Log.i("disposing", "searchDisposable");
             searchDisposable.dispose();
             searchDisposable = null;
         }
@@ -105,6 +110,12 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
             currentItuneSongsList = itunesSongsInteractor.getAllItunesSongs();
         }
         Log.d("currentItuneSongs", currentItuneSongsList.toString());
+
+        if (currentItuneSongsList.isEmpty()) {
+            //ToDo hande
+            Log.d("currentItuneSongsList", "empty!");
+            return;
+        }
 
         args.putLong(ArgumentKeys.ID, currentItuneSongsList.get(position).id());
         args.putString(ArgumentKeys.TITLE, currentItuneSongsList.get(position).title());
@@ -133,16 +144,18 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
 
         public void instantSearch(String searchTerm) {
             //ToDo Rewrite, put into ddisposeAll() function
-            if (disposable != null) {
+          /*  if (disposable != null) {
                 disposable.dispose();
             }
             if (searchDisposable != null) {
                 searchDisposable.dispose();
-            }
+            }*/
+
+            disposeAll();
 
             isSearching = true;
             searchDisposable = client.searchItunesSongs(searchTerm, MEDIA_TYPE)
-                    .delay(600, TimeUnit.MILLISECONDS)
+                    .delay(100, TimeUnit.MILLISECONDS)
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(searchResponse -> {

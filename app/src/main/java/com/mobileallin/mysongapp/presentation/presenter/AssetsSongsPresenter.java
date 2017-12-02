@@ -56,11 +56,18 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
-        String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-        allAssetsSongsArrayList = parseToAssetsArrayList(songAssetsString);
-        sortAssetsSongsArrayList(allAssetsSongsArrayList);
+        sortAndParseAssetsSongs();
         view.showLoading();
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
+    }
+
+    //ToDo Check if it's OK
+    public void sortAndParseAssetsSongs(){
+        if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
+            String songAssetsString = assetsRepository.loadJSONFromAsset(context);
+            allAssetsSongsArrayList = parseToAssetsArrayList(songAssetsString);
+            sortAssetsSongs(allAssetsSongsArrayList);
+        }
     }
 
     public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString){
@@ -68,7 +75,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         return assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
     }
 
-    public void sortAssetsSongsArrayList(ArrayList<AssetsSong> allAssetsSongsArrayList){
+    public void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList){
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
     }
 
