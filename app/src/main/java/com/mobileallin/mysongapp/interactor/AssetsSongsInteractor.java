@@ -12,6 +12,7 @@ public class AssetsSongsInteractor {
 
     public void loadSongs(AssetsSongsView assetsSongsView, ArrayList<AssetsSong> assetsSongs) {
         Log.d("loadSongs", "called");
+        assetsSongsView.hideLoading();
         assetsSongsView.displaySongs(assetsSongs);
     }
 }

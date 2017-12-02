@@ -30,7 +30,7 @@ import io.reactivex.subjects.PublishSubject;
 public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 
     private static final String TAG = "SongsListPresenter";
-    private SongsListView view;
+    private SongsListView mainView;
     private Disposable disposable;
     private Disposable searchDisposable;
     private List<ItunesSong> currentItuneSongsList;
@@ -48,9 +48,9 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 
     private List<ItunesSong> ituneSongsSearchList;
 
-    public ItuneSongsPresenter(MySongAppComponent component, SongsListView view) {
+    public ItuneSongsPresenter(MySongAppComponent component, SongsListView mainView) {
         component.inject(this);
-        this.view = view;
+        this.mainView = mainView;
     }
 
     @Override
@@ -62,10 +62,16 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     }
 
     @Override
-    public void attachView(SongsListView view) {
-        super.attachView(view);
+    public void attachView(SongsListView mainView) {
+        super.attachView(mainView);
         // ToDo Dispose the observer to avoid memory leaks
-        disposable = itunesSongsInteractor.loadSongs(view);
+        mainView.showLoading();
+        disposable = itunesSongsInteractor.loadSongs(mainView);
+    }
+
+    public void forceLoadSongs() {
+        Log.d("forceLoadSongs()", "called");
+        itunesSongsInteractor.loadSongs(mainView);
     }
 
     @Override
@@ -84,8 +90,10 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 
     //ToDo Should interactor handle this?
     public void searchItunesSong(String searchTerm) {
-        ItunesSearchCall itunesSearchCall = new ItunesSearchCall(view, client);
+        mainView.showLoading();
+        ItunesSearchCall itunesSearchCall = new ItunesSearchCall(mainView, client);
         itunesSearchCall.instantSearch(searchTerm);
+        mainView.hideLoading();
     }
 
     public void showDetails(int position) {
@@ -117,10 +125,10 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
         private PublishSubject publishSubject;
         private HttpClient client;
         private final static String MEDIA_TYPE = "music";
-        private SearchView view;
+        private SearchView searchView;
 
         public ItunesSearchCall(SearchView view, HttpClient client) {
-            this.view = view;
+            this.searchView = view;
             this.client = client;
         }
 
@@ -133,6 +141,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
                 searchDisposable.dispose();
             }
 
+            //doONSubscribe, afterTerminate TEst
             isSearching = true;
             searchDisposable = client.searchItunesSongs(searchTerm, MEDIA_TYPE)
                     .delay(600, TimeUnit.MILLISECONDS)
@@ -141,7 +150,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
                     .subscribe(searchResponse -> {
                         ituneSongsSearchList = searchResponse.allItuneSongs();
                         Log.d("instantSearch", searchResponse.toString());
-                        view.showSearchResult(searchResponse);
+                        searchView.showSearchResult(searchResponse);
                     });
         }
     }

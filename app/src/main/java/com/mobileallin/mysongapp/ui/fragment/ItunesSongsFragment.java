@@ -100,6 +100,16 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         songsRecyclerView.setLayoutManager(layoutManager);
         songsRecyclerView.setAdapter(songsAdapter);
 
+        swipeRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                songsListState = null;
+                ituneSongsPresenter.forceLoadSongs();
+                hideSwipeRefresh();
+            }
+        });
+
+
         itunesSearchPanel.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -134,13 +144,19 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         Toast.makeText(getContext(), "Error!, Couldn't get the Itunes songs! Message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
+    public void hideSwipeRefresh() {
+        swipeRefreshView.setRefreshing(false);
+    }
+
     @Override
     public void showLoading() {
+        Log.d("showLoading", "called");
         enableProgressBar(true);
     }
 
     @Override
     public void hideLoading() {
+        Log.d("hideLoading", "called");
         enableProgressBar(false);
     }
 

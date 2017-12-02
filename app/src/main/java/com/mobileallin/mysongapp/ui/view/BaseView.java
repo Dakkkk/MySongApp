@@ -13,4 +13,8 @@ public interface BaseView extends MvpView {
     void displaySongs(List<ItunesSong> list);
 
     void displayNoSongs();
+
+    void showLoading();
+
+    void hideLoading();
 }

@@ -60,6 +60,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
         allAssetsSongsArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
+        view.showLoading();
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
@@ -70,6 +71,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     public void showAssetsSearchResults(ArrayList<AssetsSong> searchResponse) {
         Log.d("MySearch", "showAssetsSearchResults called!");
         //view.showSearchResult(searchResponse);
+        view.showLoading();
         assetsSongsInteractor.loadSongs(view, searchResponse);
     }
 

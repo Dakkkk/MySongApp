@@ -155,4 +155,17 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
             songsRecyclerView.getLayoutManager().onRestoreInstanceState(songsListState);
         }
     }
+
+    @Override
+    public void showLoading() {
+        Log.d("showLoading", "called");
+        enableProgressBar(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        Log.d("hideLoading", "called");
+        enableProgressBar(false);
+    }
+
 }

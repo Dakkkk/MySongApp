@@ -52,18 +52,19 @@ public class ItunesSongsInteractor {
                         Log.d("loadSongs", songs.toString());
                         allItunesSongs = convertToItuneSongsList(songs.allItuneSongs());
                         Log.d("allItunesSongs", "2: " + allItunesSongs.get(2).id() + ", 5:" + allItunesSongs.get(5).id());
+                        view.hideLoading();
                         view.displaySongs(allItunesSongs);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         System.out.println("boom! " + e.getMessage() + e.toString());
+                        view.hideLoading();
                         view.displayError(e);
                     }
 
                     @Override
                     public void onComplete() {
-
                     }
                 }));
         return null;
@@ -91,7 +92,6 @@ public class ItunesSongsInteractor {
 
     //ToDo rewrite this
     public List<ItunesSong> getAllItunesSongs() {
-
         return allItunesSongs;
     }
 }
