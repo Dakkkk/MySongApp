@@ -1,7 +1,5 @@
 package com.mobileallin.mysongapp.factory;
 
-import android.util.Log;
-
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 /**
@@ -32,7 +30,6 @@ public class ItunesSongsFactory {
     }
 
     public ItunesSong buildItunesSong() {
-        Log.d("buildItunesSong", genreName + ", " + collectionName + ", " + country + ", " + thumbnailUrl);
         ItunesSong itunesSong = ItunesSong.builder()
                 .setId(id)
                 .setTitle(title)
