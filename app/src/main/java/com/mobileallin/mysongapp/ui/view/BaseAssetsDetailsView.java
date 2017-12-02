@@ -5,9 +5,6 @@ import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 
-/**
- * Created by Dawid on 2017-11-29.
- */
 
 public interface BaseAssetsDetailsView extends MvpView {
     @StateStrategyType(OneExecutionStateStrategy.class)

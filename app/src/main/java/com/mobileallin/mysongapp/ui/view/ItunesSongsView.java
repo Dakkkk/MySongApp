@@ -7,9 +7,6 @@ import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 import java.util.List;
 
-/**
- * Created by Dawid on 2017-12-02.
- */
 
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface ItunesSongsView extends MvpView, BaseView, SearchView {

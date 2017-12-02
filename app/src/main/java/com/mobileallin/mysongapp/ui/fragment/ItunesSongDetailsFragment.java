@@ -66,10 +66,8 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
         View view = inflater.inflate(R.layout.fragment_song_details, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(presenter.getSongTitle());
-
         return view;
     }
-
 
     @Override
     public void showSongDetails(ItunesSong itunesSong) {

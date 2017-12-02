@@ -8,9 +8,6 @@ import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongDetailsFragment;
 import com.mobileallin.mysongapp.utils.ActivityUtils;
 
-/**
- * Created by Dawid on 2017-11-29.
- */
 
 public class AssetsSongDetailsActivity extends BaseActivity {
 
