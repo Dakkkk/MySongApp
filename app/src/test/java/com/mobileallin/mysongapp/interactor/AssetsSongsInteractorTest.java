@@ -1,14 +1,21 @@
-package com.mobileallin.mysongapp;
+/*
+package com.mobileallin.mysongapp.interactor;
 
+import android.content.Context;
 import android.os.Parcel;
+import android.test.mock.MockContext;
 
+import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
+import com.mobileallin.mysongapp.factory.AssetsSongFactory;
 import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
-import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
 import com.mobileallin.mysongapp.network.HttpClient;
+import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
 import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
+import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.repositories.impl.ItunesSongsRepositoryImpl;
+import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 
 import org.junit.After;
@@ -31,48 +38,48 @@ import io.reactivex.schedulers.Schedulers;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+*/
 /**
  * Created by Dawid on 2017-12-02.
- */
-public class ItuneSongsInteractorTest {
+ *//*
+
+public class AssetsSongsInteractorTest {
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Mock
-    ItunesSongsRepositoryImpl songsRepository;
+    AssetsSongsRepositoryImpl songsRepository;
 
     @Mock
-    ItunesSongsView view;
+    AssetsSongsView view;
 
     @Mock
-    HttpClient client;
+    AssetsSongsInteractor assetsSongsInteractor;
 
-    @Mock
-    ItunesSongsInteractor itunesSongsInteractor;
-
-    ItuneSongsPresenter presenter;
+    AssetsSongsPresenter presenter;
 
     Scheduler mainTestScheduler;
 
     long fakeId;
 
-    ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(fakeId, "Fake",
-            "Fake", "2017", "Fake", "Fake", "Poland", "fake_url");
+    AssetsSongFactory assetsSongFactory = new AssetsSongFactory(fakeId, "Fake",
+            "Fake", "2017", "Fake", "Fake", "Poland");
 
-    ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
+    AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
 
-    public ItunesResponse ITUNES_RESPONSE;
+    List<AssetsSong> MANY_SONGS = new ArrayList<>();
 
-    List<ItunesSong> MANY_SONGS = new ArrayList<>();
+    private final List<AssetsSong> EMPTY_LIST = Collections.emptyList();
 
-    private final List<ItunesSong> EMPTY_LIST = Collections.emptyList();
+    Context context;
 
     @Before
     public void setUp() {
         long fakeId = (long) Math.random();
         Scheduler mainTestScheduler = Schedulers.trampoline();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
+        context = new MockContext();
     }
 
     @After
@@ -82,34 +89,12 @@ public class ItuneSongsInteractorTest {
 
     @Test
     public void shouldPassSongsToView() {
-        MANY_SONGS.add(itunesSong);
-        MANY_SONGS.add(itunesSong);
-        MANY_SONGS.add(itunesSong);
+        MANY_SONGS.add(assetsSong);
+        MANY_SONGS.add(assetsSong);
+        MANY_SONGS.add(assetsSong);
 
-        ItunesResponse ITUNES_RESPONSE = new ItunesResponse() {
-            @Override
-            public int resultsNumber() {
-                return 3;
-            }
-
-            @Override
-            public List<ItunesSong> allItuneSongs() {
-                return MANY_SONGS;
-            }
-
-            @Override
-            public int describeContents() {
-                return 0;
-            }
-
-            @Override
-            public void writeToParcel(Parcel parcel, int i) {
-
-            }
-        };
-
-        System.out.print("itunesResponse" + ITUNES_RESPONSE.toString());
-        when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
+        System.out.print("many songs" + MANY_SONGS.toString());
+        when(songsRepository.loadJSONFromAsset(context))
                 .thenReturn(Maybe.<ItunesResponse>just((ItunesResponse) ITUNES_RESPONSE));
 
         //Calling on view because the method is called in interactor's loadSongs()...
@@ -141,4 +126,5 @@ public class ItuneSongsInteractorTest {
 
         verify(view).displayError(error);
     }
-}
+
+}*/

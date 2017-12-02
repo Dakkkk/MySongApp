@@ -39,7 +39,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Inject
     Router router;
 
-    //ToDo to many arguments, get rid of the context...
+    //ToDo to many arguments, get rid of the context... IMPORTANT
     public AssetsSongsPresenter(MySongAppComponent component, AssetsSongsView view,
                                 AssetsSongsRepositoryImpl assetsRepository, Context context) {
         component.inject(this);
@@ -57,11 +57,19 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
         String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-        AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
-        allAssetsSongsArrayList = assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
-        Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
+        allAssetsSongsArrayList = parseToAssetsArrayList(songAssetsString);
+        sortAssetsSongsArrayList(allAssetsSongsArrayList);
         view.showLoading();
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
+    }
+
+    public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString){
+        AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
+        return assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
+    }
+
+    public void sortAssetsSongsArrayList(ArrayList<AssetsSong> allAssetsSongsArrayList){
+        Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
     }
 
     public ArrayList<AssetsSong> getAssetsSongArrayList() {
@@ -92,7 +100,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         return assetsSearchList;
     }
 
-    //ToDo clear asssets before put?
     public void showDetails(int position) {
         ArrayList<AssetsSong> currentSongsList;
         if (assetsSearchList != null && !assetsSearchList.isEmpty()) {
