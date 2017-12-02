@@ -1,7 +1,5 @@
 package com.mobileallin.mysongapp.interactor;
 
-import android.util.Log;
-
 import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
@@ -49,16 +47,13 @@ public class ItunesSongsInteractor {
                 .subscribeWith(new DisposableMaybeObserver<ItunesResponse>() {
                     @Override
                     public void onSuccess(@NonNull ItunesResponse songs) {
-                        Log.d("loadSongs", songs.toString());
                         allItunesSongs = convertToItuneSongsList(songs.allItuneSongs());
-                        Log.d("allItunesSongs", "2: " + allItunesSongs.get(2).id() + ", 5:" + allItunesSongs.get(5).id());
                         view.hideLoading();
                         view.displaySongs(allItunesSongs);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        System.out.println("boom! " + e.getMessage() + e.toString());
                         view.hideLoading();
                         view.displayError(e);
                     }
@@ -70,29 +65,33 @@ public class ItunesSongsInteractor {
         return null;
     }
 
+    public List<ItunesSong> getAllItunesSongs() {
+        return allItunesSongs;
+    }
+
     public List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
         List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
         for (int i = 0; i < itunesSongs.size(); i++) {
-            ItunesSong currentSongI = itunesSongs.get(i);
-            String title = currentSongI.title();
-            String author = currentSongI.author();
-            String releaseDate = currentSongI.releaseDate();
-            String genre = currentSongI.genreName();
-            String collectionName = currentSongI.collectionName();
-            String country = currentSongI.country();
-            String thumbnailUrl = currentSongI.thumbnailUrl();
-
-            ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(i, title, author,
-                    releaseDate, genre, collectionName, country, thumbnailUrl);
-            ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
-
+            ItunesSong convertedItuneSong = createItuneSong(itunesSongs, i);
             convertedItuneSongsList.add(i, convertedItuneSong);
             Collections.sort(convertedItuneSongsList, new ItunesSongTitleComparator());
         }
         return convertedItuneSongsList;
     }
 
-    public List<ItunesSong> getAllItunesSongs() {
-        return allItunesSongs;
+    public ItunesSong createItuneSong(List<ItunesSong> itunesSongs, int currentIteration) {
+        ItunesSong currentSongI = itunesSongs.get(currentIteration);
+        String title = currentSongI.title();
+        String author = currentSongI.author();
+        String releaseDate = currentSongI.releaseDate();
+        String genre = currentSongI.genreName();
+        String collectionName = currentSongI.collectionName();
+        String country = currentSongI.country();
+        String thumbnailUrl = currentSongI.thumbnailUrl();
+
+        ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(currentIteration, title, author,
+                releaseDate, genre, collectionName, country, thumbnailUrl);
+        ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
+        return convertedItuneSong;
     }
 }

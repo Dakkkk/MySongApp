@@ -24,7 +24,6 @@ public class ItunesSongTitleComparator implements Comparator<ItunesSong> {
         if (title1.equals(title2)) {
             return 0;
         }
-
         return title1.compareTo(title2);
     }
 }

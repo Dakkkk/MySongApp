@@ -2,7 +2,6 @@ package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -26,7 +25,6 @@ import javax.inject.Inject;
 @InjectViewState
 public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
-    private static final String TAG = "AssetsSongsPresenter";
     private AssetsSongsView view;
     private AssetsSongsRepositoryImpl assetsRepository;
     private Context context;
@@ -84,17 +82,12 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void showAssetsSearchResults(ArrayList<AssetsSong> searchResponse) {
-        Log.d("MySearch", "showAssetsSearchResults called!");
-        //view.showSearchResult(searchResponse);
         view.showLoading();
         assetsSongsInteractor.loadSongs(view, searchResponse);
     }
 
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
         assetsSearchList = new ArrayList<>();
-
-        Log.d("searchA..AllSongs", allAssetsSongsArrayList.toString());
-
         for (AssetsSong song : allAssetsSongsArrayList) {
             //ToDo check id this can be done better (use startsWith or contains or...)
             if (song.author().toLowerCase().contains(s) ||
@@ -103,19 +96,20 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                 assetsSearchList.add(song);
             }
         }
-        Log.d("MySearch searchAS...", assetsSearchList.toString());
         return assetsSearchList;
     }
 
     public void showDetails(int position) {
         ArrayList<AssetsSong> currentSongsList;
         if (assetsSearchList != null && !assetsSearchList.isEmpty()) {
-            Log.d("ASetarchList", "null or empty");
             currentSongsList = assetsSearchList;
         } else {
             currentSongsList = getAssetsSongArrayList();
         }
+        putDetailArgsToBundle(currentSongsList, position);
+    }
 
+    public void putDetailArgsToBundle(ArrayList<AssetsSong> currentSongsList, int position ){
         Bundle args = new Bundle();
         args.putLong(ArgumentKeys.ID, currentSongsList.get(position).id());
         args.putString(ArgumentKeys.TITLE, currentSongsList.get(position).title());
@@ -124,9 +118,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         args.putString(ArgumentKeys.YEAR, currentSongsList.get(position).year());
         args.putString(ArgumentKeys.FIRST, currentSongsList.get(position).first());
         args.putString(ArgumentKeys.PLAY_COUNT, currentSongsList.get(position).playCount());
-
         router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS, AssetsSongDetailsPresenter.class.getName(), args);
-        Log.d("showDetails, Command: ", args.getLong(ArgumentKeys.ID) + "");
-        Log.d("showDetails, ID: ", args.getLong(ArgumentKeys.ID) + "");
     }
 }

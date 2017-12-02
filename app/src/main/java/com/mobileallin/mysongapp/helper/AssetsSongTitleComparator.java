@@ -26,6 +26,5 @@ public class AssetsSongTitleComparator implements Comparator<AssetsSong> {
         }
         return title1.compareTo(title2);
     }
-
 }
 
