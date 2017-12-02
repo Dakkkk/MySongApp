@@ -36,7 +36,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         Bundle assetsDetailBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
         Bundle itunesDetailBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
 
-        //ToDo Move this logic to presenter ?
+        //ToDo Move this logic to presenter, there is a BUG in this logic IMPORTANT!
         if (assetsDetailBundle != null && !assetsDetailBundle.isEmpty()) {
             replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), true, "assetsFragment");
         } else if (itunesDetailBundle != null && !itunesDetailBundle.isEmpty()) {

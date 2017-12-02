@@ -55,7 +55,6 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
         view.showSongDetails(getAssetsSongDetails());
     }
 
-    //ToDO Rewrite (maybe create separate class and function for building Itunes/Assets songs)
     public AssetsSong getAssetsSongDetails() {
         Bundle routerSongBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);

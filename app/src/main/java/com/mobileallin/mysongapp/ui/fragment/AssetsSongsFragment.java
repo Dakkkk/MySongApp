@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -137,7 +138,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @Override
     public void displayNoSongs() {
-        //ToDo define this logic
+        Toast.makeText(getContext(), getString(R.string.songs_list_empty), Toast.LENGTH_LONG).show();
     }
 
     @Override

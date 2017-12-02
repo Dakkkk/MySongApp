@@ -64,7 +64,6 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     @Override
     public void attachView(ItunesSongsView mainView) {
         super.attachView(mainView);
-        // ToDo Dispose the observer to avoid memory leaks
         mainView.showLoading();
         disposable = itunesSongsInteractor.loadSongs(mainView);
     }
@@ -77,6 +76,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     @Override
     public void detachView(ItunesSongsView view) {
         super.detachView(view);
+        //ToDo Rewrite, put into ddisposeAll() function
         if (disposable == null && searchDisposable == null) return;
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
@@ -88,7 +88,6 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
         }
     }
 
-    //ToDo Should interactor handle this?
     public void searchItunesSong(String searchTerm) {
         mainView.showLoading();
         ItunesSearchCall itunesSearchCall = new ItunesSearchCall(mainView, client);
@@ -132,8 +131,8 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
             this.client = client;
         }
 
-        //ToDo Check if this can be done better
         public void instantSearch(String searchTerm) {
+            //ToDo Rewrite, put into ddisposeAll() function
             if (disposable != null) {
                 disposable.dispose();
             }
@@ -141,7 +140,6 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
                 searchDisposable.dispose();
             }
 
-            //doONSubscribe, afterTerminate TEst
             isSearching = true;
             searchDisposable = client.searchItunesSongs(searchTerm, MEDIA_TYPE)
                     .delay(600, TimeUnit.MILLISECONDS)

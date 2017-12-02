@@ -92,7 +92,6 @@ public class ItunesSongsInteractor {
         return convertedItuneSongsList;
     }
 
-    //ToDo rewrite this?
     public List<ItunesSong> getAllItunesSongs() {
         return allItunesSongs;
     }

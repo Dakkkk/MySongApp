@@ -18,4 +18,5 @@
     <string name="itunes_menu">Itunes songs</string>
     <string name="assets_menu">Assets songs</string>
     <string name="menu">MENU</string>
+    <string name="songs_list_empty">Ooops...! Songs list is empty!</string>
 </resources>
