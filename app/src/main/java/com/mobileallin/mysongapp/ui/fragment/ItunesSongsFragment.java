@@ -100,13 +100,10 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsLi
         songsRecyclerView.setLayoutManager(layoutManager);
         songsRecyclerView.setAdapter(songsAdapter);
 
-        swipeRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                songsListState = null;
-                ituneSongsPresenter.forceLoadSongs();
-                hideSwipeRefresh();
-            }
+        swipeRefreshView.setOnRefreshListener(() -> {
+            songsListState = null;
+            ituneSongsPresenter.forceLoadSongs();
+            hideSwipeRefresh();
         });
 
 
