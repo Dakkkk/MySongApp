@@ -11,8 +11,8 @@ import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
 import com.mobileallin.mysongapp.navigation.Command;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.network.HttpClient;
+import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 import com.mobileallin.mysongapp.ui.view.SearchView;
-import com.mobileallin.mysongapp.ui.view.SongsListView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
 import java.util.List;
@@ -27,10 +27,10 @@ import io.reactivex.subjects.PublishSubject;
 
 
 @InjectViewState
-public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
+public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
 
     private static final String TAG = "SongsListPresenter";
-    private SongsListView mainView;
+    private ItunesSongsView mainView;
     private Disposable disposable;
     private Disposable searchDisposable;
     private List<ItunesSong> currentItuneSongsList;
@@ -48,7 +48,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
 
     private List<ItunesSong> ituneSongsSearchList;
 
-    public ItuneSongsPresenter(MySongAppComponent component, SongsListView mainView) {
+    public ItuneSongsPresenter(MySongAppComponent component, ItunesSongsView mainView) {
         component.inject(this);
         this.mainView = mainView;
     }
@@ -62,7 +62,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     }
 
     @Override
-    public void attachView(SongsListView mainView) {
+    public void attachView(ItunesSongsView mainView) {
         super.attachView(mainView);
         // ToDo Dispose the observer to avoid memory leaks
         mainView.showLoading();
@@ -75,7 +75,7 @@ public class ItuneSongsPresenter extends MvpPresenter<SongsListView> {
     }
 
     @Override
-    public void detachView(SongsListView view) {
+    public void detachView(ItunesSongsView view) {
         super.detachView(view);
         if (disposable == null && searchDisposable == null) return;
         if (disposable != null && !disposable.isDisposed()) {

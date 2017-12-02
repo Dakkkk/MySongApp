@@ -1,6 +1,5 @@
 package com.mobileallin.mysongapp.ui.fragment;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import butterknife.ButterKnife;
 
 
 public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.ViewHolder> {
-    private Context context;
     private View emptyView;
     private List<AssetsSong> items;
     private IOnItemClickListener itemClickListener;
@@ -32,12 +30,11 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
         itemClickListener = listener;
     }
 
-    public AssetsSongsAdapter(Context context, View emptyView) {
-        this(context, new ArrayList<>(), emptyView);
+    public AssetsSongsAdapter(View emptyView) {
+        this(new ArrayList<>(), emptyView);
     }
 
-    public AssetsSongsAdapter(Context context, List<AssetsSong> items, View emptyView) {
-        this.context = context;
+    public AssetsSongsAdapter( List<AssetsSong> items, View emptyView) {
         this.items = items;
         this.emptyView = emptyView;
         showEmptyView(items);
@@ -84,7 +81,6 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
         }
 
         public void bind(AssetsSong song) {
-
             songTitleView.setText(song.title());
             songAuthorView.setText(song.author());
             songDateView.setText(String.valueOf(song.releaseDate()));

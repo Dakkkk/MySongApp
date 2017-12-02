@@ -34,6 +34,7 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
         return new AssetsSongDetailsPresenter(component, this);
     }
 
+    //fields
     @BindView(R.id.song_details_title)
     TextView songTitleTextView;
     @BindView(R.id.song_details_author)
@@ -46,7 +47,7 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     TextView songYearView;
     @BindView(R.id.song_details_country)
     TextView songPlayCountTextView;
-
+    //labels
     @BindView(R.id.song_details_collection_name_label)
     TextView songFirstLabel;
     @BindView(R.id.song_details_genre_name_label)
@@ -58,7 +59,6 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-
         if (args != null) {
             presenter.init(args.getLong(Keys.ITUNE_SONG_ID));
         }
@@ -81,7 +81,7 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
         songFirstLabel.setText(getResources().getString(R.string.first_label));
         songYearLabel.setText(getResources().getString(R.string.year_label));
         songPlayCountLabel.setText(getResources().getString(R.string.play_count));
-
+        //fields
         songTitleTextView.setText(assetsSong.title());
         songAuthorTextView.setText(assetsSong.author());
         songDateTextView.setText(String.valueOf(assetsSong.releaseDate()));

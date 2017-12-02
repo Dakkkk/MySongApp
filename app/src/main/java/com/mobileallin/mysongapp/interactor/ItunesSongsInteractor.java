@@ -10,7 +10,7 @@ import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
 import com.mobileallin.mysongapp.helper.ItunesSongTitleComparator;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
-import com.mobileallin.mysongapp.ui.view.SongsListView;
+import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +41,7 @@ public class ItunesSongsInteractor {
         this.uiScheduler = uiScheduler;
     }
 
-    public Disposable loadSongs(SongsListView view) {
+    public Disposable loadSongs(ItunesSongsView view) {
         compositeDisposable.add(itunesSongsRepository.getSongs(client,
                 ioScheduler, uiScheduler)
                 .subscribeOn(Schedulers.io())

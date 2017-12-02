@@ -5,13 +5,11 @@ import android.view.MenuItem;
 
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
-import com.mobileallin.mysongapp.navigation.Command;
-import com.mobileallin.mysongapp.navigation.INavigator;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongDetailsFragment;
 import com.mobileallin.mysongapp.utils.ActivityUtils;
 
 
-public class SongDetailsActivity extends BaseActivity implements INavigator {
+public class SongDetailsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +22,6 @@ public class SongDetailsActivity extends BaseActivity implements INavigator {
 
     private void showSongDetails() {
         addFragment(R.id.song_details_container, ItunesSongDetailsFragment::new, false);
-    }
-
-    //ToDo this should not be here split the interface into separate or remove the metod from interface
-    @Override
-    public void handleCommand(Command command) {
-
     }
 
     @Override

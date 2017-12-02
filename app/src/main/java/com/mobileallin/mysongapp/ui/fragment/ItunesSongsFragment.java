@@ -28,8 +28,8 @@ import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
+import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 import com.mobileallin.mysongapp.ui.view.SearchView;
-import com.mobileallin.mysongapp.ui.view.SongsListView;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ItunesSongsFragment extends MvpAppCompatFragment implements SongsListView, SearchView {
+public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesSongsView, SearchView {
 
     private static final String ITUNES_SONGS_LIST_STATE = "itunes_songs_state";
     private Parcelable songsListState;

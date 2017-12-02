@@ -24,13 +24,11 @@ import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
-import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +92,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         View view = inflater.inflate(R.layout.fragment_assets_songs, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(getString(R.string.assets_songs));
-        assetsSongsAdapter = new AssetsSongsAdapter(getContext(), emptyListView);
+        assetsSongsAdapter = new AssetsSongsAdapter(emptyListView);
         allAssetsSongs = assetsSongsPresenter.getAssetsSongArrayList();
         assetsSongsAdapter.setItemClickListener(position -> assetsSongsPresenter.showDetails(position));
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
@@ -138,13 +136,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     }
 
     @Override
-    public void displaySongs(List<ItunesSong> list) {
-
-    }
-
-    @Override
     public void displayNoSongs() {
-
+        //ToDo define this logic
     }
 
     @Override

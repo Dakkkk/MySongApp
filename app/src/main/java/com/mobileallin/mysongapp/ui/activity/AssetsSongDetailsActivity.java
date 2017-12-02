@@ -5,8 +5,6 @@ import android.view.MenuItem;
 
 import com.mobileallin.mysongapp.MySongApp;
 import com.mobileallin.mysongapp.R;
-import com.mobileallin.mysongapp.navigation.Command;
-import com.mobileallin.mysongapp.navigation.INavigator;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongDetailsFragment;
 import com.mobileallin.mysongapp.utils.ActivityUtils;
 
@@ -14,7 +12,7 @@ import com.mobileallin.mysongapp.utils.ActivityUtils;
  * Created by Dawid on 2017-11-29.
  */
 
-public class AssetsSongDetailsActivity extends BaseActivity implements INavigator {
+public class AssetsSongDetailsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +25,6 @@ public class AssetsSongDetailsActivity extends BaseActivity implements INavigato
 
     private void showSongDetails() {
         addFragment(R.id.song_details_container, AssetsSongDetailsFragment::new, false);
-    }
-
-    //ToDo this should not be here split the interface into separate
-    @Override
-    public void handleCommand(Command command) {
-
     }
 
     @Override
