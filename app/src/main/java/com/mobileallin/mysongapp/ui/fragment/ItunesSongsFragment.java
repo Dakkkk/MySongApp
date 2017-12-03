@@ -73,8 +73,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
     }
 
     public static ItunesSongsFragment newInstance() {
-        ItunesSongsFragment f = new ItunesSongsFragment();
-        return f;
+        return new ItunesSongsFragment();
     }
 
     @Override

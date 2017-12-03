@@ -25,12 +25,12 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class ItunesSongsInteractor {
-    private HttpClient client;
-    private Scheduler ioScheduler;
-    private Scheduler uiScheduler;
-    private ItunesSongsRepository itunesSongsRepository;
+    private final HttpClient client;
+    private final Scheduler ioScheduler;
+    private final Scheduler uiScheduler;
+    private final ItunesSongsRepository itunesSongsRepository;
     private List<ItunesSong> allItunesSongs;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public ItunesSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client,
                                  @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler
@@ -41,6 +41,7 @@ public class ItunesSongsInteractor {
         this.uiScheduler = uiScheduler;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public Disposable loadSongs(ItunesSongsView view) {
         compositeDisposable.add(itunesSongsRepository.getSongs(client,
                 ioScheduler, uiScheduler)
@@ -97,7 +98,6 @@ public class ItunesSongsInteractor {
 
         ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(currentIteration, title,
                 author, releaseDate, genre, collectionName, country, thumbnailUrl);
-        ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
-        return convertedItuneSong;
+        return itunesSongsFactory.buildItunesSong();
     }
 }

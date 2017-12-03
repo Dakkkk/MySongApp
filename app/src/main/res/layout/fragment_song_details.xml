@@ -6,7 +6,6 @@
     tools:context="com.mobileallin.mysongapp.ui.activity.SongDetailsActivity">
 
     <LinearLayout
-        android:id="@+id/song_details_data"
         android:layout_width="@dimen/detail_text_container_width"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
@@ -115,7 +114,6 @@
                 android:textColor="@color/secondaryText" />
 
             <TextView
-                android:id="@+id/song_details_release_date_label"
                 android:layout_width="@dimen/detail_text_label_width"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/song_details_country_label"

@@ -7,7 +7,6 @@ import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.factory.AssetsSongFactory;
 import com.mobileallin.mysongapp.navigation.Router;
-import com.mobileallin.mysongapp.ui.fragment.AssetsSongDetailsFragment;
 import com.mobileallin.mysongapp.ui.view.BaseAssetsDetailsView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
 
@@ -19,7 +18,7 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
     @Inject
     Router router;
 
-    public AssetsSongDetailsPresenter(MySongAppComponent component, AssetsSongDetailsFragment view) {
+    public AssetsSongDetailsPresenter(MySongAppComponent component) {
         component.inject(this);
     }
 
@@ -50,8 +49,7 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
 
         AssetsSongFactory assetsSongFactory = new AssetsSongFactory(id, title, author,
                 releaseDate, first, year, playCount);
-        AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
-        return assetsSong;
+        return assetsSongFactory.buildAssetsSong();
     }
 
     public String getSongTitle() {

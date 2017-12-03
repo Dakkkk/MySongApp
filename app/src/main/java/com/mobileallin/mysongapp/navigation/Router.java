@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Router {
 
     private WeakReference<INavigator> navigator;
-    private HashMap<String, Bundle> argumentMap;
+    private final HashMap<String, Bundle> argumentMap;
 
     public Router() {
         navigator = new WeakReference<>(command -> {
@@ -40,14 +40,6 @@ public class Router {
     public Bundle getArguments(String key) {
         return key == null ? new Bundle() :
                 argumentMap.containsKey(key) ? argumentMap.get(key) : new Bundle();
-    }
-
-    public Bundle removeArguments(String key) {
-        Log.d("removeArguments", "called");
-        Log.d("argumentMap", getArguments(key).toString());
-
-        return key == null ? new Bundle() :
-                argumentMap.containsKey(key) ? argumentMap.remove(key) : new Bundle();
     }
 
     private void addArguments(String key, Bundle args) {

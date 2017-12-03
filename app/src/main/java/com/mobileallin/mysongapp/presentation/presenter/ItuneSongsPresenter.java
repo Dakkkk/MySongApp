@@ -28,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
 
-    private ItunesSongsView mainView;
+    private final ItunesSongsView mainView;
     private Disposable disposable;
     private Disposable searchDisposable;
     private List<ItunesSong> currentItuneSongsList;
@@ -121,9 +121,9 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     }
 
     private class ItunesSearchCall {
-        private HttpClient client;
+        private final HttpClient client;
         private final static String MEDIA_TYPE = "music";
-        private SearchView searchView;
+        private final SearchView searchView;
 
         public ItunesSearchCall(SearchView view, HttpClient client) {
             this.searchView = view;

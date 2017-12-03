@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 
 
 public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.ViewHolder> {
-    private View emptyView;
+    private final View emptyView;
     private List<AssetsSong> items;
     private IOnItemClickListener itemClickListener;
 

@@ -61,8 +61,8 @@ public class ItuneSongsInteractorTest {
 
     @Before
     public void setUp() {
-        long fakeId = (long) Math.random();
-        Scheduler mainTestScheduler = Schedulers.trampoline();
+        @SuppressWarnings("UnusedAssignment") long fakeId = (long) Math.random();
+        @SuppressWarnings("UnusedAssignment") Scheduler mainTestScheduler = Schedulers.trampoline();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
     }
 
@@ -99,6 +99,7 @@ public class ItuneSongsInteractorTest {
             }
         };
 
+        //noinspection RedundantTypeArguments
         when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
                 .thenReturn(Maybe.<ItunesResponse>just((ItunesResponse) ITUNES_RESPONSE));
 

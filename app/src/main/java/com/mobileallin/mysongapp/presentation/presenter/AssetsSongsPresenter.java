@@ -31,12 +31,11 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
-    private AssetsSongsView view;
-    private AssetsSongsRepositoryImpl assetsRepository;
-    private Context context;
+    private final AssetsSongsView view;
+    private final Context context;
     private ArrayList<AssetsSong> allAssetsSongsArrayList;
     private ArrayList<AssetsSong> assetsSearchList;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final Scheduler mainScheduler;
 
     @Inject
@@ -50,7 +49,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                                 Scheduler mainScheduler) {
         component.inject(this);
         this.view = view;
-        this.assetsRepository = assetsRepository;
         this.context = context;
         this.mainScheduler = mainScheduler;
     }

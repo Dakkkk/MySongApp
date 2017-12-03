@@ -19,7 +19,7 @@ public class AssetsSongsStringParser {
             jsonarray = new JSONArray(songAssetsString);
             for (int i = 0; i < jsonarray.length(); i++) {
                 JSONObject jsonobject = jsonarray.getJSONObject(i);
-                long id = Long.valueOf(i);
+                long id = (long) i;
                 String title = jsonobject.getString("Song Clean");
                 String author = jsonobject.getString("ARTIST CLEAN");
                 String releaseDate = jsonobject.getString("Release Year");

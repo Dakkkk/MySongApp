@@ -40,7 +40,6 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     private static final String ASSETS_SONGS_LIST_STATE = "assets_songs_state";
     AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
     private AssetsSongsAdapter assetsSongsAdapter;
-    private ArrayList<AssetsSong> allAssetsSongs;
     private Parcelable songsListState;
     private static final String SONGS_LIST_STATE = "songs_list_state";
 
@@ -72,8 +71,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     }
 
     public static AssetsSongsFragment newInstance() {
-        AssetsSongsFragment f = new AssetsSongsFragment();
-        return f;
+        return new AssetsSongsFragment();
     }
 
     @Override
@@ -92,7 +90,6 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         ButterKnife.bind(this, view);
         getActivity().setTitle(getString(R.string.assets_songs));
         assetsSongsAdapter = new AssetsSongsAdapter(emptyListView);
-        allAssetsSongs = assetsSongsPresenter.getAssetsSongArrayList();
         assetsSongsAdapter.setItemClickListener(position -> assetsSongsPresenter.showDetails(position));
         int columns = getResources().getInteger(R.integer.snongs_list_columns_nr);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), columns);

@@ -19,16 +19,12 @@ import io.reactivex.Single;
 
 public class AssetsSongsInteractor {
 
-    private AssetsSongsRepositoryImpl assetsRepository;
-    private Scheduler ioScheduler;
-    private Scheduler uiScheduler;
+    private final AssetsSongsRepositoryImpl assetsRepository;
 
     public AssetsSongsInteractor(AssetsSongsRepositoryImpl assetsRepository,
                                  @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler
                                  ){
         this.assetsRepository = assetsRepository;
-        this.ioScheduler = ioScheduler;
-        this.uiScheduler = uiScheduler;
     }
 
     public void loadSongs(AssetsSongsView assetsSongsView, ArrayList<AssetsSong> assetsSongs) {

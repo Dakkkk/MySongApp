@@ -13,6 +13,7 @@ import java.util.List;
 @AutoValue
 public abstract class ItunesResponse implements Parcelable {
 
+    @SuppressWarnings("SameReturnValue")
     @SerializedName("resultsCount")
     public abstract int resultsNumber();
 

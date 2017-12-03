@@ -5,13 +5,13 @@ import com.mobileallin.mysongapp.data.model.AssetsSong;
 
 public class AssetsSongFactory {
 
-    private long id;
-    private String title;
-    private String author;
-    private String releaseDate;
-    private String first;
-    private String year;
-    private String playCount;
+    private final long id;
+    private final String title;
+    private final String author;
+    private final String releaseDate;
+    private final String first;
+    private final String year;
+    private final String playCount;
 
     public AssetsSongFactory(long id, String title, String author, String releaseDate, String first,
                              String year, String playCount) {
@@ -25,7 +25,7 @@ public class AssetsSongFactory {
     }
 
     public AssetsSong buildAssetsSong() {
-        AssetsSong assetsSong = AssetsSong.builder()
+        return AssetsSong.builder()
                 .setId(id)
                 .setTitle(title)
                 .setAuthor(author)
@@ -34,6 +34,5 @@ public class AssetsSongFactory {
                 .setYear(year)
                 .setPlayCount(playCount)
                 .build();
-        return assetsSong;
     }
 }

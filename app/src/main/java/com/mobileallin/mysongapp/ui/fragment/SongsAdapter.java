@@ -20,8 +20,8 @@ import butterknife.ButterKnife;
 
 
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> {
-    private Context context;
-    private View emptyView;
+    private final Context context;
+    private final View emptyView;
     private List<ItunesSong> items;
     private IOnItemClickListener itemClickListener;
 

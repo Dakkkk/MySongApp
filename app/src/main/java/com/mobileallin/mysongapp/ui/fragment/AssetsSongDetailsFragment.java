@@ -30,7 +30,7 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     AssetsSongDetailsPresenter providePresenter() {
         MySongAppComponent component = ((MySongApp) getActivity().getApplication())
                 .getMySongsAppComponent();
-        return new AssetsSongDetailsPresenter(component, this);
+        return new AssetsSongDetailsPresenter(component);
     }
 
     //fields

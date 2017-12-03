@@ -46,6 +46,7 @@ public class AssetsSongsInteractorTest {
     @Mock
     AssetsSongsPresenter presenter;
 
+    @SuppressWarnings("unused")
     long fakeId;
 
     AssetsSongFactory assetsSongFactory = new AssetsSongFactory(fakeId, "Fake",
@@ -61,7 +62,7 @@ public class AssetsSongsInteractorTest {
 
     @Before
     public void setUp() {
-        long fakeId = (long) Math.random();
+        @SuppressWarnings("UnusedAssignment") long fakeId = (long) Math.random();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
         context = new MockContext();
     }

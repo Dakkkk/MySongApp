@@ -51,8 +51,7 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
 
         ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(id, title, author,
                 releaseDate, genreName, collectionName, country, thumbnailUrl);
-        ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
-        return itunesSong;
+        return itunesSongsFactory.buildItunesSong();
     }
 
     public String getSongTitle() {

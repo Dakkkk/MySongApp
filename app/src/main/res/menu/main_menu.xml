@@ -5,7 +5,6 @@
     tools:context=".activities.BaseActivity">
 
     <item
-        android:id="@+id/action_notification1"
         android:icon="@drawable/ic_menu_white_36px"
         android:title="@string/menu"
         app:showAsAction="always">

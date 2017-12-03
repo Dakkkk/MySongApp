@@ -4,14 +4,14 @@ import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 
 public class ItunesSongsFactory {
-    private long id;
-    private String title;
-    private String author;
-    private String releaseDate;
-    private String genreName;
-    private String collectionName;
-    private String country;
-    private String thumbnailUrl;
+    private final long id;
+    private final String title;
+    private final String author;
+    private final String releaseDate;
+    private final String genreName;
+    private final String collectionName;
+    private final String country;
+    private final String thumbnailUrl;
 
     public ItunesSongsFactory(long id, String title, String author, String releaseDate,
                               String genreName, String collectionName, String country,
@@ -27,7 +27,7 @@ public class ItunesSongsFactory {
     }
 
     public ItunesSong buildItunesSong() {
-        ItunesSong itunesSong = ItunesSong.builder()
+        return ItunesSong.builder()
                 .setId(id)
                 .setTitle(title)
                 .setAuthor(author)
@@ -37,7 +37,6 @@ public class ItunesSongsFactory {
                 .setCountry(country)
                 .setThumbnailUrl(thumbnailUrl)
                 .build();
-        return itunesSong;
     }
 }
 
