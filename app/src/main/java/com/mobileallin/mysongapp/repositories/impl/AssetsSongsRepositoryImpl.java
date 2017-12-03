@@ -14,6 +14,7 @@ public class AssetsSongsRepositoryImpl {
             InputStream is = context.getAssets().open("songs_list.json");
             int size = is.available();
             byte[] buffer = new byte[size];
+            //noinspection ResultOfMethodCallIgnored
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");

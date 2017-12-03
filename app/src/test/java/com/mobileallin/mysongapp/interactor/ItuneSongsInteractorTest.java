@@ -42,6 +42,7 @@ public class ItuneSongsInteractorTest {
     @Mock
     ItunesSongsView view;
 
+    @SuppressWarnings("CanBeFinal")
     @Mock
     HttpClient client;
 
@@ -51,14 +52,12 @@ public class ItuneSongsInteractorTest {
     @SuppressWarnings({"CanBeFinal", "unused"})
     private Scheduler mainTestScheduler;
 
-    @SuppressWarnings({"CanBeFinal", "unused"})
-    private long fakeId;
-
-    private final ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(fakeId, "Fake",
+    private final ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(3, "Fake",
             "Fake", "2017", "Fake", "Fake", "Poland", "fake_url");
 
     private final ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
 
+    @SuppressWarnings("unused")
     public ItunesResponse ITUNES_RESPONSE;
 
     @SuppressWarnings("CanBeFinal")
@@ -66,7 +65,6 @@ public class ItuneSongsInteractorTest {
 
     @Before
     public void setUp() {
-        @SuppressWarnings("UnusedAssignment") long fakeId = (long) Math.random();
         @SuppressWarnings("UnusedAssignment") Scheduler mainTestScheduler = Schedulers.trampoline();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
     }
@@ -104,14 +102,13 @@ public class ItuneSongsInteractorTest {
             }
         };
 
-        //noinspection RedundantTypeArguments
         when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
-                .thenReturn(Maybe.<ItunesResponse>just((ItunesResponse) ITUNES_RESPONSE));
+                .thenReturn(Maybe.just(ITUNES_RESPONSE));
 
         //Calling on view because the method is called in interactor's loadSongs()...
-        view.displaySongs(((ItunesResponse) ITUNES_RESPONSE).allItuneSongs());
+        view.displaySongs(ITUNES_RESPONSE.allItuneSongs());
 
-        verify(view).displaySongs(((ItunesResponse) ITUNES_RESPONSE).allItuneSongs());
+        verify(view).displaySongs(ITUNES_RESPONSE.allItuneSongs());
     }
 
     @Test

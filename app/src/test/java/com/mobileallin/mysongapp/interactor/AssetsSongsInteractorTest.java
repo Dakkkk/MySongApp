@@ -45,15 +45,14 @@ public class AssetsSongsInteractorTest {
     @Mock
     AssetsSongsInteractor assetsSongsInteractor;
 
+    @SuppressWarnings("CanBeFinal")
     @Mock
     AssetsSongsPresenter presenter;
 
-    @SuppressWarnings({"unused", "CanBeFinal"})
-    long fakeId;
-
-    private final AssetsSongFactory assetsSongFactory = new AssetsSongFactory(fakeId, "Fake",
+    private final AssetsSongFactory assetsSongFactory = new AssetsSongFactory(3, "Fake",
             "Fake", "2017", "Fake", "Fake", "Poland");
 
+    @SuppressWarnings("CanBeFinal")
     private AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
 
     @SuppressWarnings("CanBeFinal")
@@ -65,7 +64,6 @@ public class AssetsSongsInteractorTest {
 
     @Before
     public void setUp() {
-        @SuppressWarnings("UnusedAssignment") long fakeId = (long) Math.random();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
         context = new MockContext();
     }

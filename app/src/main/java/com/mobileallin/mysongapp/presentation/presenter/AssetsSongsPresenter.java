@@ -116,6 +116,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
         assetsSearchList = new ArrayList<>();
+        //ToDo resolve this warning
         for (AssetsSong song : allAssetsSongsArrayList) {
             if (song.author().toLowerCase().contains(s) ||
                     song.title().toLowerCase().contains(s) ||

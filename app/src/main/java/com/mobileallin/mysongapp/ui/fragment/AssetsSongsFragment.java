@@ -25,7 +25,6 @@ import com.mobileallin.mysongapp.R;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
-import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
 import java.util.ArrayList;
@@ -67,9 +66,6 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @ProvidePresenter
     AssetsSongsPresenter providePresenter() {
-        //ToDo this shouldn't be initialized here, change this later on: inject or sth
-        AssetsSongsRepositoryImpl assetsSongsRepositoryImpl = new AssetsSongsRepositoryImpl();
-
         MySongAppComponent component = ((MySongApp) getActivity().getApplication())
                 .getMySongsAppComponent();
         return new AssetsSongsPresenter(component, this,
