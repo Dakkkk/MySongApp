@@ -16,16 +16,12 @@ import javax.inject.Inject;
 @InjectViewState
 public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsView> {
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     Router router;
 
     public ItunesSongDetailsPresenter(MySongAppComponent component) {
         component.inject(this);
-    }
-
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
     }
 
     @Override

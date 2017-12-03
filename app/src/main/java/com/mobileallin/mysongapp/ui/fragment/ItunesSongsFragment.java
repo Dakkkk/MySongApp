@@ -46,22 +46,29 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
     private static final String SONGS_LIST_STATE = "songs_list_state";
     private SongsAdapter songsAdapter;
 
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.songs_list)
     RecyclerView songsRecyclerView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.empty_view)
     TextView emptyListView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.shield)
     FrameLayout shield;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.itunes_search_panel)
     EditText itunesSearchPanel;
 
     @Inject
     Router router;
 
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @InjectPresenter
     ItuneSongsPresenter ituneSongsPresenter;
 

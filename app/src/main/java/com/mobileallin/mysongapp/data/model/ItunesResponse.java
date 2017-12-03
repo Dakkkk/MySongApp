@@ -23,13 +23,4 @@ public abstract class ItunesResponse implements Parcelable {
     public static TypeAdapter<ItunesResponse> typeAdapter(Gson gson) {
         return new AutoValue_ItunesResponse.GsonTypeAdapter(gson);
     }
-
-    @AutoValue.Builder
-    public abstract static class Builder {
-        public abstract Builder setResultsNumber(int resultsNumber);
-
-        public abstract Builder setAllItuneSongs(List<ItunesSong> allItuneSongs);
-
-        public abstract ItunesResponse build();
-    }
 }

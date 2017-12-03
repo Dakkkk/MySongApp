@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 
 public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements BaseItunesDetailsView {
 
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @InjectPresenter
     ItunesSongDetailsPresenter presenter;
 
@@ -35,25 +36,28 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
         return new ItunesSongDetailsPresenter(component);
     }
 
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_image)
     ImageView songImage;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_title)
     TextView songTitleTextView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_author)
     TextView songAuthorTextView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_release_date)
     TextView songDateTextView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_collection_name)
     TextView songCollectionTextView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_genre_name)
     TextView songGenreTextView;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @BindView(R.id.song_details_country)
     TextView songCountryTextView;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override

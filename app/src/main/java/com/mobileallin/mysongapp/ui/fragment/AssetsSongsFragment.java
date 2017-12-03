@@ -39,31 +39,36 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
 
     private static final String ASSETS_SONGS_LIST_STATE = "assets_songs_state";
-    private AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
     private AssetsSongsAdapter assetsSongsAdapter;
     private Parcelable songsListState;
     private static final String SONGS_LIST_STATE = "songs_list_state";
 
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.songs_list)
     RecyclerView songsRecyclerView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.empty_view)
     TextView emptyListView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.shield)
     FrameLayout shield;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.assets_search_panel)
     EditText assetsSearchPanel;
 
+    @SuppressWarnings("CanBeFinal")
     @InjectPresenter
     AssetsSongsPresenter assetsSongsPresenter;
 
     @ProvidePresenter
     AssetsSongsPresenter providePresenter() {
         //ToDo this shouldn't be initialized here, change this later on: inject or sth
-        assetsSongsRepositoryImpl = new AssetsSongsRepositoryImpl();
+        AssetsSongsRepositoryImpl assetsSongsRepositoryImpl = new AssetsSongsRepositoryImpl();
 
         MySongAppComponent component = ((MySongApp) getActivity().getApplication())
                 .getMySongsAppComponent();

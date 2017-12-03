@@ -34,12 +34,15 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     private List<ItunesSong> currentItuneSongsList;
     private boolean isSearching;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     ItunesSongsInteractor itunesSongsInteractor;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     HttpClient client;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     Router router;
 
@@ -48,11 +51,6 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     public ItuneSongsPresenter(MySongAppComponent component, ItunesSongsView mainView) {
         component.inject(this);
         this.mainView = mainView;
-    }
-
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
     }
 
     @Override

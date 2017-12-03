@@ -1,6 +1,5 @@
 package com.mobileallin.mysongapp.ui.activity;
 
-import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,11 +11,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     interface IFragmentCreator {
         Fragment createFragment();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     void addFragment(@IdRes int containerId, IFragmentCreator fragmentCreator,

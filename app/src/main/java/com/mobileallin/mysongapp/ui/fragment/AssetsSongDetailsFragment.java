@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 @SuppressWarnings("WeakerAccess")
 public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements BaseAssetsDetailsView {
 
+    @SuppressWarnings("CanBeFinal")
     @InjectPresenter
     AssetsSongDetailsPresenter presenter;
 
@@ -35,30 +36,35 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     }
 
     //fields
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_title)
     TextView songTitleTextView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_author)
     TextView songAuthorTextView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_release_date)
     TextView songDateTextView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_collection_name)
     TextView songFirstTextView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_genre_name)
     TextView songYearView;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_country)
     TextView songPlayCountTextView;
     //labels
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_collection_name_label)
     TextView songFirstLabel;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_genre_name_label)
     TextView songYearLabel;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.song_details_country_label)
     TextView songPlayCountLabel;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override

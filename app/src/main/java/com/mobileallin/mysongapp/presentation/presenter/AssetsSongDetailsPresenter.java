@@ -24,11 +24,6 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
     }
 
     @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-    }
-
-    @Override
     public void attachView(BaseAssetsDetailsView view) {
         super.attachView(view);
         view.showSongDetails(getAssetsSongDetails());

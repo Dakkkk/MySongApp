@@ -37,9 +37,11 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final Scheduler mainScheduler;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     Router router;
 
@@ -50,11 +52,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         this.view = view;
         this.context = context;
         this.mainScheduler = mainScheduler;
-    }
-
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
     }
 
     @Override

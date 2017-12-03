@@ -24,6 +24,7 @@ import javax.inject.Inject;
 
 public class SongsListActivity extends BaseActivity implements INavigator {
 
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @Inject
     Router router;
 
@@ -42,11 +43,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         super.onResume();
         router.attachToNavigator(this);
         Log.d(getClass().getSimpleName(), router.toString());
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
     @Override
@@ -126,9 +122,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     private void replaceFragment(Fragment f) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.songs_fragment_container, f);
-        if (false) {
-            ft.addToBackStack(null);
-        }
         ft.commit();
     }
 }
