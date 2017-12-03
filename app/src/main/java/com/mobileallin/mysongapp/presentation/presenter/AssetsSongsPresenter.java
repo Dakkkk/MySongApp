@@ -11,7 +11,6 @@ import com.mobileallin.mysongapp.helper.AssetsSongTitleComparator;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.navigation.Command;
 import com.mobileallin.mysongapp.navigation.Router;
-import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
 import com.mobileallin.mysongapp.utils.Keys;
@@ -45,7 +44,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     Router router;
 
     public AssetsSongsPresenter(MySongAppComponent component, AssetsSongsView view,
-                                AssetsSongsRepositoryImpl assetsRepository, Context context,
+                                Context context,
                                 Scheduler mainScheduler) {
         component.inject(this);
         this.view = view;
@@ -72,11 +71,11 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         unsubscribe();
     }
 
-    public void unsubscribe() {
+    private void unsubscribe() {
         compositeDisposable.clear();
     }
 
-    public void loadFormattedAssetsSongs() {
+    private void loadFormattedAssetsSongs() {
         if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
             loadAssetsSongs();
         }
@@ -105,11 +104,11 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                 }));
     }
 
-    public void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList) {
+    private void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList) {
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
     }
 
-    public ArrayList<AssetsSong> getAssetsSongArrayList() {
+    private ArrayList<AssetsSong> getAssetsSongArrayList() {
         return allAssetsSongsArrayList;
     }
 
@@ -140,7 +139,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         putDetailArgsToBundle(currentSongsList, position);
     }
 
-    public void putDetailArgsToBundle(ArrayList<AssetsSong> currentSongsList, int position) {
+    private void putDetailArgsToBundle(ArrayList<AssetsSong> currentSongsList, int position) {
         Bundle args = new Bundle();
         args.putLong(ArgumentKeys.ID, currentSongsList.get(position).id());
         args.putString(ArgumentKeys.TITLE, currentSongsList.get(position).title());

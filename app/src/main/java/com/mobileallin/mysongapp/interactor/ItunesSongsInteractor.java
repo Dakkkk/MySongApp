@@ -76,7 +76,7 @@ public class ItunesSongsInteractor {
     }
 
     //ToDo put into some helper?
-    public List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
+    private List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
         List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
         for (int i = 0; i < itunesSongs.size(); i++) {
             ItunesSong convertedItuneSong = createItuneSong(itunesSongs, i);
@@ -86,7 +86,7 @@ public class ItunesSongsInteractor {
         return convertedItuneSongsList;
     }
 
-    public ItunesSong createItuneSong(List<ItunesSong> itunesSongs, int currentIteration) {
+    private ItunesSong createItuneSong(List<ItunesSong> itunesSongs, int currentIteration) {
         ItunesSong currentSongI = itunesSongs.get(currentIteration);
         String title = currentSongI.title();
         String author = currentSongI.author();

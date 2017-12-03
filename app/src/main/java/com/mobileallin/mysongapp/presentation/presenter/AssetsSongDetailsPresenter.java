@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsView> {
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     Router router;
 
@@ -33,11 +34,13 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
         view.showSongDetails(getAssetsSongDetails());
     }
 
+    @SuppressWarnings("WeakerAccess")
     public AssetsSong getAssetsSongDetails() {
         Bundle routerSongBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
         return createAssetsSong(routerSongBundle);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public AssetsSong createAssetsSong(Bundle routerSongBundle) {
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);

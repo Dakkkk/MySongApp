@@ -35,10 +35,11 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
+@SuppressWarnings("WeakerAccess")
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
 
     private static final String ASSETS_SONGS_LIST_STATE = "assets_songs_state";
-    AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
+    private AssetsSongsRepositoryImpl assetsSongsRepositoryImpl;
     private AssetsSongsAdapter assetsSongsAdapter;
     private Parcelable songsListState;
     private static final String SONGS_LIST_STATE = "songs_list_state";
@@ -66,7 +67,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
         MySongAppComponent component = ((MySongApp) getActivity().getApplication())
                 .getMySongsAppComponent();
-        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl,
+        return new AssetsSongsPresenter(component, this,
                 getContext(), AndroidSchedulers.mainThread());
     }
 

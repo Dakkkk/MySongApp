@@ -34,7 +34,7 @@ public class AssetsSongsAdapter extends RecyclerView.Adapter<AssetsSongsAdapter.
         this(new ArrayList<>(), emptyView);
     }
 
-    public AssetsSongsAdapter( List<AssetsSong> items, View emptyView) {
+    private AssetsSongsAdapter(List<AssetsSong> items, View emptyView) {
         this.items = items;
         this.emptyView = emptyView;
         showEmptyView(items);

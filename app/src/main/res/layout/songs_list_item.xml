@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_marginBottom="4dp"
@@ -36,7 +37,8 @@
             android:layout_toEndOf="@+id/song_image"
             android:paddingStart="16dp"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/song_author"
@@ -46,7 +48,8 @@
             android:textColor="@color/secondaryText"
             android:layout_toEndOf="@+id/song_image"
             android:paddingStart="14dp"
-            android:text="@string/author" />
+            android:text="@string/author"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/song_release_date"
@@ -55,7 +58,8 @@
             android:layout_below="@+id/song_author"
             android:textColor="@color/secondaryText"
             android:layout_toEndOf="@+id/song_image"
-            android:paddingStart="14dp" />
+            android:paddingStart="14dp"
+            tools:ignore="RtlSymmetry" />
 
     </RelativeLayout>
 

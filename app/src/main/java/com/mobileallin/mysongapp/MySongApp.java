@@ -7,6 +7,7 @@ import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.dagger.module.AppModule;
 
 
+@SuppressWarnings("WeakerAccess")
 public class MySongApp extends Application {
 
     private MySongAppComponent mySongAppComponent;

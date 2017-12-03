@@ -2,7 +2,6 @@ package com.mobileallin.mysongapp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -28,7 +27,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     @Inject
     Router router;
 
-    Bundle assetsDetailBundle;
+    private Bundle assetsDetailBundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +64,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
                 return true;
             case R.id.menu_assets_fragment:
                 Toast.makeText(getApplicationContext(), "Assets", Toast.LENGTH_SHORT).show();
-                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(),
-                        false, null);
+                replaceFragment(AssetsSongsFragment.newInstance()
+                );
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -100,8 +99,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     private void addItunesFragment() {
         removeAssetsFlag();
-        replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(),
-                false, null);
+        replaceFragment(ItunesSongsFragment.newInstance()
+        );
     }
 
     private void removeAssetsFlag() {
@@ -110,8 +109,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     private void addAssetsFragment() {
         removeAssetsFlag();
-        replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(),
-                false, null);
+        replaceFragment(AssetsSongsFragment.newInstance()
+        );
     }
 
     private void showSongDetails() {
@@ -124,12 +123,11 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         startActivity(intent);
     }
 
-    private void replaceFragment(@IdRes int containerId, Fragment f, boolean addToBackStack,
-                                 String fragmentTag) {
+    private void replaceFragment(Fragment f) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(containerId, f);
-        if (addToBackStack) {
-            ft.addToBackStack(fragmentTag);
+        ft.replace(R.id.songs_fragment_container, f);
+        if (false) {
+            ft.addToBackStack(null);
         }
         ft.commit();
     }

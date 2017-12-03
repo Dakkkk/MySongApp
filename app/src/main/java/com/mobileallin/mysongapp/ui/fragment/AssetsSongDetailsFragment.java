@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+@SuppressWarnings("WeakerAccess")
 public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements BaseAssetsDetailsView {
 
     @InjectPresenter

@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected interface IFragmentCreator {
+    interface IFragmentCreator {
         Fragment createFragment();
     }
 
@@ -19,8 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    protected void addFragment(@IdRes int containerId, IFragmentCreator fragmentCreator,
-                               boolean addToBackStack) {
+    void addFragment(@IdRes int containerId, IFragmentCreator fragmentCreator,
+                     boolean addToBackStack) {
 
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentById(containerId) == null) {

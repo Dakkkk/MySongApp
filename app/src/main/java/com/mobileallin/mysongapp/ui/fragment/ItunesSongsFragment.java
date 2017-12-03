@@ -139,7 +139,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
                 e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    public void hideSwipeRefresh() {
+    private void hideSwipeRefresh() {
         swipeRefreshView.setRefreshing(false);
     }
 

@@ -37,7 +37,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         this(context, new ArrayList<>(), emptyView);
     }
 
-    public SongsAdapter(Context context, List<ItunesSong> items, View emptyView) {
+    private SongsAdapter(Context context, List<ItunesSong> items, View emptyView) {
         this.context = context;
         this.items = items;
         this.emptyView = emptyView;

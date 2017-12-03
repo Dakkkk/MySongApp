@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.mobileallin.mysongapp.ui.activity.SongDetailsActivity">
+    tools:context="com.mobileallin.mysongapp.ui.activity.SongDetailsActivity"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:layout_width="@dimen/detail_text_container_width"

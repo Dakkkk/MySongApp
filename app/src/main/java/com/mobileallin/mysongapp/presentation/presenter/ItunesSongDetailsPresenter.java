@@ -34,12 +34,12 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         view.showSongDetails(getItunesSongDetails());
     }
 
-    public ItunesSong getItunesSongDetails() {
+    private ItunesSong getItunesSongDetails() {
         Bundle routerSongBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
         return createItunesSongFromBundle(routerSongBundle);
     }
 
-    public ItunesSong createItunesSongFromBundle(Bundle routerSongBundle) {
+    private ItunesSong createItunesSongFromBundle(Bundle routerSongBundle) {
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);

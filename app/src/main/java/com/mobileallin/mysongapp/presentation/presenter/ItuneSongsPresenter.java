@@ -72,7 +72,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
         disposeAll();
     }
 
-    public void disposeAll() {
+    private void disposeAll() {
         if (disposable == null && searchDisposable == null) return;
         if (disposable != null && !disposable.isDisposed()) {
             Log.i("disposing", "disposable");
@@ -107,7 +107,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
         putSongToBundle(position);
     }
 
-    public void putSongToBundle(int position) {
+    private void putSongToBundle(int position) {
         Bundle args = new Bundle();
         args.putLong(ArgumentKeys.ID, currentItuneSongsList.get(position).id());
         args.putString(ArgumentKeys.TITLE, currentItuneSongsList.get(position).title());
