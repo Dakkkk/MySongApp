@@ -2,9 +2,6 @@ package com.mobileallin.mysongapp.factory;
 
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 
-/**
- * Created by Dawid on 2017-11-30.
- */
 
 public class ItunesSongsFactory {
     private long id;

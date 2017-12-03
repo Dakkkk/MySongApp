@@ -10,10 +10,7 @@ import retrofit2.http.Query;
 public interface HttpClient {
     String ENDPOINT = "https://itunes.apple.com/";
 
-    //Used Maybe instead of Single because it handles also the case when we get the response
-    // from server, but it contains no body, which Single does not handle.
-    //ToDo Change the API call address?
-    @GET("search?term=offspring&entity=musicTrack")
+    @GET("search?term=*&entity=musicTrack")
     Maybe<ItunesResponse> getSongs();
 
     @GET("search")

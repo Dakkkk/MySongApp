@@ -30,7 +30,8 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
 
     @ProvidePresenter
     ItunesSongDetailsPresenter providePresenter() {
-        MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
+        MySongAppComponent component = ((MySongApp) getActivity().getApplication())
+                .getMySongsAppComponent();
         return new ItunesSongDetailsPresenter(component);
     }
 
@@ -56,7 +57,8 @@ public class ItunesSongDetailsFragment extends MvpAppCompatFragment implements B
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_song_details, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(presenter.getSongTitle());

@@ -80,14 +80,17 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public ItunesSongsInteractor provideSongsInteractor(ItunesSongsRepository itunesSongsRepository, HttpClient client,
-                                                        @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
+    public ItunesSongsInteractor provideSongsInteractor(ItunesSongsRepository itunesSongsRepository,
+                                                        HttpClient client, @IoScheduler Scheduler ioScheduler,
+                                                        @UiScheduler Scheduler uiScheduler) {
         return new ItunesSongsInteractor(itunesSongsRepository, client, ioScheduler, uiScheduler);
     }
 
     @Singleton
     @Provides
-    public AssetsSongsInteractor provideAssetsSongsInteractor(AssetsSongsRepositoryImpl assetsSongsRepository, @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
+    public AssetsSongsInteractor provideAssetsSongsInteractor(AssetsSongsRepositoryImpl assetsSongsRepository,
+                                                              @IoScheduler Scheduler ioScheduler,
+                                                              @UiScheduler Scheduler uiScheduler) {
         return new AssetsSongsInteractor(assetsSongsRepository, ioScheduler, uiScheduler);
     }
 
@@ -101,7 +104,7 @@ public class AppModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HttpClient.ENDPOINT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(gsonConverterFactory) //or use GsonConverterFactory.create()
+                .addConverterFactory(gsonConverterFactory)
                 .build();
 
         return retrofit.create(HttpClient.class);
@@ -112,5 +115,4 @@ public class AppModule {
     public SharedPreferences providePreferences(@ApplicationContext Context context) {
         return context.getSharedPreferences(SHARED_PREFS_NAME, Activity.MODE_PRIVATE);
     }
-
 }

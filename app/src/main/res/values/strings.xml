@@ -20,4 +20,6 @@
     <string name="menu">MENU</string>
     <string name="songs_list_empty">Ooops...! Songs list is empty!</string>
     <string name="error_assets_songs">Error! Could not load songs from assets!</string>
+    <string name="server_response_no_body">OOOps, no Itune songs to show! Server response contains no body.</string>
+    <string name="error_getting_itune_songs">Error!, Couldn\'t get the Itunes songs! Message:</string>
 </resources>

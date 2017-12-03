@@ -65,7 +65,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
                 return true;
             case R.id.menu_assets_fragment:
                 Toast.makeText(getApplicationContext(), "Assets", Toast.LENGTH_SHORT).show();
-                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(), false, null);
+                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(),
+                        false, null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -99,7 +100,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     private void addItunesFragment() {
         removeAssetsFlag();
-        replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(), false, null);
+        replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(),
+                false, null);
     }
 
     private void removeAssetsFlag() {
@@ -108,7 +110,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     private void addAssetsFragment() {
         removeAssetsFlag();
-        replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(), false, null);
+        replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(),
+                false, null);
     }
 
     private void showSongDetails() {
@@ -121,7 +124,8 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         startActivity(intent);
     }
 
-    private void replaceFragment(@IdRes int containerId, Fragment f, boolean addToBackStack, String fragmentTag) {
+    private void replaceFragment(@IdRes int containerId, Fragment f, boolean addToBackStack,
+                                 String fragmentTag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(containerId, f);
         if (addToBackStack) {

@@ -2,9 +2,6 @@ package com.mobileallin.mysongapp.factory;
 
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 
-/**
- * Created by Dawid on 2017-11-30.
- */
 
 public class AssetsSongFactory {
 

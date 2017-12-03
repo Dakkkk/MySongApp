@@ -39,7 +39,7 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         return createItunesSongFromBundle(routerSongBundle);
     }
 
-    public ItunesSong createItunesSongFromBundle(Bundle routerSongBundle){
+    public ItunesSong createItunesSongFromBundle(Bundle routerSongBundle) {
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);

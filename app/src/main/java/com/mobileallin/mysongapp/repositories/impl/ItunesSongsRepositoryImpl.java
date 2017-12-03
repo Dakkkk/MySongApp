@@ -10,8 +10,6 @@ import io.reactivex.Scheduler;
 
 public class ItunesSongsRepositoryImpl implements ItunesSongsRepository {
 
-    //ToDo Rewrite this to use f.e. callable instead of just()
-
     @Override
     public Maybe<ItunesResponse> getSongs(HttpClient httpClient,
                                           Scheduler ioScheduler, Scheduler uiScheduler) {

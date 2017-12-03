@@ -38,7 +38,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesSongsView, SearchView {
+public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesSongsView,
+        SearchView {
 
     private static final String ITUNES_SONGS_LIST_STATE = "itunes_songs_state";
     private Parcelable songsListState;
@@ -66,7 +67,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
     @ProvidePresenter
     ItuneSongsPresenter providePresenter() {
-        MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
+        MySongAppComponent component = ((MySongApp) getActivity().getApplication())
+                .getMySongsAppComponent();
         return new ItuneSongsPresenter(component, this);
     }
 
@@ -85,7 +87,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_songs_list, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(getString(R.string.itunes_songs));
@@ -133,7 +136,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
     @Override
     public void displayError(Throwable e) {
-        Toast.makeText(getContext(), "Error!, Couldn't get the Itunes songs! Message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.error_getting_itune_songs) +
+                e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     public void hideSwipeRefresh() {
@@ -167,7 +171,8 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
     @Override
     public void displayNoSongs() {
-        Toast.makeText(getContext(), "OOOps, there are no Itunes Songs", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.server_response_no_body),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override

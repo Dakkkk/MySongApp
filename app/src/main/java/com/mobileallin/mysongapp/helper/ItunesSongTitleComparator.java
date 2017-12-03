@@ -4,9 +4,6 @@ import com.mobileallin.mysongapp.data.model.ItunesSong;
 
 import java.util.Comparator;
 
-/**
- * Created by Dawid on 2017-11-30.
- */
 
 public class ItunesSongTitleComparator implements Comparator<ItunesSong> {
 

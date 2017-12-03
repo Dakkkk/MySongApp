@@ -101,7 +101,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
         }
 
         if (currentItuneSongsList.isEmpty()) {
-            //ToDo hande
+            //ToDo handle
             Log.d("currentItuneSongsList", "empty!");
             return;
         }

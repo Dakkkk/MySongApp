@@ -23,7 +23,8 @@ public class AssetsSongsInteractor {
     private Scheduler ioScheduler;
     private Scheduler uiScheduler;
 
-    public AssetsSongsInteractor(AssetsSongsRepositoryImpl assetsRepository, @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler
+    public AssetsSongsInteractor(AssetsSongsRepositoryImpl assetsRepository,
+                                 @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler
                                  ){
         this.assetsRepository = assetsRepository;
         this.ioScheduler = ioScheduler;

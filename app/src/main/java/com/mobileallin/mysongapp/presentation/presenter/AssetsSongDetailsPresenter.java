@@ -19,28 +19,13 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
     @Inject
     Router router;
 
-    private long songId;
-    private int position;
-    private AssetsSong chosenSong;
-    private AssetsSongDetailsFragment view;
-
     public AssetsSongDetailsPresenter(MySongAppComponent component, AssetsSongDetailsFragment view) {
         component.inject(this);
-        this.view = view;
-    }
-
-    public void init(long songId) {
-        this.songId = songId;
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        Bundle args = router.getArguments(ItunesSongDetailsPresenter.class.getName());
-        if (args != null) {
-            songId = args.getLong(ArgumentKeys.ID);
-            position = args.getInt(ArgumentKeys.POSITION);
-        }
     }
 
     @Override

@@ -4,9 +4,6 @@ import com.mobileallin.mysongapp.data.model.AssetsSong;
 
 import java.util.Comparator;
 
-/**
- * Created by Dawid on 2017-11-30.
- */
 
 public class AssetsSongTitleComparator implements Comparator<AssetsSong> {
 

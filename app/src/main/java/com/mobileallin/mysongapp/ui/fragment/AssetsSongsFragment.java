@@ -65,8 +65,10 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         //ToDo this shouldn't be initialized here, change this later on: inject or sth
         assetsSongsRepositoryImpl = new AssetsSongsRepositoryImpl();
 
-        MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
-        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl, getContext(), AndroidSchedulers.mainThread());
+        MySongAppComponent component = ((MySongApp) getActivity().getApplication())
+                .getMySongsAppComponent();
+        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl,
+                getContext(), AndroidSchedulers.mainThread());
     }
 
     public static AssetsSongsFragment newInstance() {
@@ -84,7 +86,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assets_songs, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(getString(R.string.assets_songs));
@@ -146,7 +149,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @Override
     public void displayError() {
-        Toast.makeText(getContext(), getString(R.string.error_assets_songs), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), getString(R.string.error_assets_songs),
+                Toast.LENGTH_LONG).show();
     }
 
     @Override

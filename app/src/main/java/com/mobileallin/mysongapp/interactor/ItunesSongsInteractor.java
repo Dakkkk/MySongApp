@@ -1,5 +1,7 @@
 package com.mobileallin.mysongapp.interactor;
 
+import android.util.Log;
+
 import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
@@ -60,6 +62,9 @@ public class ItunesSongsInteractor {
 
                     @Override
                     public void onComplete() {
+                        //The case when we got response from server, but it contains no body
+                        view.displayNoSongs();
+                        Log.d("onComplete", "called");
                     }
                 }));
         return null;
@@ -90,8 +95,8 @@ public class ItunesSongsInteractor {
         String country = currentSongI.country();
         String thumbnailUrl = currentSongI.thumbnailUrl();
 
-        ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(currentIteration, title, author,
-                releaseDate, genre, collectionName, country, thumbnailUrl);
+        ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(currentIteration, title,
+                author, releaseDate, genre, collectionName, country, thumbnailUrl);
         ItunesSong convertedItuneSong = itunesSongsFactory.buildItunesSong();
         return convertedItuneSong;
     }

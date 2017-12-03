@@ -94,8 +94,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
                     public void onSuccess(List<AssetsSong> songList) {
                         allAssetsSongsArrayList = (ArrayList<AssetsSong>) songList;
                         sortAssetsSongs(allAssetsSongsArrayList);
-                        Log.d("songList", songList.toString());
-                        System.out.println("Thread subscribe(): " + Thread.currentThread().getId());
                         if (songList.isEmpty()) {
                             view.displayNoSongs();
                         } else {
@@ -105,7 +103,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("songListErr", e.toString());
                         view.displayError();
                     }
                 }));
@@ -157,6 +154,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         args.putString(ArgumentKeys.FIRST, currentSongsList.get(position).first());
         args.putString(ArgumentKeys.PLAY_COUNT, currentSongsList.get(position).playCount());
         args.putString(Keys.IS_ASSETS_SONG, Keys.IS_ASSETS_SONG);
-        router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS, AssetsSongDetailsPresenter.class.getName(), args);
+        router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS,
+                AssetsSongDetailsPresenter.class.getName(), args);
     }
 }

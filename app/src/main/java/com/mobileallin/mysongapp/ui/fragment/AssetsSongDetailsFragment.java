@@ -28,7 +28,8 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
 
     @ProvidePresenter
     AssetsSongDetailsPresenter providePresenter() {
-        MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
+        MySongAppComponent component = ((MySongApp) getActivity().getApplication())
+                .getMySongsAppComponent();
         return new AssetsSongDetailsPresenter(component, this);
     }
 
@@ -60,7 +61,8 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_song_details, container, false);
         ButterKnife.bind(this, view);
         getActivity().setTitle(presenter.getSongTitle());
