@@ -34,9 +34,11 @@ public class ItuneSongsInteractorTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
+    @SuppressWarnings("CanBeFinal")
     @Mock
     ItunesSongsRepositoryImpl songsRepository;
 
+    @SuppressWarnings("CanBeFinal")
     @Mock
     ItunesSongsView view;
 
@@ -46,18 +48,21 @@ public class ItuneSongsInteractorTest {
     @Mock
     ItunesSongsInteractor itunesSongsInteractor;
 
-    Scheduler mainTestScheduler;
+    @SuppressWarnings({"CanBeFinal", "unused"})
+    private Scheduler mainTestScheduler;
 
-    long fakeId;
+    @SuppressWarnings({"CanBeFinal", "unused"})
+    private long fakeId;
 
-    ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(fakeId, "Fake",
+    private final ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(fakeId, "Fake",
             "Fake", "2017", "Fake", "Fake", "Poland", "fake_url");
 
-    ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
+    private final ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
 
     public ItunesResponse ITUNES_RESPONSE;
 
-    List<ItunesSong> MANY_SONGS = new ArrayList<>();
+    @SuppressWarnings("CanBeFinal")
+    private List<ItunesSong> MANY_SONGS = new ArrayList<>();
 
     @Before
     public void setUp() {

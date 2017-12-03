@@ -37,28 +37,31 @@ public class AssetsSongsInteractorTest {
     @Mock
     AssetsSongsRepositoryImpl songsRepository;
 
+    @SuppressWarnings("CanBeFinal")
     @Mock
     AssetsSongsView view;
 
+    @SuppressWarnings("CanBeFinal")
     @Mock
     AssetsSongsInteractor assetsSongsInteractor;
 
     @Mock
     AssetsSongsPresenter presenter;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CanBeFinal"})
     long fakeId;
 
-    AssetsSongFactory assetsSongFactory = new AssetsSongFactory(fakeId, "Fake",
+    private final AssetsSongFactory assetsSongFactory = new AssetsSongFactory(fakeId, "Fake",
             "Fake", "2017", "Fake", "Fake", "Poland");
 
-    AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
+    private AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
 
-    List<AssetsSong> MANY_SONGS = new ArrayList<>();
+    @SuppressWarnings("CanBeFinal")
+    private List<AssetsSong> MANY_SONGS = new ArrayList<>();
 
     private final List<AssetsSong> EMPTY_LIST = Collections.emptyList();
 
-    Context context;
+    private Context context;
 
     @Before
     public void setUp() {

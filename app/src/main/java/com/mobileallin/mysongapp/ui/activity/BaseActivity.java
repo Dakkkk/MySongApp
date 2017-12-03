@@ -18,9 +18,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (fm.findFragmentById(com.mobileallin.mysongapp.R.id.song_details_container) == null) {
             FragmentTransaction ft = fm.beginTransaction();
             ft.add(com.mobileallin.mysongapp.R.id.song_details_container, fragmentCreator.createFragment());
-            if (false) {
-                ft.addToBackStack(null);
-            }
             ft.commit();
         }
     }
