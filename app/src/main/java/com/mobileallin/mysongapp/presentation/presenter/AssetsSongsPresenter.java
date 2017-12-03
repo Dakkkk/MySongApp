@@ -2,12 +2,12 @@ package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
-import com.mobileallin.mysongapp.helper.AssertsSongsStringParser;
 import com.mobileallin.mysongapp.helper.AssetsSongTitleComparator;
 import com.mobileallin.mysongapp.interactor.AssetsSongsInteractor;
 import com.mobileallin.mysongapp.navigation.Command;
@@ -19,8 +19,14 @@ import com.mobileallin.mysongapp.utils.Keys;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 
 @InjectViewState
@@ -32,6 +38,12 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     private ArrayList<AssetsSong> allAssetsSongsArrayList;
     private ArrayList<AssetsSong> assetsSearchList;
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private final Scheduler mainScheduler;
+
+
+
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
 
@@ -40,11 +52,13 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
     //ToDo to many arguments, get rid of the context... IMPORTANT
     public AssetsSongsPresenter(MySongAppComponent component, AssetsSongsView view,
-                                AssetsSongsRepositoryImpl assetsRepository, Context context) {
+                                AssetsSongsRepositoryImpl assetsRepository, Context context,
+                                Scheduler mainScheduler ) {
         component.inject(this);
         this.view = view;
         this.assetsRepository = assetsRepository;
         this.context = context;
+        this.mainScheduler = mainScheduler;
     }
 
     @Override
@@ -55,24 +69,71 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
-        sortAndParseAssetsSongs();
+
+        String songAssetsString = assetsRepository.loadJSONFromAsset(context);
+
+        Log.d("songAssetsString", songAssetsString.toString());
+        sortAndParseAssetsSongs(songAssetsString);
         view.showLoading();
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
     //ToDo Check if it's OK
-    public void sortAndParseAssetsSongs() {
+  /*  public void sortAndParseAssetsSongs() {
         if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
             String songAssetsString = assetsRepository.loadJSONFromAsset(context);
+*//*
             allAssetsSongsArrayList = parseToAssetsArrayList(songAssetsString);
+*//*
+            loadAssetsSongs(songAssetsString);
             sortAssetsSongs(allAssetsSongsArrayList);
+        }
+    }*/
+
+    public void sortAndParseAssetsSongs(String songAssetsString) {
+        if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
+            loadAssetsSongs(songAssetsString);
         }
     }
 
-    public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString) {
-        AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
-        return assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
+    public void loadAssetsSongs (String songAssetsString){
+        compositeDisposable.add(assetsSongsInteractor.getParsedSongs(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(mainScheduler)
+                .subscribeWith(new DisposableSingleObserver<List<AssetsSong>>() {
+                    @Override
+                    public void onSuccess(List<AssetsSong> songList) {
+                        allAssetsSongsArrayList = (ArrayList<AssetsSong>) songList;
+                        sortAssetsSongs(allAssetsSongsArrayList);
+                        Log.d("songList", songList.toString());
+                        System.out.println("Thread subscribe(): " + Thread.currentThread().getId());
+                        if (songList.isEmpty()) {
+                            view.displayNoSongs();
+                        } else {
+                            view.displaySongs((ArrayList<AssetsSong>) songList);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        String stackTrace = e.getStackTrace().toString();
+
+/*
+                        Log.d("songListErr",e.getMessage());
+*/
+
+                        //ToDo - create
+                        view.displayNoSongs();
+                    }
+                }));
     }
+
+ /*   public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString) {
+        AssetsSongsStringParser assetsSongsStringParser = new AssetsSongsStringParser();
+        return assetsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
+    }*/
+
+
 
     public void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList) {
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());

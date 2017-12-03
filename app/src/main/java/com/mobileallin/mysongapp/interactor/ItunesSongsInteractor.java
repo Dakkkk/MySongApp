@@ -69,6 +69,7 @@ public class ItunesSongsInteractor {
         return allItunesSongs;
     }
 
+    //ToDo put into some helper?
     public List<ItunesSong> convertToItuneSongsList(@NonNull List<ItunesSong> itunesSongs) {
         List<ItunesSong> convertedItuneSongsList = new ArrayList<>();
         for (int i = 0; i < itunesSongs.size(); i++) {

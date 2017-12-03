@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
@@ -65,7 +66,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         assetsSongsRepositoryImpl = new AssetsSongsRepositoryImpl();
 
         MySongAppComponent component = ((MySongApp) getActivity().getApplication()).getMySongsAppComponent();
-        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl, getContext());
+        return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl, getContext(), AndroidSchedulers.mainThread());
     }
 
     public static AssetsSongsFragment newInstance() {

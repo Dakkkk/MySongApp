@@ -87,8 +87,8 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public AssetsSongsInteractor provideAssetsSongsInteractor() {
-        return new AssetsSongsInteractor();
+    public AssetsSongsInteractor provideAssetsSongsInteractor(AssetsSongsRepositoryImpl assetsSongsRepository, @IoScheduler Scheduler ioScheduler, @UiScheduler Scheduler uiScheduler) {
+        return new AssetsSongsInteractor(assetsSongsRepository, ioScheduler, uiScheduler);
     }
 
     @Singleton
