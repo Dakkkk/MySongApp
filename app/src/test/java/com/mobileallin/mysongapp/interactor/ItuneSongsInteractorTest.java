@@ -28,9 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Dawid on 2017-12-02.
- */
+
 public class ItuneSongsInteractorTest {
 
     @Rule

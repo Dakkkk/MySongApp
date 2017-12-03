@@ -7,9 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by Dawid on 2017-11-28.
- */
 
 public class BaseActivity extends AppCompatActivity {
 
