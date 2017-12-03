@@ -1,22 +1,13 @@
-/*
 package com.mobileallin.mysongapp.interactor;
 
 import android.content.Context;
-import android.os.Parcel;
 import android.test.mock.MockContext;
 
 import com.mobileallin.mysongapp.data.model.AssetsSong;
-import com.mobileallin.mysongapp.data.model.ItunesResponse;
-import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.factory.AssetsSongFactory;
-import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
-import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
-import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
-import com.mobileallin.mysongapp.repositories.impl.ItunesSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
-import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,18 +21,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.Maybe;
-import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-*/
-/**
- * Created by Dawid on 2017-12-02.
- *//*
 
 public class AssetsSongsInteractorTest {
 
@@ -57,9 +43,8 @@ public class AssetsSongsInteractorTest {
     @Mock
     AssetsSongsInteractor assetsSongsInteractor;
 
+    @Mock
     AssetsSongsPresenter presenter;
-
-    Scheduler mainTestScheduler;
 
     long fakeId;
 
@@ -77,7 +62,6 @@ public class AssetsSongsInteractorTest {
     @Before
     public void setUp() {
         long fakeId = (long) Math.random();
-        Scheduler mainTestScheduler = Schedulers.trampoline();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
         context = new MockContext();
     }
@@ -93,21 +77,23 @@ public class AssetsSongsInteractorTest {
         MANY_SONGS.add(assetsSong);
         MANY_SONGS.add(assetsSong);
 
-        System.out.print("many songs" + MANY_SONGS.toString());
-        when(songsRepository.loadJSONFromAsset(context))
-                .thenReturn(Maybe.<ItunesResponse>just((ItunesResponse) ITUNES_RESPONSE));
+        when(assetsSongsInteractor.getParsedSongs(context))
+                .thenReturn(Single.just(MANY_SONGS));
 
-        //Calling on view because the method is called in interactor's loadSongs()...
-        view.displaySongs(((ItunesResponse) ITUNES_RESPONSE).allItuneSongs());
+        presenter.loadAssetsSongs();
 
-        verify(view).displaySongs(((ItunesResponse) ITUNES_RESPONSE).allItuneSongs());
+        view.displaySongs((ArrayList<AssetsSong>) MANY_SONGS);
+
+        verify(view).displaySongs((ArrayList<AssetsSong>) MANY_SONGS);
     }
 
     @Test
     public void shouldHandleNoSongsFound() throws InterruptedException {
 
-        when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
-                .thenReturn(Maybe.empty());
+        when(assetsSongsInteractor.getParsedSongs(context))
+                .thenReturn(Single.just(EMPTY_LIST));
+
+        presenter.loadAssetsSongs();
 
         view.displayNoSongs();
 
@@ -119,12 +105,13 @@ public class AssetsSongsInteractorTest {
 
         final Throwable error = new Throwable("Error");
 
-        when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
-                .thenReturn(Maybe.error(error));
+        when(assetsSongsInteractor.getParsedSongs(context))
+                .thenReturn(Single.error(error));
 
-        view.displayError(error);
+        presenter.loadAssetsSongs();
 
-        verify(view).displayError(error);
+        view.displayError();
+
+        verify(view).displayError();
     }
-
-}*/
+}

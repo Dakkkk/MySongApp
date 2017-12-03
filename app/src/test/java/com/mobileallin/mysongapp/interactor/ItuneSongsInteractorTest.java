@@ -6,7 +6,6 @@ import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
 import com.mobileallin.mysongapp.network.HttpClient;
-import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
 import com.mobileallin.mysongapp.repositories.impl.ItunesSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 
@@ -19,7 +18,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Maybe;
@@ -50,8 +48,6 @@ public class ItuneSongsInteractorTest {
     @Mock
     ItunesSongsInteractor itunesSongsInteractor;
 
-    ItuneSongsPresenter presenter;
-
     Scheduler mainTestScheduler;
 
     long fakeId;
@@ -64,8 +60,6 @@ public class ItuneSongsInteractorTest {
     public ItunesResponse ITUNES_RESPONSE;
 
     List<ItunesSong> MANY_SONGS = new ArrayList<>();
-
-    private final List<ItunesSong> EMPTY_LIST = Collections.emptyList();
 
     @Before
     public void setUp() {
@@ -107,7 +101,6 @@ public class ItuneSongsInteractorTest {
             }
         };
 
-        System.out.print("itunesResponse" + ITUNES_RESPONSE.toString());
         when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
                 .thenReturn(Maybe.<ItunesResponse>just((ItunesResponse) ITUNES_RESPONSE));
 
