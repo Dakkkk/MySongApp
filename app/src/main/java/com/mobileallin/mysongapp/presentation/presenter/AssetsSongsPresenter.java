@@ -37,12 +37,8 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     private Context context;
     private ArrayList<AssetsSong> allAssetsSongsArrayList;
     private ArrayList<AssetsSong> assetsSearchList;
-
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private final Scheduler mainScheduler;
-
-
 
     @Inject
     public AssetsSongsInteractor assetsSongsInteractor;
@@ -50,10 +46,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Inject
     Router router;
 
-    //ToDo to many arguments, get rid of the context... IMPORTANT
     public AssetsSongsPresenter(MySongAppComponent component, AssetsSongsView view,
                                 AssetsSongsRepositoryImpl assetsRepository, Context context,
-                                Scheduler mainScheduler ) {
+                                Scheduler mainScheduler) {
         component.inject(this);
         this.view = view;
         this.assetsRepository = assetsRepository;
@@ -69,34 +64,28 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
-
-        String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-
-        Log.d("songAssetsString", songAssetsString.toString());
-        sortAndParseAssetsSongs(songAssetsString);
+        loadFormattedAssetsSongs();
         view.showLoading();
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
-    //ToDo Check if it's OK
-  /*  public void sortAndParseAssetsSongs() {
-        if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
-            String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-*//*
-            allAssetsSongsArrayList = parseToAssetsArrayList(songAssetsString);
-*//*
-            loadAssetsSongs(songAssetsString);
-            sortAssetsSongs(allAssetsSongsArrayList);
-        }
-    }*/
+    @Override
+    public void detachView(AssetsSongsView view) {
+        super.detachView(view);
+        unsubscribe();
+    }
 
-    public void sortAndParseAssetsSongs(String songAssetsString) {
+    public void unsubscribe() {
+        compositeDisposable.clear();
+    }
+
+    public void loadFormattedAssetsSongs() {
         if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
-            loadAssetsSongs(songAssetsString);
+            loadAssetsSongs();
         }
     }
 
-    public void loadAssetsSongs (String songAssetsString){
+    public void loadAssetsSongs() {
         compositeDisposable.add(assetsSongsInteractor.getParsedSongs(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainScheduler)
@@ -116,24 +105,11 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        String stackTrace = e.getStackTrace().toString();
-
-/*
-                        Log.d("songListErr",e.getMessage());
-*/
-
-                        //ToDo - create
-                        view.displayNoSongs();
+                        Log.d("songListErr", e.toString());
+                        view.displayError();
                     }
                 }));
     }
-
- /*   public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString) {
-        AssetsSongsStringParser assetsSongsStringParser = new AssetsSongsStringParser();
-        return assetsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
-    }*/
-
-
 
     public void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList) {
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());

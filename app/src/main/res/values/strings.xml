@@ -19,4 +19,5 @@
     <string name="assets_menu">Assets songs</string>
     <string name="menu">MENU</string>
     <string name="songs_list_empty">Ooops...! Songs list is empty!</string>
+    <string name="error_assets_songs">Error! Could not load songs from assets!</string>
 </resources>

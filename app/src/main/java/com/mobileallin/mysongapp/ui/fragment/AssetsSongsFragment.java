@@ -145,6 +145,11 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     }
 
     @Override
+    public void displayError() {
+        Toast.makeText(getContext(), getString(R.string.error_assets_songs), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showLoading() {
         enableProgressBar(true);
     }

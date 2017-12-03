@@ -11,4 +11,6 @@ import java.util.ArrayList;
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface AssetsSongsView extends MvpView, BaseView {
     void displaySongs(ArrayList<AssetsSong> assetsSongs);
+
+    void displayError();
 }
