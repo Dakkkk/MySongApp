@@ -21,7 +21,7 @@ public class SongDetailsActivity extends BaseActivity {
     }
 
     private void showSongDetails() {
-        addFragment(R.id.song_details_container, ItunesSongDetailsFragment::new, false);
+        addFragment(ItunesSongDetailsFragment::new);
     }
 
     @Override

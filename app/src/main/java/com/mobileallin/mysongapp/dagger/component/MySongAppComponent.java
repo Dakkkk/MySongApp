@@ -19,6 +19,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 
+@SuppressWarnings("unused")
 @Singleton
 @Component(modules = {AppModule.class})
 public interface MySongAppComponent {

@@ -21,7 +21,7 @@ public class AssetsSongDetailsActivity extends BaseActivity {
     }
 
     private void showSongDetails() {
-        addFragment(R.id.song_details_container, AssetsSongDetailsFragment::new, false);
+        addFragment(AssetsSongDetailsFragment::new);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.mobileallin.mysongapp.ui.activity;
 
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,14 +12,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         Fragment createFragment();
     }
 
-    void addFragment(@IdRes int containerId, IFragmentCreator fragmentCreator,
-                     boolean addToBackStack) {
+    void addFragment(IFragmentCreator fragmentCreator) {
 
         FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentById(containerId) == null) {
+        if (fm.findFragmentById(com.mobileallin.mysongapp.R.id.song_details_container) == null) {
             FragmentTransaction ft = fm.beginTransaction();
-            ft.add(containerId, fragmentCreator.createFragment());
-            if (addToBackStack) {
+            ft.add(com.mobileallin.mysongapp.R.id.song_details_container, fragmentCreator.createFragment());
+            if (false) {
                 ft.addToBackStack(null);
             }
             ft.commit();

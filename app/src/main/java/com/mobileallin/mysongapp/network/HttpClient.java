@@ -7,6 +7,7 @@ import io.reactivex.Maybe;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+@SuppressWarnings("")
 public interface HttpClient {
     String ENDPOINT = "https://itunes.apple.com/";
 
