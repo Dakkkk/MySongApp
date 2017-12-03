@@ -2,7 +2,6 @@ package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -124,10 +123,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
         assetsSearchList = new ArrayList<>();
         for (AssetsSong song : allAssetsSongsArrayList) {
-            //ToDo check id this can be done better (use startsWith or contains or...)
             if (song.author().toLowerCase().contains(s) ||
-                    song.title().toLowerCase().startsWith(s) ||
-                    String.valueOf(song.releaseDate()).toLowerCase().startsWith(s)) {
+                    song.title().toLowerCase().contains(s) ||
+                    String.valueOf(song.releaseDate()).toLowerCase().contains(s)) {
                 assetsSearchList.add(song);
             }
         }
