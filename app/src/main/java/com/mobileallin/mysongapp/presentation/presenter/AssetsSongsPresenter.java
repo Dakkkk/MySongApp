@@ -15,6 +15,7 @@ import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
+import com.mobileallin.mysongapp.utils.Keys;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +61,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     //ToDo Check if it's OK
-    public void sortAndParseAssetsSongs(){
+    public void sortAndParseAssetsSongs() {
         if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
             String songAssetsString = assetsRepository.loadJSONFromAsset(context);
             allAssetsSongsArrayList = parseToAssetsArrayList(songAssetsString);
@@ -68,12 +69,12 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         }
     }
 
-    public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString){
+    public ArrayList<AssetsSong> parseToAssetsArrayList(String songAssetsString) {
         AssertsSongsStringParser assertsSongsStringParser = new AssertsSongsStringParser();
         return assertsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
     }
 
-    public void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList){
+    public void sortAssetsSongs(ArrayList<AssetsSong> allAssetsSongsArrayList) {
         Collections.sort(allAssetsSongsArrayList, new AssetsSongTitleComparator());
     }
 
@@ -109,7 +110,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         putDetailArgsToBundle(currentSongsList, position);
     }
 
-    public void putDetailArgsToBundle(ArrayList<AssetsSong> currentSongsList, int position ){
+    public void putDetailArgsToBundle(ArrayList<AssetsSong> currentSongsList, int position) {
         Bundle args = new Bundle();
         args.putLong(ArgumentKeys.ID, currentSongsList.get(position).id());
         args.putString(ArgumentKeys.TITLE, currentSongsList.get(position).title());
@@ -118,6 +119,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         args.putString(ArgumentKeys.YEAR, currentSongsList.get(position).year());
         args.putString(ArgumentKeys.FIRST, currentSongsList.get(position).first());
         args.putString(ArgumentKeys.PLAY_COUNT, currentSongsList.get(position).playCount());
+        args.putString(Keys.IS_ASSETS_SONG, Keys.IS_ASSETS_SONG);
         router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS, AssetsSongDetailsPresenter.class.getName(), args);
     }
 }

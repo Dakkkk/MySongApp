@@ -43,6 +43,9 @@ public class Router {
     }
 
     public Bundle removeArguments(String key) {
+        Log.d("removeArguments", "called");
+        Log.d("argumentMap", getArguments(key).toString());
+
         return key == null ? new Bundle() :
                 argumentMap.containsKey(key) ? argumentMap.remove(key) : new Bundle();
     }

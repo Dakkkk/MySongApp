@@ -16,9 +16,9 @@ import com.mobileallin.mysongapp.navigation.Command;
 import com.mobileallin.mysongapp.navigation.INavigator;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongDetailsPresenter;
-import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
 import com.mobileallin.mysongapp.ui.fragment.AssetsSongsFragment;
 import com.mobileallin.mysongapp.ui.fragment.ItunesSongsFragment;
+import com.mobileallin.mysongapp.utils.Keys;
 
 import javax.inject.Inject;
 
@@ -27,21 +27,39 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     @Inject
     Router router;
 
+    Bundle assetsDetailBundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs_list);
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
+        choseFragment();
+    }
 
-        Bundle assetsDetailBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
-        Bundle itunesDetailBundle = router.getArguments(ItunesSongDetailsPresenter.class.getName());
-
-        //ToDo Move this logic to presenter, there is a BUG in this logic IMPORTANT!
-        if (assetsDetailBundle != null && !assetsDetailBundle.isEmpty()) {
-            replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), true, "assetsFragment");
-        } else if (itunesDetailBundle != null && !itunesDetailBundle.isEmpty()) {
-            replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), true, "itunessFragment");
+    private void choseFragment() {
+        //ToDo Move this logic to presenter
+        assetsDetailBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
+        if (assetsDetailBundle != null &&
+                assetsDetailBundle.get(Keys.IS_ASSETS_SONG) == Keys.IS_ASSETS_SONG) {
+            addAssetsFragment();
+        } else {
+            addItunesFragment();
         }
+    }
+
+    private void addItunesFragment() {
+        removeAssetsFlag();
+        replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(), false, null);
+    }
+
+    private void removeAssetsFlag() {
+        assetsDetailBundle.remove(Keys.IS_ASSETS_SONG);
+    }
+
+    private void addAssetsFragment() {
+        removeAssetsFlag();
+        replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(), false, null);
     }
 
     @Override
@@ -68,12 +86,11 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         switch (item.getItemId()) {
             case R.id.menu_itunes_fragment:
                 Toast.makeText(getApplicationContext(), "Itunes", Toast.LENGTH_SHORT).show();
-                //ToDo Create method out of this?, we don' need id in the newInstance method - rewrite
-                replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(1), true, "itunessFragment");
+                addItunesFragment();
                 return true;
             case R.id.menu_assets_fragment:
                 Toast.makeText(getApplicationContext(), "Assets", Toast.LENGTH_SHORT).show();
-                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(2), true, "assetsFragment");
+                replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(), false, null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -82,7 +99,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     @Override
     public void handleCommand(Command command) {
-        Log.d("handleCommand", command.toString());
         switch (command) {
             case SHOW_ITUNE_SONG_DETAILS: {
                 showSongDetails();
@@ -97,13 +113,11 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     }
 
     private void showSongDetails() {
-        Log.d("showSongDetails", "called");
         Intent intent = new Intent(this, SongDetailsActivity.class);
         startActivity(intent);
     }
 
     private void showAssetsSongDetails() {
-        Log.d("showAssetsSongDetails", "called");
         Intent intent = new Intent(this, AssetsSongDetailsActivity.class);
         startActivity(intent);
     }

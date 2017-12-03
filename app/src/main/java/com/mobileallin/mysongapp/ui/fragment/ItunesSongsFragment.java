@@ -70,7 +70,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
         return new ItuneSongsPresenter(component, this);
     }
 
-    public static ItunesSongsFragment newInstance(long songId) {
+    public static ItunesSongsFragment newInstance() {
         ItunesSongsFragment f = new ItunesSongsFragment();
         return f;
     }
@@ -120,7 +120,6 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
             }
         });
-
         songsAdapter.setItemClickListener(position -> ituneSongsPresenter.showDetails(position));
         return view;
     }

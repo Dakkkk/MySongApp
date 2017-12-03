@@ -8,7 +8,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +32,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.mobileallin.mysongapp.utils.Keys.ASSETS_SONG_ID;
 
 
 public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsSongsView {
@@ -71,11 +68,8 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         return new AssetsSongsPresenter(component, this, assetsSongsRepositoryImpl, getContext());
     }
 
-    public static AssetsSongsFragment newInstance(long songId) {
-        Bundle args = new Bundle();
-        args.putLong(ASSETS_SONG_ID, songId);
+    public static AssetsSongsFragment newInstance() {
         AssetsSongsFragment f = new AssetsSongsFragment();
-        f.setArguments(args);
         return f;
     }
 

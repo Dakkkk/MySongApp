@@ -2,7 +2,6 @@ package com.mobileallin.mysongapp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongDetailsPresenter;
 import com.mobileallin.mysongapp.ui.view.BaseAssetsDetailsView;
-import com.mobileallin.mysongapp.utils.Keys;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,10 +56,6 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        if (args != null) {
-            presenter.init(args.getLong(Keys.ITUNE_SONG_ID));
-        }
     }
 
     @Nullable
