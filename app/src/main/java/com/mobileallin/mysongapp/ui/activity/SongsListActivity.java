@@ -22,6 +22,7 @@ import com.mobileallin.mysongapp.utils.Keys;
 
 import javax.inject.Inject;
 
+
 public class SongsListActivity extends BaseActivity implements INavigator {
 
     @Inject
@@ -35,31 +36,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         setContentView(R.layout.activity_songs_list);
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
         choseFragment();
-    }
-
-    private void choseFragment() {
-        //ToDo Move this logic to presenter
-        assetsDetailBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
-        if (assetsDetailBundle != null &&
-                assetsDetailBundle.get(Keys.IS_ASSETS_SONG) == Keys.IS_ASSETS_SONG) {
-            addAssetsFragment();
-        } else {
-            addItunesFragment();
-        }
-    }
-
-    private void addItunesFragment() {
-        removeAssetsFlag();
-        replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(), false, null);
-    }
-
-    private void removeAssetsFlag() {
-        assetsDetailBundle.remove(Keys.IS_ASSETS_SONG);
-    }
-
-    private void addAssetsFragment() {
-        removeAssetsFlag();
-        replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(), false, null);
     }
 
     @Override
@@ -82,7 +58,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //ToDo Replacing fragments should be done by presenter
         switch (item.getItemId()) {
             case R.id.menu_itunes_fragment:
                 Toast.makeText(getApplicationContext(), "Itunes", Toast.LENGTH_SHORT).show();
@@ -110,6 +85,30 @@ public class SongsListActivity extends BaseActivity implements INavigator {
             }
             default:
         }
+    }
+
+    private void choseFragment() {
+        assetsDetailBundle = router.getArguments(AssetsSongDetailsPresenter.class.getName());
+        if (assetsDetailBundle != null &&
+                assetsDetailBundle.get(Keys.IS_ASSETS_SONG) == Keys.IS_ASSETS_SONG) {
+            addAssetsFragment();
+        } else {
+            addItunesFragment();
+        }
+    }
+
+    private void addItunesFragment() {
+        removeAssetsFlag();
+        replaceFragment(R.id.songs_fragment_container, ItunesSongsFragment.newInstance(), false, null);
+    }
+
+    private void removeAssetsFlag() {
+        assetsDetailBundle.remove(Keys.IS_ASSETS_SONG);
+    }
+
+    private void addAssetsFragment() {
+        removeAssetsFlag();
+        replaceFragment(R.id.songs_fragment_container, AssetsSongsFragment.newInstance(), false, null);
     }
 
     private void showSongDetails() {
