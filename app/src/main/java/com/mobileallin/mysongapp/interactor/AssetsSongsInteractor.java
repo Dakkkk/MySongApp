@@ -16,7 +16,7 @@ public class AssetsSongsInteractor {
     private final AssetsSongsRepositoryImpl assetsRepository;
 
     public AssetsSongsInteractor(AssetsSongsRepositoryImpl assetsRepository
-    ){
+    ) {
         this.assetsRepository = assetsRepository;
     }
 
@@ -26,7 +26,6 @@ public class AssetsSongsInteractor {
             try {
                 List<AssetsSong> assetsSongs;
                 String songAssetsString = assetsRepository.loadJSONFromAsset(context);
-                System.out.println("Thread db: " + Thread.currentThread().getId());
                 assetsSongs = assetsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
                 return assetsSongs;
             } catch (Exception e) {

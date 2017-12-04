@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.SongsListActivity"
+        <activity
+            android:name=".ui.activity.SongsListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -24,12 +25,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.SongDetailsActivity"
+        <activity
+            android:name=".ui.activity.SongDetailsActivity"
             android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".ui.activity.AssetsSongDetailsActivity"
+        <activity
+            android:name=".ui.activity.AssetsSongDetailsActivity"
             android:screenOrientation="portrait">
 
         </activity>

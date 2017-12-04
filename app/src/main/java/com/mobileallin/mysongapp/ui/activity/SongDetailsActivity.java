@@ -26,7 +26,7 @@ public class SongDetailsActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;

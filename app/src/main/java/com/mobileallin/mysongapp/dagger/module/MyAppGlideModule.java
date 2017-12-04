@@ -6,4 +6,5 @@ import com.bumptech.glide.module.AppGlideModule;
 
 @SuppressWarnings("WeakerAccess")
 @GlideModule
-public final class MyAppGlideModule extends AppGlideModule {}
+public final class MyAppGlideModule extends AppGlideModule {
+}

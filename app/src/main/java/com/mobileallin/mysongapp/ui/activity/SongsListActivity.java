@@ -88,7 +88,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         }
     }
 
-    private void displayIntroDialog(boolean isFirsLaunch){
+    private void displayIntroDialog(boolean isFirsLaunch) {
         if (!isFirsLaunch) return;
         AlertDialog alertDialog = new AlertDialog.Builder(SongsListActivity.this).create();
         alertDialog.setTitle(getResources().getString(R.string.introduction));
@@ -100,9 +100,9 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         alertDialog.show();
     }
 
-    private boolean isAppFirstLaunch(){
+    private boolean isAppFirstLaunch() {
         boolean firstRun = sharedPreferences.getBoolean("firstRun", true);
-        if (firstRun){
+        if (firstRun) {
             sharedPreferences
                     .edit()
                     .putBoolean("firstRun", false)

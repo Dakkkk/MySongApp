@@ -73,7 +73,7 @@ public class AssetsSongsPresenterTest {
 
     @Before
     public void setUp() {
-        @SuppressWarnings("UnusedAssignment")final Scheduler mainTestScheduler = Schedulers.trampoline();
+        @SuppressWarnings("UnusedAssignment") final Scheduler mainTestScheduler = Schedulers.trampoline();
         presenter = new AssetsSongsPresenter(component, view, context, mainTestScheduler);
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
     }

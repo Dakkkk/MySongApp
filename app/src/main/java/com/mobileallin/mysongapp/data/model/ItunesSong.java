@@ -74,5 +74,4 @@ public abstract class ItunesSong implements Parcelable {
 
         public abstract ItunesSong build();
     }
-
 }
