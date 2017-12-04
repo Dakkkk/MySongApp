@@ -98,8 +98,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
             currentItuneSongsList = itunesSongsInteractor.getAllItunesSongs();
         }
 
-        if (currentItuneSongsList.isEmpty()) {
-            //ToDo handle
+        if (currentItuneSongsList == null) {
             return;
         }
         putSongToBundle(position);
