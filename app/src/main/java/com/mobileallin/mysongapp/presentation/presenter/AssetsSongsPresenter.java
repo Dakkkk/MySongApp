@@ -152,4 +152,8 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS,
                 AssetsSongDetailsPresenter.class.getName(), args);
     }
+
+    public void forceLoadSongs() {
+        assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
+    }
 }

@@ -30,6 +30,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     @Inject
     Router router;
 
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @Inject
     SharedPreferences sharedPreferences;
 

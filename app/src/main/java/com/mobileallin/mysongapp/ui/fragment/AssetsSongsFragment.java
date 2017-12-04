@@ -54,6 +54,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     @SuppressWarnings("CanBeFinal")
     @BindView(R.id.shield)
     FrameLayout shield;
+    @SuppressWarnings("CanBeFinal")
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshView;
     @SuppressWarnings("CanBeFinal")
@@ -98,6 +99,12 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
         songsRecyclerView.setLayoutManager(layoutManager);
         songsRecyclerView.setAdapter(assetsSongsAdapter);
 
+        swipeRefreshView.setOnRefreshListener(() -> {
+            songsListState = null;
+            assetsSongsPresenter.forceLoadSongs();
+            hideSwipeRefresh();
+        });
+
         assetsSearchPanel.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -117,6 +124,10 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
             }
         });
         return view;
+    }
+
+    private void hideSwipeRefresh() {
+        swipeRefreshView.setRefreshing(false);
     }
 
     @Override
