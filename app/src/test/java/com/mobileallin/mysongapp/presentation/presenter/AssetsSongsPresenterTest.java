@@ -53,18 +53,18 @@ public class AssetsSongsPresenterTest {
     @SuppressWarnings({"CanBeFinal", "unused"})
     private Scheduler mainTestScheduler;
 
-    private final AssetsSongFactory assetsSongFactory = new AssetsSongFactory(3, "Fake",
-            "Fake", "2017", "Fake", "Fake", "Poland");
-
-    @SuppressWarnings("CanBeFinal")
-    private AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
-
     @SuppressWarnings("CanBeFinal")
     private List<AssetsSong> MANY_SONGS = new ArrayList<>();
 
     @SuppressWarnings("CanBeFinal")
     @Mock
     Context context;
+
+    private final AssetsSongFactory assetsSongFactory = new AssetsSongFactory(3, "Fake",
+            "Fake", "2017", "Fake", "Fake", "Poland");
+
+    @SuppressWarnings("CanBeFinal")
+    private AssetsSong assetsSong = assetsSongFactory.buildAssetsSong();
 
     private final List<AssetsSong> EMPTY_LIST = Collections.emptyList();
 

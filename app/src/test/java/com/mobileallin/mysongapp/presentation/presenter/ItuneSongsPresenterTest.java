@@ -55,21 +55,22 @@ public class ItuneSongsPresenterTest {
     @Mock
     MySongAppComponent component;
 
-    private ItunesSongsPresenter presenter;
+    @SuppressWarnings("unused")
+    public ItunesResponse ITUNES_RESPONSE;
+
+    @SuppressWarnings("CanBeFinal")
+    private List<ItunesSong> MANY_SONGS = new ArrayList<>();
 
     @SuppressWarnings({"CanBeFinal", "unused"})
     private Scheduler mainTestScheduler;
+
+    private ItunesSongsPresenter presenter;
 
     private final ItunesSongsFactory itunesSongsFactory = new ItunesSongsFactory(3, "Fake",
             "Fake", "2017", "Fake", "Fake", "Poland", "fake_url");
 
     private final ItunesSong itunesSong = itunesSongsFactory.buildItunesSong();
 
-    @SuppressWarnings("unused")
-    public ItunesResponse ITUNES_RESPONSE;
-
-    @SuppressWarnings("CanBeFinal")
-    private List<ItunesSong> MANY_SONGS = new ArrayList<>();
 
     @Before
     public void setUp() {
