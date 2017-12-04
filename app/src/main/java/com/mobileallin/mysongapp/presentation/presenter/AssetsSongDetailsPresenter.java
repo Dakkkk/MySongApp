@@ -26,7 +26,11 @@ public class AssetsSongDetailsPresenter extends MvpPresenter<BaseAssetsDetailsVi
     @Override
     public void attachView(BaseAssetsDetailsView view) {
         super.attachView(view);
-        view.showSongDetails(getAssetsSongDetails());
+        displaySongDetails(view, getAssetsSongDetails());
+    }
+
+    public void displaySongDetails(BaseAssetsDetailsView view, AssetsSong assetsSong) {
+        view.showSongDetails(assetsSong);
     }
 
     @SuppressWarnings("WeakerAccess")
