@@ -1,7 +1,6 @@
 package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -87,12 +86,10 @@ public class ItunesSongsPresenter extends MvpPresenter<ItunesSongsView> {
     private void disposeAll() {
         if (disposable == null && searchDisposable == null) return;
         if (disposable != null && !disposable.isDisposed()) {
-            Log.i("disposing", "disposable");
             disposable.dispose();
             disposable = null;
         }
         if (searchDisposable != null && !searchDisposable.isDisposed()) {
-            Log.i("disposing", "searchDisposable");
             searchDisposable.dispose();
             searchDisposable = null;
         }

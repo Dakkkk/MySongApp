@@ -1,7 +1,6 @@
 package com.mobileallin.mysongapp.interactor;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.helper.AssetsSongsStringParser;
@@ -29,10 +28,8 @@ public class AssetsSongsInteractor {
                 String songAssetsString = assetsRepository.loadJSONFromAsset(context);
                 System.out.println("Thread db: " + Thread.currentThread().getId());
                 assetsSongs = assetsSongsStringParser.parseStringToAssetsSongList(songAssetsString);
-                Log.d("songAssetsStringToAss", assetsSongs.toString());
                 return assetsSongs;
             } catch (Exception e) {
-                Log.d("songAssetsString1", e.toString());
                 throw new RuntimeException();
             }
         });

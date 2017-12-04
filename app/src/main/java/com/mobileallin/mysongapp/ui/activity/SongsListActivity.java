@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -49,7 +48,6 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     public void onResume() {
         super.onResume();
         router.attachToNavigator(this);
-        Log.d(getClass().getSimpleName(), router.toString());
     }
 
     @Override
@@ -93,10 +91,11 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     private void displayIntroDialog(boolean isFirsLaunch){
         if (!isFirsLaunch) return;
         AlertDialog alertDialog = new AlertDialog.Builder(SongsListActivity.this).create();
-        alertDialog.setTitle("Introduction");
+        alertDialog.setTitle(getResources().getString(R.string.introduction));
         alertDialog.setIcon(R.mipmap.app_launch_icon);
         alertDialog.setMessage(getResources().getString(R.string.intro_dialog_msg));
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Dismiss",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+                getResources().getString(R.string.dismiss),
                 (dialog, which) -> dialog.dismiss());
         alertDialog.show();
     }
