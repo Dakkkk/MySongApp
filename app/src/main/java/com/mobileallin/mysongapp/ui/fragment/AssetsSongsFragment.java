@@ -128,6 +128,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     private void enableProgressBar(boolean enable) {
         int visibility = enable ? View.VISIBLE : View.GONE;
+
         progressBar.setVisibility(visibility);
        /* shield.setVisibility(visibility);*/
         shield.setVisibility(View.INVISIBLE);
@@ -154,6 +155,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     @Override
     public void showLoading() {
+        //ToDo...
         enableProgressBar(true);
     }
 

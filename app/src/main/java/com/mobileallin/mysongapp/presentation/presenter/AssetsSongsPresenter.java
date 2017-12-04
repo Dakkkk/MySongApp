@@ -58,7 +58,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
         loadFormattedAssetsSongs();
-        view.showLoading();
         assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
     }
 
@@ -79,6 +78,9 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void loadAssetsSongs() {
+/*
+        view.showLoading();
+*/
         compositeDisposable.add(assetsSongsInteractor.getParsedSongs(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainScheduler)

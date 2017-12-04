@@ -1,9 +1,11 @@
 package com.mobileallin.mysongapp.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +30,9 @@ public class SongsListActivity extends BaseActivity implements INavigator {
     @Inject
     Router router;
 
+    @Inject
+    SharedPreferences sharedPreferences;
+
     private Bundle assetsDetailBundle;
 
     @Override
@@ -35,6 +40,7 @@ public class SongsListActivity extends BaseActivity implements INavigator {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs_list);
         ((MySongApp) getApplication()).getMySongsAppComponent().inject(this);
+        displayIntroDialog(isAppFirstLaunch());
         choseFragment();
     }
 
@@ -81,6 +87,28 @@ public class SongsListActivity extends BaseActivity implements INavigator {
             }
             default:
         }
+    }
+
+    private void displayIntroDialog(boolean isFirsLaunch){
+        if (!isFirsLaunch) return;
+        AlertDialog alertDialog = new AlertDialog.Builder(SongsListActivity.this).create();
+        alertDialog.setTitle("Introduction");
+        alertDialog.setIcon(R.mipmap.app_launch_icon);
+        alertDialog.setMessage(getResources().getString(R.string.intro_dialog_msg));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Dismiss",
+                (dialog, which) -> dialog.dismiss());
+        alertDialog.show();
+    }
+
+    private boolean isAppFirstLaunch(){
+        boolean firstRun = sharedPreferences.getBoolean("firstRun", true);
+        if (firstRun){
+            sharedPreferences
+                    .edit()
+                    .putBoolean("firstRun", false)
+                    .apply();
+        }
+        return firstRun;
     }
 
     private void choseFragment() {
