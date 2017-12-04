@@ -6,9 +6,7 @@ import android.util.Log;
 import com.mobileallin.mysongapp.data.model.AssetsSong;
 import com.mobileallin.mysongapp.helper.AssetsSongsStringParser;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
-import com.mobileallin.mysongapp.ui.view.AssetsSongsView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -21,12 +19,6 @@ public class AssetsSongsInteractor {
     public AssetsSongsInteractor(AssetsSongsRepositoryImpl assetsRepository
     ){
         this.assetsRepository = assetsRepository;
-    }
-
-    public void loadSongs(AssetsSongsView assetsSongsView, ArrayList<AssetsSong> assetsSongs) {
-        Log.d("loadSongs", "called");
-        assetsSongsView.hideLoading();
-        assetsSongsView.displaySongs(assetsSongs);
     }
 
     public Single<List<AssetsSong>> getParsedSongs(Context context) {

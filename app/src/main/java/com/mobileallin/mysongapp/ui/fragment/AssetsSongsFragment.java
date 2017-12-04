@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,8 +140,9 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
 
     private void enableProgressBar(boolean enable) {
         int visibility = enable ? View.VISIBLE : View.GONE;
-
         progressBar.setVisibility(visibility);
+        Log.d("assets progress:", String.valueOf(visibility));
+
        /* shield.setVisibility(visibility);*/
         shield.setVisibility(View.INVISIBLE);
     }
@@ -167,6 +169,7 @@ public class AssetsSongsFragment extends MvpAppCompatFragment implements AssetsS
     @Override
     public void showLoading() {
         //ToDo...
+        Log.d("assets showLoading", "called!");
         enableProgressBar(true);
     }
 

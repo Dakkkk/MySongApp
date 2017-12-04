@@ -57,8 +57,14 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
+        view.showLoading();
         loadFormattedAssetsSongs();
-        assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
+        loadSongs(view, allAssetsSongsArrayList);
+        view.hideLoading();
+    }
+
+    public void loadSongs(AssetsSongsView assetsSongsView, ArrayList<AssetsSong> assetsSongs) {
+        assetsSongsView.displaySongs(assetsSongs);
     }
 
     @Override
@@ -78,9 +84,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void loadAssetsSongs() {
-/*
-        view.showLoading();
-*/
         compositeDisposable.add(assetsSongsInteractor.getParsedSongs(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainScheduler)
@@ -112,8 +115,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void showAssetsSearchResults(ArrayList<AssetsSong> searchResponse) {
-        view.showLoading();
-        assetsSongsInteractor.loadSongs(view, searchResponse);
+        loadSongs(view, searchResponse);
     }
 
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
@@ -154,6 +156,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void forceLoadSongs() {
-        assetsSongsInteractor.loadSongs(view, allAssetsSongsArrayList);
+        loadSongs(view, allAssetsSongsArrayList);
     }
 }
