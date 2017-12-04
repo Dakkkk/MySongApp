@@ -4,7 +4,7 @@ import com.mobileallin.mysongapp.dagger.module.AppModule;
 import com.mobileallin.mysongapp.navigation.Router;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongDetailsPresenter;
 import com.mobileallin.mysongapp.presentation.presenter.AssetsSongsPresenter;
-import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
+import com.mobileallin.mysongapp.presentation.presenter.ItunesSongsPresenter;
 import com.mobileallin.mysongapp.presentation.presenter.ItunesSongDetailsPresenter;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
 import com.mobileallin.mysongapp.repositories.impl.AssetsSongsRepositoryImpl;
@@ -30,7 +30,7 @@ public interface MySongAppComponent {
 
     void inject(AssetsSongDetailsActivity obj);
 
-    void inject(ItuneSongsPresenter obj);
+    void inject(ItunesSongsPresenter obj);
 
     void inject(ItunesSongsFragment obj);
 

@@ -1,7 +1,5 @@
 package com.mobileallin.mysongapp.interactor;
 
-import android.util.Log;
-
 import com.mobileallin.mysongapp.dagger.IoScheduler;
 import com.mobileallin.mysongapp.dagger.UiScheduler;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
@@ -9,8 +7,8 @@ import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
 import com.mobileallin.mysongapp.helper.ItunesSongTitleComparator;
 import com.mobileallin.mysongapp.network.HttpClient;
+import com.mobileallin.mysongapp.presentation.presenter.ItunesSongsPresenter;
 import com.mobileallin.mysongapp.repositories.ItunesSongsRepository;
-import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class ItunesSongsInteractor {
+
     private final HttpClient client;
     private final Scheduler ioScheduler;
     private final Scheduler uiScheduler;
@@ -42,7 +41,7 @@ public class ItunesSongsInteractor {
     }
 
     @SuppressWarnings("SameReturnValue")
-    public Disposable loadSongs(ItunesSongsView view) {
+    public Disposable loadSongs(ItunesSongsPresenter presenter) {
         compositeDisposable.add(itunesSongsRepository.getSongs(client,
                 ioScheduler, uiScheduler)
                 .subscribeOn(Schedulers.io())
@@ -51,21 +50,18 @@ public class ItunesSongsInteractor {
                     @Override
                     public void onSuccess(@NonNull ItunesResponse songs) {
                         allItunesSongs = convertToItuneSongsList(songs.allItuneSongs());
-                        view.hideLoading();
-                        view.displaySongs(allItunesSongs);
+                        presenter.displaySongs(allItunesSongs);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        view.hideLoading();
-                        view.displayError(e);
+                        presenter.displayError(e);
                     }
 
                     @Override
                     public void onComplete() {
                         //The case when we got response from server, but it contains no body
-                        view.displayNoSongs();
-                        Log.d("onComplete", "called");
+                        presenter.displayNoSongs();
                     }
                 }));
         return null;

@@ -1,10 +1,12 @@
-package com.mobileallin.mysongapp.interactor;
+package com.mobileallin.mysongapp.presentation.presenter;
 
 import android.os.Parcel;
 
+import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.factory.ItunesSongsFactory;
+import com.mobileallin.mysongapp.interactor.ItunesSongsInteractor;
 import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.repositories.impl.ItunesSongsRepositoryImpl;
 import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
@@ -29,7 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
-public class ItuneSongsInteractorTest {
+public class ItuneSongsPresenterTest {
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -49,6 +51,12 @@ public class ItuneSongsInteractorTest {
     @Mock
     ItunesSongsInteractor itunesSongsInteractor;
 
+    @SuppressWarnings("CanBeFinal")
+    @Mock
+    MySongAppComponent component;
+
+    private ItunesSongsPresenter presenter;
+
     @SuppressWarnings({"CanBeFinal", "unused"})
     private Scheduler mainTestScheduler;
 
@@ -67,6 +75,7 @@ public class ItuneSongsInteractorTest {
     public void setUp() {
         @SuppressWarnings("UnusedAssignment") Scheduler mainTestScheduler = Schedulers.trampoline();
         RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
+        presenter = new ItunesSongsPresenter(component, view);
     }
 
     @After
@@ -105,8 +114,7 @@ public class ItuneSongsInteractorTest {
         when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
                 .thenReturn(Maybe.just(ITUNES_RESPONSE));
 
-        //Calling on view because the method is called in interactor's loadSongs()...
-        view.displaySongs(ITUNES_RESPONSE.allItuneSongs());
+        presenter.displaySongs(ITUNES_RESPONSE.allItuneSongs());
 
         verify(view).displaySongs(ITUNES_RESPONSE.allItuneSongs());
     }
@@ -117,7 +125,7 @@ public class ItuneSongsInteractorTest {
         when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
                 .thenReturn(Maybe.empty());
 
-        view.displayNoSongs();
+        presenter.displayNoSongs();
 
         verify(view).displayNoSongs();
     }
@@ -130,7 +138,7 @@ public class ItuneSongsInteractorTest {
         when(songsRepository.getSongs(client, mainTestScheduler, mainTestScheduler))
                 .thenReturn(Maybe.error(error));
 
-        view.displayError(error);
+        presenter.displayError(error);
 
         verify(view).displayError(error);
     }

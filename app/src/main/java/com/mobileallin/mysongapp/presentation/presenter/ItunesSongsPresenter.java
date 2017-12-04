@@ -26,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 
 
 @InjectViewState
-public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
+public class ItunesSongsPresenter extends MvpPresenter<ItunesSongsView> {
 
     private final ItunesSongsView mainView;
     private Disposable disposable;
@@ -48,7 +48,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
 
     private List<ItunesSong> ituneSongsSearchList;
 
-    public ItuneSongsPresenter(MySongAppComponent component, ItunesSongsView mainView) {
+    public ItunesSongsPresenter(MySongAppComponent component, ItunesSongsView mainView) {
         component.inject(this);
         this.mainView = mainView;
     }
@@ -57,11 +57,25 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
     public void attachView(ItunesSongsView mainView) {
         super.attachView(mainView);
         mainView.showLoading();
-        disposable = itunesSongsInteractor.loadSongs(mainView);
+        disposable = itunesSongsInteractor.loadSongs(this);
+    }
+
+    public void displaySongs(List<ItunesSong> allItunesSongs) {
+        mainView.hideLoading();
+        mainView.displaySongs(allItunesSongs);
+    }
+
+    public void displayError(Throwable e) {
+        mainView.hideLoading();
+        mainView.displayError(e);
+    }
+
+    public void displayNoSongs() {
+        mainView.displayNoSongs();
     }
 
     public void forceLoadSongs() {
-        itunesSongsInteractor.loadSongs(mainView);
+        itunesSongsInteractor.loadSongs(this);
     }
 
     @Override
@@ -98,7 +112,7 @@ public class ItuneSongsPresenter extends MvpPresenter<ItunesSongsView> {
             currentItuneSongsList = itunesSongsInteractor.getAllItunesSongs();
         }
 
-        if (currentItuneSongsList == null) {
+        if (currentItuneSongsList.isEmpty()) {
             return;
         }
         putSongToBundle(position);

@@ -27,7 +27,11 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
     @Override
     public void attachView(BaseItunesDetailsView view) {
         super.attachView(view);
-        view.showSongDetails(getItunesSongDetails());
+        showSongDetails(view, getItunesSongDetails());
+    }
+
+    public void showSongDetails(BaseItunesDetailsView view, ItunesSong itunesSong) {
+        view.showSongDetails(itunesSong);
     }
 
     private ItunesSong getItunesSongDetails() {
@@ -35,7 +39,7 @@ public class ItunesSongDetailsPresenter extends MvpPresenter<BaseItunesDetailsVi
         return createItunesSongFromBundle(routerSongBundle);
     }
 
-    private ItunesSong createItunesSongFromBundle(Bundle routerSongBundle) {
+    public ItunesSong createItunesSongFromBundle(Bundle routerSongBundle) {
         long id = (long) routerSongBundle.get(ArgumentKeys.ID);
         String title = (String) routerSongBundle.get(ArgumentKeys.TITLE);
         String author = (String) routerSongBundle.get(ArgumentKeys.AUTHOR);

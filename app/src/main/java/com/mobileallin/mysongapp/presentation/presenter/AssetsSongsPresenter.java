@@ -57,14 +57,23 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
+/*
+        loadFormattedAssetsSongs();
+*/
+        displaySongs(view, allAssetsSongsArrayList);
+    }
+
+    private void displaySongs(AssetsSongsView assetsSongsView, ArrayList<AssetsSong> assetsSongs) {
         view.showLoading();
         loadFormattedAssetsSongs();
-        loadSongs(view, allAssetsSongsArrayList);
+        assetsSongsView.displaySongs(assetsSongs);
         view.hideLoading();
     }
 
-    public void loadSongs(AssetsSongsView assetsSongsView, ArrayList<AssetsSong> assetsSongs) {
-        assetsSongsView.displaySongs(assetsSongs);
+    private void loadFormattedAssetsSongs() {
+        if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
+            loadAssetsSongs(mainScheduler, Schedulers.io(), assetsSongsInteractor);
+        }
     }
 
     @Override
@@ -77,25 +86,20 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         compositeDisposable.clear();
     }
 
-    private void loadFormattedAssetsSongs() {
-        if (allAssetsSongsArrayList == null || allAssetsSongsArrayList.isEmpty()) {
-            loadAssetsSongs();
-        }
-    }
-
-    public void loadAssetsSongs() {
+    public void loadAssetsSongs(Scheduler mainScheduler, Scheduler uiScheduler,
+                                AssetsSongsInteractor assetsSongsInteractor) {
         compositeDisposable.add(assetsSongsInteractor.getParsedSongs(context)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(uiScheduler)
                 .observeOn(mainScheduler)
                 .subscribeWith(new DisposableSingleObserver<List<AssetsSong>>() {
                     @Override
                     public void onSuccess(List<AssetsSong> songList) {
-                        allAssetsSongsArrayList = (ArrayList<AssetsSong>) songList;
-                        sortAssetsSongs(allAssetsSongsArrayList);
                         if (songList.isEmpty()) {
                             view.displayNoSongs();
                         } else {
-                            view.displaySongs((ArrayList<AssetsSong>) songList);
+                            allAssetsSongsArrayList = (ArrayList<AssetsSong>) songList;
+                            sortAssetsSongs(allAssetsSongsArrayList);
+                            view.displaySongs(allAssetsSongsArrayList);
                         }
                     }
 
@@ -115,12 +119,12 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void showAssetsSearchResults(ArrayList<AssetsSong> searchResponse) {
-        loadSongs(view, searchResponse);
+        displaySongs(view, searchResponse);
     }
 
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
         assetsSearchList = new ArrayList<>();
-        //ToDo resolve this warning
+        //noinspection Convert2streamapi
         for (AssetsSong song : allAssetsSongsArrayList) {
             if (song.author().toLowerCase().contains(s) ||
                     song.title().toLowerCase().contains(s) ||
@@ -156,6 +160,6 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void forceLoadSongs() {
-        loadSongs(view, allAssetsSongsArrayList);
+        displaySongs(view, allAssetsSongsArrayList);
     }
 }

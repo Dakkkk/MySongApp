@@ -26,7 +26,7 @@ import com.mobileallin.mysongapp.dagger.component.MySongAppComponent;
 import com.mobileallin.mysongapp.data.model.ItunesResponse;
 import com.mobileallin.mysongapp.data.model.ItunesSong;
 import com.mobileallin.mysongapp.navigation.Router;
-import com.mobileallin.mysongapp.presentation.presenter.ItuneSongsPresenter;
+import com.mobileallin.mysongapp.presentation.presenter.ItunesSongsPresenter;
 import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 
@@ -70,13 +70,13 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
     @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
     @InjectPresenter
-    ItuneSongsPresenter ituneSongsPresenter;
+    ItunesSongsPresenter itunesSongsPresenter;
 
     @ProvidePresenter
-    ItuneSongsPresenter providePresenter() {
+    ItunesSongsPresenter providePresenter() {
         MySongAppComponent component = ((MySongApp) getActivity().getApplication())
                 .getMySongsAppComponent();
-        return new ItuneSongsPresenter(component, this);
+        return new ItunesSongsPresenter(component, this);
     }
 
     public static ItunesSongsFragment newInstance() {
@@ -108,7 +108,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
         swipeRefreshView.setOnRefreshListener(() -> {
             songsListState = null;
-            ituneSongsPresenter.forceLoadSongs();
+            itunesSongsPresenter.forceLoadSongs();
             hideSwipeRefresh();
         });
 
@@ -120,7 +120,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ituneSongsPresenter.searchItunesSong(charSequence.toString());
+                itunesSongsPresenter.searchItunesSong(charSequence.toString());
 
             }
 
@@ -129,7 +129,7 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
 
             }
         });
-        songsAdapter.setItemClickListener(position -> ituneSongsPresenter.showDetails(position));
+        songsAdapter.setItemClickListener(position -> itunesSongsPresenter.showDetails(position));
         return view;
     }
 
