@@ -161,6 +161,10 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public void forceLoadSongs() {
-        displaySongs(view, allAssetsSongsArrayList);
+        if (isSearching) {
+            displaySongs(view, assetsSearchList);
+        } else {
+            displaySongs(view, allAssetsSongsArrayList);
+        }
     }
 }

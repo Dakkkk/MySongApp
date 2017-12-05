@@ -78,7 +78,9 @@ public class ItunesSongsPresenter extends MvpPresenter<ItunesSongsView> {
     }
 
     public void forceLoadSongs() {
-        itunesSongsInteractor.loadSongs(this);
+        if (!isSearching) {
+            itunesSongsInteractor.loadSongs(this);
+        }
     }
 
     @Override
