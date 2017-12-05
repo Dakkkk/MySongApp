@@ -18,9 +18,7 @@ import com.mobileallin.mysongapp.utils.Keys;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -136,6 +134,14 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         return assetsSearchList;
     }
 
+    public void forceLoadSongs() {
+        if (isSearching) {
+            displaySongs(view, assetsSearchList);
+        } else {
+            displaySongs(view, allAssetsSongsArrayList);
+        }
+    }
+
     public void showDetails(int position) {
         ArrayList<AssetsSong> currentSongsList;
         if (assetsSearchList != null && !assetsSearchList.isEmpty()) {
@@ -158,13 +164,5 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
         args.putString(Keys.IS_ASSETS_SONG, Keys.IS_ASSETS_SONG);
         router.putCommand(Command.SHOW_ASSETS_SONG_DETAILS,
                 AssetsSongDetailsPresenter.class.getName(), args);
-    }
-
-    public void forceLoadSongs() {
-        if (isSearching) {
-            displaySongs(view, assetsSearchList);
-        } else {
-            displaySongs(view, allAssetsSongsArrayList);
-        }
     }
 }

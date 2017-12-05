@@ -13,7 +13,6 @@ import com.mobileallin.mysongapp.network.HttpClient;
 import com.mobileallin.mysongapp.ui.view.ItunesSongsView;
 import com.mobileallin.mysongapp.ui.view.SearchView;
 import com.mobileallin.mysongapp.utils.ArgumentKeys;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -77,16 +76,16 @@ public class ItunesSongsPresenter extends MvpPresenter<ItunesSongsView> {
         mainView.displayNoSongs();
     }
 
-    public void forceLoadSongs() {
-        if (!isSearching) {
-            itunesSongsInteractor.loadSongs(this);
-        }
-    }
-
     @Override
     public void detachView(ItunesSongsView view) {
         super.detachView(view);
         disposeAll();
+    }
+
+    public void forceLoadSongs() {
+        if (!isSearching) {
+            itunesSongsInteractor.loadSongs(this);
+        }
     }
 
     private void disposeAll() {
