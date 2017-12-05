@@ -45,6 +45,8 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Inject
     Router router;
 
+    private boolean isSearching;
+
     public AssetsSongsPresenter(MySongAppComponent component, AssetsSongsView view,
                                 Context context,
                                 Scheduler mainScheduler) {
@@ -57,9 +59,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     @Override
     public void attachView(AssetsSongsView view) {
         super.attachView(view);
-/*
-        loadFormattedAssetsSongs();
-*/
+        if (isSearching) return;
         displaySongs(view, allAssetsSongsArrayList);
     }
 
@@ -123,6 +123,7 @@ public class AssetsSongsPresenter extends MvpPresenter<AssetsSongsView> {
     }
 
     public ArrayList<AssetsSong> searchAssetsSong(String s) {
+        isSearching = true;
         assetsSearchList = new ArrayList<>();
         //noinspection Convert2streamapi
         for (AssetsSong song : allAssetsSongsArrayList) {

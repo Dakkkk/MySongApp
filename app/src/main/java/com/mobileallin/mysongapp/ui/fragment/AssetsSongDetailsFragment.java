@@ -78,7 +78,6 @@ public class AssetsSongDetailsFragment extends MvpAppCompatFragment implements B
 
     @Override
     public void showSongDetails(AssetsSong assetsSong) {
-        //ToDo set no data in empty field?
         getActivity().setTitle(assetsSong.title());
         //labels
         songFirstLabel.setText(getResources().getString(R.string.first_label));

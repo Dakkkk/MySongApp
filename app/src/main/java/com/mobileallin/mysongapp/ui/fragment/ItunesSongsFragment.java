@@ -186,5 +186,3 @@ public class ItunesSongsFragment extends MvpAppCompatFragment implements ItunesS
         songsAdapter.setItems(searchResponse.allItuneSongs());
     }
 }
-
-

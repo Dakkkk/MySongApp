@@ -56,6 +56,10 @@ public class ItunesSongsPresenter extends MvpPresenter<ItunesSongsView> {
     public void attachView(ItunesSongsView mainView) {
         super.attachView(mainView);
         mainView.showLoading();
+        if (isSearching) {
+            mainView.hideLoading();
+            return;
+        }
         disposable = itunesSongsInteractor.loadSongs(this);
     }
 
